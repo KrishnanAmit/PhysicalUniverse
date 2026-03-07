@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Series — Amit Krishnan</title>
+<link rel="stylesheet" href="style.css">
+<style>
+
+.page-hero {
+  background: var(--ink);
+  padding: 160px 48px 100px;
+  position: relative; overflow: hidden;
+}
+.page-hero-atmos {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 20% 60%, rgba(181,39,30,0.12) 0%, transparent 55%);
+}
+.page-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 2; }
+.page-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: rise 0.8s ease forwards 0.2s;
+}
+.page-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 6vw, 76px);
+  font-weight: 900; line-height: 1.04;
+  letter-spacing: -0.025em; color: var(--paper);
+  margin-bottom: 24px;
+  opacity: 0; animation: rise 1s ease forwards 0.4s;
+}
+.page-title em { font-style: italic; color: var(--accent2); }
+.page-sub {
+  font-size: 17px; color: rgba(244,239,230,0.5);
+  max-width: 520px; line-height: 1.7; font-weight: 300;
+  opacity: 0; animation: rise 1s ease forwards 0.6s;
+}
+
+/* Series overview bar */
+.series-meta {
+  background: rgba(244,239,230,0.04);
+  border-top: 1px solid rgba(244,239,230,0.06);
+  padding: 28px 48px;
+  position: relative; z-index: 2;
+}
+.series-meta-inner {
+  max-width: 760px; margin: 0 auto;
+  display: flex; gap: 48px; flex-wrap: wrap;
+}
+.meta-item { display: flex; flex-direction: column; gap: 4px; }
+.meta-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700; color: var(--paper);
+}
+.meta-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(244,239,230,0.3);
+}
+
+/* Article list */
+.article-list {
+  max-width: 760px; margin: 0 auto;
+  padding: 80px 48px 120px;
+}
+
+.article-entry {
+  display: grid; grid-template-columns: 80px 1fr;
+  gap: 0 32px; align-items: start;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none; color: inherit;
+  position: relative;
+  transition: padding-left 0.25s;
+}
+.article-entry:first-child { border-top: 1px solid var(--rule); }
+.article-entry::before {
+  content: ''; position: absolute;
+  left: -48px; top: 0; bottom: 0;
+  width: 3px; background: var(--accent);
+  opacity: 0; transition: opacity 0.25s;
+}
+.article-entry:hover { padding-left: 12px; }
+.article-entry:hover::before { opacity: 1; }
+.article-entry.locked { opacity: 0.45; pointer-events: none; }
+
+.entry-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.1em;
+  color: var(--accent); padding-top: 6px;
+}
+
+.entry-body {}
+
+.entry-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px; letter-spacing: 0.18em;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.entry-status.live { color: var(--accent); }
+.entry-status.coming { color: var(--muted); }
+
+.entry-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 2.8vw, 28px);
+  font-weight: 700; line-height: 1.2;
+  color: var(--ink); margin-bottom: 14px;
+  letter-spacing: -0.015em;
+}
+.article-entry:hover .entry-title { color: var(--accent); }
+
+.entry-desc {
+  font-size: 15px; color: var(--muted);
+  line-height: 1.7; margin-bottom: 20px;
+}
+
+.entry-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* What's coming */
+.coming-section {
+  background: var(--soft);
+  padding: 80px 48px;
+  border-top: 1px solid var(--rule);
+}
+.coming-inner { max-width: 760px; margin: 0 auto; }
+.coming-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 16px;
+}
+.coming-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px; font-weight: 700;
+  color: var(--ink); margin-bottom: 40px;
+  letter-spacing: -0.015em;
+}
+.coming-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.coming-item {
+  background: var(--paper);
+  padding: 28px 28px;
+  border: 1px solid var(--rule);
+}
+.coming-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 10px;
+}
+.coming-item-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-weight: 700;
+  color: var(--ink); margin-bottom: 8px;
+}
+.coming-item-desc {
+  font-size: 13px; color: var(--muted); line-height: 1.6;
+}
+
+@media (max-width: 720px) {
+  .page-hero, .article-list, .coming-section { padding-left: 24px; padding-right: 24px; }
+  .series-meta { padding-left: 24px; padding-right: 24px; }
+  .article-entry { grid-template-columns: 52px 1fr; gap: 0 16px; }
+  .coming-grid { grid-template-columns: 1fr; }
+  .series-meta-inner { gap: 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><em>AK</em> &nbsp;/&nbsp; The Physical Universe</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="series.html" class="active">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Collaborate</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-atmos"></div>
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">The Physical Universe</p>
+    <h1 class="page-title">The <em>Series</em></h1>
+    <p class="page-sub">A physical description of the Universe — built to explain what centuries of equations have catalogued but never fully accounted for. Published as the work develops.</p>
+  </div>
+  <div class="series-meta">
+    <div class="series-meta-inner">
+      <div class="meta-item">
+        <span class="meta-val">3</span>
+        <span class="meta-label">Published</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-val">∞</span>
+        <span class="meta-label">Planned</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-val">1</span>
+        <span class="meta-label">Core Thesis</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="background:var(--paper);">
+  <div class="article-list">
+
+    <a href="article-01.html" class="article-entry fade-up">
+      <div class="entry-num">01</div>
+      <div class="entry-body">
+        <p class="entry-status live">● Published — Jan 7, 2026</p>
+        <h2 class="entry-title">It's All About the Resources</h2>
+        <p class="entry-desc">From India's Aravalli range to Venezuela's oil fields and Greenland's minerals — the same ancient logic repeating at civilisational scale. Every convenience requires materials and energy. Modern science was supposed to change that equation. It has not. This article asks why, and traces the answer back to the foundational concepts of force and energy — neither of which is a physical entity.</p>
+        <div class="entry-tags">
+          <span class="tag">Resources</span>
+          <span class="tag">Force &amp; Energy</span>
+          <span class="tag">Mechanical Universe</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="article-02.html" class="article-entry fade-up">
+      <div class="entry-num">02</div>
+      <div class="entry-body">
+        <p class="entry-status live">● Published — Feb 2026</p>
+        <h2 class="entry-title">Why Elon Musk Is Dead Wrong About Solar: The Math That Destroys the Dream</h2>
+        <p class="entry-desc">When the world's richest man promotes solar over fusion, it's time to check the numbers. This article does the maths that mainstream energy commentary avoids — comparing the energy density of solar against the physics of what the Sun actually does — and makes the case for why betting on solar over fusion is a civilisational miscalculation.</p>
+        <div class="entry-tags">
+          <span class="tag">Solar vs Fusion</span>
+          <span class="tag">Elon Musk</span>
+          <span class="tag">Energy Density</span>
+        </div>
+      </div>
+    </a>
+
+    <a href="article-03.html" class="article-entry fade-up">
+      <div class="entry-num">03</div>
+      <div class="entry-body">
+        <p class="entry-status live">● Published — Mar 2026</p>
+        <h2 class="entry-title">A Hundred Years of the Wrong Question</h2>
+        <p class="entry-desc">The AI industry will spend $650 billion on infrastructure in 2026 and has no answer to where the power comes from. Fusion has been thirty years away for a hundred years. This article uses the Franck-Hertz experiment — a Nobel Prize-winning result that its own discoverers misunderstood — as a precise demonstration of why prediction is not the same as understanding, and why that difference is now costing us the future.</p>
+        <div class="entry-tags">
+          <span class="tag">Fusion</span>
+          <span class="tag">AI Energy</span>
+          <span class="tag">Quantum Mechanics</span>
+          <span class="tag">Franck-Hertz</span>
+        </div>
+      </div>
+    </a>
+
+    <div class="article-entry fade-up" style="opacity:0.45; cursor:default; pointer-events:none;">
+      <div class="entry-num" style="color:var(--muted);">04</div>
+      <div class="entry-body">
+        <p class="entry-status" style="color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase;">◌ Coming Soon</p>
+        <h2 class="entry-title">The Most Expensive Assumption in Science</h2>
+        <p class="entry-desc">Seven Nobel Prizes have established that the vacuum of space is not empty — and that whatever fills it interacts with matter continuously, at every scale, by mechanisms that remain physically unnamed. This article takes the full inventory, names three conclusions the evidence demands, and asks what it would mean to take the question seriously for the first time.</p>
+        <div class="entry-tags">
+          <span class="tag">Vacuum Energy</span>
+          <span class="tag">Higgs Field</span>
+          <span class="tag">Casimir Effect</span>
+          <span class="tag">Foundation of Physics</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p class="footer-name">Amit Krishnan</p>
+      <p>Working on creating a second Sun on Earth. Mechanical Engineer with an MBA from IIM Ahmedabad.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">The Series</p>
+      <ul>
+        <li><a href="article-01.html">Series 01 — It's All About the Resources</a></li>
+        <li><a href="article-02.html">Series 02 — Why Elon Musk Is Dead Wrong About Solar</a></li>
+        <li><a href="article-03.html">Series 03 — A Hundred Years of the Wrong Question</a></li>
+        <li style="color:var(--muted); opacity:0.5;">Series 04 — The Most Expensive Assumption in Science <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.15em;">— COMING SOON</span></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Connect</p>
+      <ul>
+        <li><a href="about.html">About the author</a></li>
+        <li><a href="contact.html">Collaborate / invest</a></li>
+        <li><a href="https://medium.com/@amit.1krishnan" target="_blank">Medium →</a></li>
+        <li><a href="https://www.youtube.com/@amit.krishnan" target="_blank">YouTube →</a></li>
+        <li><a href="https://www.linkedin.com/in/amitkris/" target="_blank">LinkedIn →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Amit Krishnan — The Physical Universe</p>
+    <p>Ideas survive. People do not.</p>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('bar').style.width =
+      (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('navLinks');
+  ham.addEventListener('click', () => nav.classList.toggle('open'));
+</script>
+</body>
+</html>

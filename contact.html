@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Collaborate — Amit Krishnan</title>
+<link rel="stylesheet" href="style.css">
+<style>
+
+.page-hero {
+  background: var(--ink);
+  padding: 160px 48px 100px;
+  position: relative; overflow: hidden;
+}
+.page-hero-atmos {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 65% 55% at 85% 30%, rgba(181,39,30,0.12) 0%, transparent 55%);
+}
+.page-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 2; }
+.page-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: rise 0.8s ease forwards 0.2s;
+}
+.page-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 6vw, 76px);
+  font-weight: 900; line-height: 1.04;
+  letter-spacing: -0.025em; color: var(--paper);
+  margin-bottom: 24px;
+  opacity: 0; animation: rise 1s ease forwards 0.4s;
+}
+.page-title em { font-style: italic; color: var(--accent2); }
+.page-sub {
+  font-size: 17px; color: rgba(244,239,230,0.5);
+  max-width: 520px; line-height: 1.7;
+  opacity: 0; animation: rise 1s ease forwards 0.6s;
+}
+
+/* Contact body */
+.contact-body {
+  max-width: 960px; margin: 0 auto;
+  padding: 96px 48px 120px;
+  display: grid; grid-template-columns: 1fr 1.6fr;
+  gap: 80px; align-items: start;
+}
+
+/* Left — who we're looking for */
+.contact-aside {}
+.aside-section { margin-bottom: 48px; }
+.aside-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 18px;
+}
+.audience-card {
+  border: 1px solid var(--rule);
+  padding: 24px 22px; margin-bottom: 2px;
+  background: var(--paper);
+  position: relative; overflow: hidden;
+  cursor: pointer; transition: border-color 0.2s;
+}
+.audience-card.active, .audience-card:hover { border-color: var(--accent); }
+.audience-card.active::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 3px; height: 100%;
+  background: var(--accent);
+}
+.audience-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-weight: 700; color: var(--ink);
+  margin-bottom: 8px;
+}
+.audience-card-desc {
+  font-size: 13px; color: var(--muted); line-height: 1.6;
+}
+
+.contact-stat {
+  background: var(--ink); padding: 24px 22px;
+  margin-bottom: 2px;
+}
+.contact-stat-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 900; color: var(--paper);
+  display: block; margin-bottom: 4px;
+  line-height: 1;
+}
+.contact-stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(244,239,230,0.3);
+}
+
+/* Form */
+.contact-form-wrap {}
+.form-intro {
+  margin-bottom: 36px;
+}
+.form-intro h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700; color: var(--ink);
+  margin-bottom: 12px; letter-spacing: -0.015em;
+}
+.form-intro p {
+  font-size: 15px; color: var(--muted); line-height: 1.7;
+}
+
+.form-group { margin-bottom: 24px; }
+.form-label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 8px;
+}
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%; padding: 14px 16px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font-family: 'Source Serif 4', serif;
+  font-size: 16px; font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(181,39,30,0.08);
+}
+.form-textarea { resize: vertical; min-height: 140px; line-height: 1.7; }
+
+.form-select-wrap { position: relative; }
+.form-select-wrap::after {
+  content: '↓';
+  position: absolute; right: 16px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted); font-size: 12px;
+  pointer-events: none;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.form-submit {
+  width: 100%; padding: 16px;
+  background: var(--accent); color: var(--paper);
+  border: none; cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 8px;
+}
+.form-submit:hover { background: #9e2019; transform: translateY(-1px); }
+.form-submit:active { transform: translateY(0); }
+
+.form-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.12em;
+  color: var(--muted); margin-top: 14px;
+  line-height: 1.6;
+}
+
+/* Success state */
+.form-success {
+  display: none;
+  background: var(--ink); padding: 48px 40px;
+  text-align: center;
+}
+.form-success.show { display: block; }
+.form-success h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; color: var(--paper);
+  margin-bottom: 12px;
+}
+.form-success p {
+  font-size: 15px; color: rgba(244,239,230,0.45); line-height: 1.7;
+}
+
+/* Medium link band */
+.medium-band {
+  background: var(--soft);
+  padding: 60px 48px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.medium-band-inner {
+  max-width: 760px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  flex-wrap: wrap;
+}
+.medium-band p {
+  font-size: 16px; color: var(--muted); max-width: 460px; line-height: 1.65;
+}
+.medium-band p strong { color: var(--ink); font-weight: 600; }
+
+@media (max-width: 800px) {
+  .contact-body { grid-template-columns: 1fr; gap: 48px; padding: 64px 24px; }
+  .page-hero { padding: 140px 24px 80px; }
+  .form-row { grid-template-columns: 1fr; }
+  .medium-band { padding: 48px 24px; }
+  .medium-band-inner { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><em>AK</em> &nbsp;/&nbsp; The Physical Universe</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="series.html">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="active nav-cta">Collaborate</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-atmos"></div>
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">Open invitation</p>
+    <h1 class="page-title">The physics is<br><em>incomplete.</em><br>Let's fix it.</h1>
+    <p class="page-sub">The Physical Universe series is building toward a physical — not merely mathematical — description of the vacuum, gravity, and stellar energy. That programme needs two things: scientists willing to engage with the argument, and capital willing to fund the experiments. If you are either, this page is for you.</p>
+  </div>
+</section>
+
+<div style="background:var(--paper);">
+  <div class="contact-body">
+
+    <!-- Sidebar -->
+    <div class="contact-aside fade-up">
+      <div class="aside-section">
+        <p class="aside-title">Who this is for</p>
+        <div class="audience-card active" onclick="selectAudience(this, 'scientist')">
+          <h3 class="audience-card-title">Scientists &amp; Researchers</h3>
+          <p class="audience-card-desc">Physicists, engineers, and researchers who work on vacuum structure, quantum foundations, gravity, or fusion — and who want to engage with an argument, challenge a claim, or discuss what an experimental programme would actually look like. Critique is as welcome as agreement.</p>
+        </div>
+        <div class="audience-card" onclick="selectAudience(this, 'investor')">
+          <h3 class="audience-card-title">Investors &amp; AI Companies</h3>
+          <p class="audience-card-desc">You are spending $1 trillion on AI infrastructure that will hit a hard power ceiling within two years. The cost of seriously testing whether the physical account of the vacuum is complete is a rounding error against that number. The return, if it is not, ends the problem permanently.</p>
+        </div>
+        <div class="audience-card" onclick="selectAudience(this, 'other')">
+          <h3 class="audience-card-title">Curious Minds</h3>
+          <p class="audience-card-desc">You read the series, you have a question, a challenge, or something to add. That conversation is also worth having.</p>
+        </div>
+      </div>
+
+      <div class="aside-section">
+        <p class="aside-title">The asymmetry</p>
+        <div class="contact-stat">
+          <span class="contact-stat-val">$65B</span>
+          <span class="contact-stat-label">Spent on ITER — zero watts delivered to the grid</span>
+        </div>
+        <div class="contact-stat">
+          <span class="contact-stat-val">$1T+</span>
+          <span class="contact-stat-label">AI infrastructure committed 2025–2026</span>
+        </div>
+        <div class="contact-stat">
+          <span class="contact-stat-val">4.5B</span>
+          <span class="contact-stat-label">Years the Sun has run without a fuel delivery</span>
+        </div>
+        <div class="contact-stat">
+          <span class="contact-stat-val">10¹²⁰</span>
+          <span class="contact-stat-label">Orders of magnitude wrong — our best prediction for vacuum energy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="contact-form-wrap fade-up">
+      <div class="form-intro">
+        <h2>Start the conversation</h2>
+        <p>If you are a scientist: the argument is in the series. Read it, find the weakest point, and tell me what it is. That is the conversation worth having — not agreement, but rigorous engagement with what the evidence actually requires.</p>
+        <p style="margin-top:12px;">If you are an investor or an AI company: the question is not whether this is possible. It is what the minimum credible experiment looks like, and what it costs against what is already being spent. That conversation starts here.</p>
+      </div>
+
+      <form id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="fname">First name</label>
+            <input class="form-input" type="text" id="fname" name="fname" required placeholder="James">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lname">Last name</label>
+            <input class="form-input" type="text" id="lname" name="lname" required placeholder="Maxwell">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Email address</label>
+          <input class="form-input" type="email" id="email" name="email" required placeholder="you@institution.edu">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="affiliation">Organisation / Affiliation</label>
+          <input class="form-input" type="text" id="affiliation" name="affiliation" placeholder="MIT, DeepMind, Independent…">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="type">I am reaching out as a…</label>
+          <div class="form-select-wrap">
+            <select class="form-select" id="type" name="type">
+              <option value="">Select one</option>
+              <option value="scientist">Physicist / researcher</option>
+              <option value="engineer">Engineer</option>
+              <option value="investor">Investor / VC</option>
+              <option value="ai-company">AI company</option>
+              <option value="journalist">Journalist / writer</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="interest">Area of interest</label>
+          <div class="form-select-wrap">
+            <select class="form-select" id="interest" name="interest">
+              <option value="">Select one</option>
+              <option value="fusion">Fusion energy — physical framework</option>
+              <option value="gravity">Gravity — physical mechanism</option>
+              <option value="atomic">Atomic structure — physical model</option>
+              <option value="investment">Investment / funding inquiry</option>
+              <option value="collaboration">Research collaboration</option>
+              <option value="challenge">Challenge an argument</option>
+              <option value="general">General question</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="message">Your message</label>
+          <textarea class="form-textarea" id="message" name="message" required placeholder="What brings you here? A challenge, a question, a proposal — all are welcome."></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Send message →</button>
+        <p class="form-note">This goes directly to Amit. Response time is typically 2–5 days for substantive enquiries.</p>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <h3>Message received.</h3>
+        <p>Thank you for reaching out. Every serious enquiry gets a serious response. Amit will be in touch shortly.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<section class="medium-band">
+  <div class="medium-band-inner fade-up">
+    <p><strong>Follow the series on Medium.</strong> New articles are published as the Physical Universe series develops. The conversation happens in the comments as much as in the text.</p>
+    <a href="https://medium.com/@amit.1krishnan" target="_blank" class="btn-primary" style="white-space:nowrap;">Read on Medium →</a>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p class="footer-name">Amit Krishnan</p>
+      <p>Working on creating a second Sun on Earth. Mechanical Engineer with an MBA from IIM Ahmedabad.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">The Series</p>
+      <ul>
+        <li><a href="#">Series 01 — It's All About the Resources</a></li>
+        <li><a href="#">Series 02 — The Mechanical Universe</a></li>
+        <li><a href="article-03.html">Series 03 — A Hundred Years of the Wrong Question</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Connect</p>
+      <ul>
+        <li><a href="about.html">About the author</a></li>
+        <li><a href="contact.html">Collaborate / invest</a></li>
+        <li><a href="https://medium.com/@amit.1krishnan" target="_blank">Medium →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Amit Krishnan — The Physical Universe</p>
+    <p>Ideas survive. People do not.</p>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('bar').style.width =
+      (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('navLinks');
+  ham.addEventListener('click', () => nav.classList.toggle('open'));
+
+  function selectAudience(el, type) {
+    document.querySelectorAll('.audience-card').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+    const sel = document.getElementById('type');
+    const map = { scientist: 'scientist', investor: 'investor', other: 'other' };
+    if (map[type]) sel.value = map[type];
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    // In production, wire to Formspree / Netlify Forms / EmailJS here
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  }
+</script>
+</body>
+</html>

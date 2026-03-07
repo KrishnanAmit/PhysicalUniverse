@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amit Krishnan — The Physical Universe</title>
+<link rel="stylesheet" href="style.css">
+<style>
+
+/* ---- HOME HERO ---- */
+.hero {
+  min-height: 100vh;
+  background: var(--ink);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  position: relative;
+  overflow: hidden;
+  padding-top: 64px;
+}
+
+.hero-atmos {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 80%, rgba(181,39,30,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 70% at 90% 20%, rgba(212,131,10,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, rgba(18,16,14,0) 0%, rgba(18,16,14,0.4) 100%);
+}
+
+.hero-canvas {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0.07;
+}
+.hero-canvas svg { width: min(860px, 95vw); }
+
+.orbit { fill: none; stroke: var(--paper); stroke-width: 1; }
+.orbit-1 { animation: spin 40s linear infinite; transform-origin: 430px 200px; }
+.orbit-2 { animation: spin 65s linear infinite reverse; transform-origin: 430px 200px; }
+.orbit-3 { animation: spin 90s linear infinite; transform-origin: 430px 200px; }
+.orbit-dot { fill: var(--accent); opacity: 0; animation: appear 1s ease forwards; }
+.orbit-dot:nth-child(5) { animation-delay: 2s; }
+.orbit-dot:nth-child(6) { animation-delay: 3s; }
+.orbit-dot:nth-child(7) { animation-delay: 4s; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.hero-body {
+  position: relative; z-index: 10;
+  align-self: end;
+  max-width: 900px; margin: 0 auto;
+  padding: 0 48px 100px; width: 100%;
+}
+
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 28px;
+  display: flex; align-items: center; gap: 14px;
+  opacity: 0; animation: rise 0.9s ease forwards 0.3s;
+}
+.hero-eyebrow::before {
+  content: ''; display: block;
+  width: 32px; height: 1px; background: var(--accent);
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(48px, 7vw, 96px);
+  font-weight: 900; line-height: 1.02;
+  letter-spacing: -0.03em; color: var(--paper);
+  margin-bottom: 8px;
+  opacity: 0; animation: rise 1s ease forwards 0.5s;
+}
+.hero-title em { font-style: italic; color: var(--accent2); }
+
+.hero-deck {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(244,239,230,0.35);
+  margin-bottom: 28px;
+  opacity: 0; animation: rise 1s ease forwards 0.62s;
+}
+
+.hero-sub {
+  font-size: 18px; color: rgba(244,239,230,0.5);
+  max-width: 560px; line-height: 1.65; font-weight: 300;
+  margin-bottom: 52px;
+  opacity: 0; animation: rise 1s ease forwards 0.75s;
+}
+
+.hero-actions {
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  opacity: 0; animation: rise 1s ease forwards 0.9s;
+}
+
+.btn-primary {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 14px 28px;
+  background: var(--accent); color: var(--paper);
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+  display: inline-block;
+}
+.btn-primary:hover { background: #9e2019; transform: translateY(-1px); }
+
+.btn-ghost {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 13px 28px;
+  border: 1px solid rgba(244,239,230,0.2); color: rgba(244,239,230,0.5);
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: rgba(244,239,230,0.5); color: var(--paper); }
+
+.scroll-cue {
+  position: absolute; bottom: 36px; right: 48px; z-index: 10;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0.25;
+  animation: bob 2.4s ease-in-out infinite, rise 1s ease forwards 1.2s;
+}
+.scroll-cue span {
+  font-family: 'JetBrains Mono', monospace; font-size: 8px;
+  letter-spacing: 0.22em; color: var(--paper);
+  writing-mode: vertical-rl; text-transform: uppercase;
+}
+.scroll-cue::after {
+  content: ''; width: 1px; height: 48px;
+  background: linear-gradient(to bottom, var(--paper), transparent);
+}
+
+/* ---- SERIES STRIP ---- */
+.series-strip {
+  background: var(--soft);
+  padding: 100px 48px;
+  border-bottom: 1px solid var(--rule);
+}
+.strip-inner { max-width: 960px; margin: 0 auto; }
+
+.strip-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 56px; gap: 24px;
+}
+.strip-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 10px;
+}
+.strip-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700; line-height: 1.15;
+  color: var(--ink); letter-spacing: -0.02em;
+}
+.strip-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none; white-space: nowrap;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.strip-link:hover { color: var(--accent); border-color: var(--accent); }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.card {
+  background: var(--paper);
+  padding: 36px 32px;
+  text-decoration: none; color: inherit;
+  border: 1px solid var(--rule);
+  position: relative; overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  display: block;
+}
+.card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 3px; height: 100%;
+  background: var(--accent); opacity: 0;
+  transition: opacity 0.25s;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(18,16,14,0.1); }
+.card:hover::before { opacity: 1; }
+
+.card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 20px;
+}
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px; font-weight: 700; line-height: 1.25;
+  color: var(--ink); margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+.card-desc {
+  font-size: 14px; color: var(--muted);
+  line-height: 1.65; margin-bottom: 28px;
+}
+.card-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 18px; border-top: 1px solid var(--rule);
+}
+.card-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px; letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.card-status.live { color: var(--accent); }
+.card-status.coming { color: var(--muted); }
+.card-arrow { color: var(--muted); font-size: 16px; transition: transform 0.2s, color 0.2s; }
+.card:hover .card-arrow { transform: translateX(4px); color: var(--accent); }
+
+.card.locked { opacity: 0.5; cursor: default; pointer-events: none; }
+.card.locked:hover { transform: none; box-shadow: none; }
+
+/* ---- MISSION BAND ---- */
+.mission {
+  background: var(--ink);
+  padding: 120px 48px;
+}
+.mission-inner {
+  max-width: 760px; margin: 0 auto; text-align: center;
+}
+.mission-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 32px;
+}
+.mission-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 3.5vw, 38px);
+  font-style: italic; font-weight: 400;
+  line-height: 1.45; color: var(--paper);
+  margin-bottom: 40px;
+  position: relative;
+}
+.mission-quote::before {
+  content: '\201C';
+  font-size: 120px; line-height: 1;
+  color: var(--accent); opacity: 0.12;
+  position: absolute; top: -20px; left: -20px;
+  font-style: normal;
+}
+.mission-attr {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(244,239,230,0.3);
+}
+
+/* ---- ABOUT TEASER ---- */
+.about-teaser {
+  padding: 100px 48px;
+  background: var(--paper);
+  border-top: 1px solid var(--rule);
+}
+.about-inner {
+  max-width: 960px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 2fr;
+  gap: 80px; align-items: center;
+}
+.about-aside {
+  position: sticky; top: 100px;
+}
+.about-monogram {
+  width: 80px; height: 80px;
+  background: var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 28px;
+}
+.about-monogram span {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 900; color: var(--paper);
+}
+.about-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 700; color: var(--ink);
+  margin-bottom: 8px;
+}
+.about-role {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 24px;
+}
+.about-content h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 3.5vw, 36px);
+  font-weight: 700; line-height: 1.2; color: var(--ink);
+  letter-spacing: -0.02em; margin-bottom: 28px;
+}
+.about-content p {
+  font-size: 17px; color: #3a3530;
+  line-height: 1.85; margin-bottom: 1.6em;
+}
+.about-content p:last-of-type { margin-bottom: 32px; }
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 860px) {
+  .cards { grid-template-columns: 1fr; }
+  .about-inner { grid-template-columns: 1fr; gap: 40px; }
+  .about-aside { position: static; }
+  .strip-header { flex-direction: column; align-items: flex-start; }
+  .hero-body { padding: 0 24px 72px; }
+  .series-strip, .about-teaser, .mission { padding-left: 24px; padding-right: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<!-- NAV -->
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><em>AK</em> &nbsp;/&nbsp; The Physical Universe</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="series.html">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Collaborate</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-atmos"></div>
+
+  <div class="hero-canvas">
+    <svg viewBox="0 0 860 400" xmlns="http://www.w3.org/2000/svg">
+      <ellipse class="orbit orbit-1" cx="430" cy="200" rx="320" ry="120"/>
+      <ellipse class="orbit orbit-2" cx="430" cy="200" rx="220" ry="80"/>
+      <ellipse class="orbit orbit-3" cx="430" cy="200" rx="140" ry="50"/>
+      <circle cx="430" cy="200" r="10" fill="rgba(212,131,10,0.6)"/>
+      <circle class="orbit-dot" cx="750" cy="200" r="5"/>
+      <circle class="orbit-dot" cx="210" cy="200" r="4"/>
+      <circle class="orbit-dot" cx="560" cy="128" r="3"/>
+    </svg>
+  </div>
+
+  <div class="hero-body">
+    <div class="hero-eyebrow">Working on creating a second Sun on Earth</div>
+    <h1 class="hero-title">The <em>Physical</em><br>Universe</h1>
+    <p class="hero-deck">A series by Amit Krishnan</p>
+    <p class="hero-sub">A hundred years of asking the right questions in the wrong framework. This series is about changing that — and about what becomes possible when we do.</p>
+    <div class="hero-actions">
+      <a href="article-03.html" class="btn-primary">Read Series 03</a>
+      <a href="series.html" class="btn-ghost">View All Articles</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue"><span>scroll</span></div>
+</section>
+
+<!-- SERIES CARDS -->
+<section class="series-strip">
+  <div class="strip-inner">
+    <div class="strip-header">
+      <div>
+        <p class="strip-eyebrow">The Physical Universe Series</p>
+        <h2 class="strip-heading">The Articles So Far</h2>
+      </div>
+      <a href="series.html" class="strip-link">View full series →</a>
+    </div>
+
+    <div class="cards">
+      <a href="article-01.html" class="card">
+        <h3 class="card-title">It's All About the Resources</h3>
+        <p class="card-desc">Why modern science has not delivered the breakthroughs needed to free us from tearing the Earth apart — and what that has to do with how we define force and energy.</p>
+        <div class="card-foot">
+          <span class="card-status live">Published</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="article-02.html" class="card">
+        <p class="card-num">Series 02</p>
+        <h3 class="card-title">Why Elon Musk Is Dead Wrong About Solar</h3>
+        <p class="card-desc">A deep examination of what the Mechanical Universe model actually is, what it can and cannot tell us, and why its extraordinary success has become its greatest limitation.</p>
+        <div class="card-foot">
+          <span class="card-status live">Published</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <a href="article-03.html" class="card">
+        <p class="card-num">Series 03</p>
+        <h3 class="card-title">A Hundred Years of the Wrong Question</h3>
+        <p class="card-desc">Fusion, AI, and the physics we never finished. Why a century of brilliant prediction has left us no closer to replicating the Sun — and what a physical description of the Universe would change.</p>
+        <div class="card-foot">
+          <span class="card-status live">Published</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <div class="card" style="opacity:0.4; cursor:default; pointer-events:none;">
+        <p class="card-num">Series 04</p>
+        <h3 class="card-title">The Most Expensive Assumption in Science</h3>
+        <p class="card-desc">Seven Nobel Prizes have established that the vacuum is not empty — and that what fills it interacts with matter by mechanisms that remain physically unnamed. The full inventory, and what follows from it.</p>
+        <div class="card-foot">
+          <span class="card-status coming">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION QUOTE -->
+<section class="mission">
+  <div class="mission-inner fade-up">
+    <p class="mission-label">The Thesis</p>
+    <p class="mission-quote">The equations predict. They do not possess. And until we understand what actually moves matter — not just how to calculate its motion — we will keep opening mines where we should be opening laboratories.</p>
+    <p class="mission-attr">— Amit Krishnan, The Physical Universe Series 03</p>
+  </div>
+</section>
+
+<!-- ABOUT TEASER -->
+<section class="about-teaser">
+  <div class="about-inner">
+    <div class="about-aside fade-up">
+      <div class="about-monogram"><span>AK</span></div>
+      <h2 class="about-name">Amit Krishnan</h2>
+      <p class="about-role">Mechanical Engineer · IIM Ahmedabad</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+        <span class="tag">Physics</span>
+        <span class="tag">Energy</span>
+        <span class="tag">Fusion</span>
+      </div>
+    </div>
+    <div class="about-content fade-up">
+      <h2>Working on creating a second Sun on Earth</h2>
+      <p>A Mechanical Engineer with an MBA from IIM Ahmedabad, Amit Krishnan has spent years asking the question that most of the scientific establishment has stopped asking: not whether our equations are correct, but whether they are complete.</p>
+      <p>The Physical Universe series is his attempt to lay out, step by step, a physical description of the Universe that can explain observations — from gravity to elasticity to atomic energy thresholds — not as the outputs of mathematical abstractions, but as the outcomes of real, physical processes. Processes that, once understood, could change everything.</p>
+      <a href="about.html" class="btn-primary">Full biography →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p class="footer-name">Amit Krishnan</p>
+      <p>Working on creating a second Sun on Earth. Mechanical Engineer with an MBA from IIM Ahmedabad.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">The Series</p>
+      <ul>
+        <li><a href="article-01.html">Series 01 — It's All About the Resources</a></li>
+        <li><a href="article-02.html">Series 02 — Why Elon Musk Is Dead Wrong About Solar</a></li>
+        <li><a href="article-03.html">Series 03 — A Hundred Years of the Wrong Question</a></li>
+        <li style="color:var(--muted); opacity:0.5;">Series 04 — Coming Soon</li>
+        <li><a href="series.html">View all →</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Connect</p>
+      <ul>
+        <li><a href="about.html">About the author</a></li>
+        <li><a href="contact.html">Collaborate / invest</a></li>
+        <li><a href="https://medium.com/@amit.1krishnan" target="_blank">Medium →</a></li>
+        <li><a href="https://www.youtube.com/@amit.krishnan" target="_blank">YouTube →</a></li>
+        <li><a href="https://www.linkedin.com/in/amitkris/" target="_blank">LinkedIn →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Amit Krishnan — The Physical Universe</p>
+    <p>Ideas survive. People do not.</p>
+  </div>
+</footer>
+
+<script>
+  // scroll bar
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('bar').style.width =
+      (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+  });
+
+  // fade-up
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  // hamburger
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('navLinks');
+  ham.addEventListener('click', () => nav.classList.toggle('open'));
+</script>
+</body>
+</html>

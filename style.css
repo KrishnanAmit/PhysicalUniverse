@@ -1,0 +1,218 @@
+/* =============================================
+   THE PHYSICAL UNIVERSE — Shared Stylesheet
+   Amit Krishnan
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ---- TOKENS ---- */
+:root {
+  --ink:     #12100e;
+  --paper:   #f4efe6;
+  --accent:  #b5271e;
+  --accent2: #d4830a;
+  --muted:   #6b6155;
+  --rule:    #d6ccb8;
+  --soft:    #ede8dd;
+}
+
+/* ---- RESET ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+/* ---- BASE ---- */
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 18px;
+  line-height: 1.8;
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* grain overlay */
+body::after {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 9999; opacity: 0.5;
+}
+
+/* ---- SCROLL PROGRESS ---- */
+#bar {
+  position: fixed; top: 0; left: 0;
+  height: 2px; background: var(--accent);
+  width: 0%; z-index: 1001;
+  transition: width 0.08s linear;
+}
+
+/* ---- NAV ---- */
+.site-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+  background: rgba(18,16,14,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(244,239,230,0.06);
+  transition: background 0.3s;
+}
+
+.nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--paper);
+  text-decoration: none; opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.nav-logo:hover { opacity: 1; }
+.nav-logo em { font-style: normal; color: var(--accent); }
+
+.nav-links {
+  display: flex; align-items: center; gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: rgba(244,239,230,0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover,
+.nav-links a.active { color: var(--paper); }
+.nav-links a.active::after {
+  content: '';
+  display: block;
+  width: 100%; height: 1px;
+  background: var(--accent);
+  margin-top: 2px;
+}
+
+.nav-cta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border: 1px solid rgba(181,39,30,0.5);
+  color: var(--accent) !important;
+  text-decoration: none;
+  transition: all 0.2s !important;
+}
+.nav-cta:hover { background: var(--accent) !important; color: var(--paper) !important; }
+
+.nav-hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  cursor: pointer; background: none; border: none; padding: 4px;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 1px;
+  background: rgba(244,239,230,0.6);
+  transition: all 0.3s;
+}
+
+/* ---- FOOTER ---- */
+.site-footer {
+  background: var(--ink);
+  padding: 80px 48px 48px;
+  border-top: 1px solid rgba(244,239,230,0.06);
+}
+
+.footer-inner {
+  max-width: 960px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px;
+}
+
+.footer-brand .footer-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 700;
+  color: var(--paper); margin-bottom: 10px;
+}
+.footer-brand p {
+  font-size: 13px; color: rgba(244,239,230,0.35);
+  line-height: 1.7; margin: 0;
+}
+
+.footer-col-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 18px;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul a {
+  font-size: 13px; color: rgba(244,239,230,0.4);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-col ul a:hover { color: var(--paper); }
+
+.footer-bottom {
+  max-width: 960px; margin: 56px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(244,239,230,0.06);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.footer-bottom p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: rgba(244,239,230,0.2);
+  margin: 0;
+}
+
+/* ---- ANIMATIONS ---- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes appear {
+  to { opacity: 1; }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+
+.fade-up {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.fade-up.in { opacity: 1; transform: translateY(0); }
+
+/* ---- UTILITIES ---- */
+.mono {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+}
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; letter-spacing: 0.12em;
+  padding: 5px 13px; border: 1px solid var(--rule);
+  color: var(--muted); text-transform: uppercase;
+  display: inline-block;
+  transition: all 0.2s;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---- MOBILE NAV ---- */
+@media (max-width: 720px) {
+  .site-nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: fixed; inset: 64px 0 0 0;
+    background: rgba(18,16,14,0.98);
+    align-items: center; justify-content: center;
+    gap: 32px; z-index: 999;
+  }
+  .nav-links.open a { font-size: 13px; }
+
+  .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+}
