@@ -89,6 +89,7 @@ body::after {
   background: var(--accent);
   margin-top: 2px;
 }
+.nav-links a.nav-cta.active::after { display: none; }
 
 .nav-cta {
   font-family: 'JetBrains Mono', monospace;
