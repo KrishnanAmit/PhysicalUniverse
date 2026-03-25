@@ -316,6 +316,85 @@
   .hero-body { padding: 0 24px 72px; }
   .series-strip, .about-teaser, .mission { padding-left: 24px; padding-right: 24px; }
 }
+
+/* ---- PAPERS STRIP ---- */
+.papers-strip {
+  background: var(--ink);
+  padding: 100px 48px;
+  border-bottom: 1px solid rgba(244,239,230,0.06);
+}
+.papers-strip .strip-inner { max-width: 960px; margin: 0 auto; }
+.papers-strip .strip-header {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  margin-bottom: 56px; gap: 24px;
+}
+.papers-strip .strip-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent2);
+  margin-bottom: 10px;
+}
+.papers-strip .strip-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700; line-height: 1.15;
+  color: var(--paper); letter-spacing: -0.02em;
+}
+.papers-strip .strip-link {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: rgba(244,239,230,0.35);
+  text-decoration: none; white-space: nowrap;
+  border-bottom: 1px solid rgba(244,239,230,0.15);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.papers-strip .strip-link:hover { color: var(--accent2); border-color: var(--accent2); }
+.paper-card {
+  background: rgba(244,239,230,0.04);
+  padding: 32px 28px;
+  border: 1px solid rgba(244,239,230,0.08);
+  position: relative;
+  transition: background 0.25s, border-color 0.25s;
+}
+.paper-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 3px; height: 100%;
+  background: var(--accent2); opacity: 0;
+  transition: opacity 0.25s;
+}
+.paper-card.paper-flagship {
+  background: rgba(212,131,10,0.08);
+  border-color: rgba(212,131,10,0.25);
+}
+.paper-card.paper-flagship::before { opacity: 1; }
+.paper-card.paper-locked { opacity: 0.35; }
+.paper-card-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent2);
+  margin-bottom: 14px;
+}
+.paper-card.paper-locked .paper-card-num { color: rgba(244,239,230,0.25); }
+.paper-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-weight: 700; line-height: 1.25;
+  color: var(--paper); margin-bottom: 10px;
+}
+.paper-card-desc {
+  font-size: 13px; color: rgba(244,239,230,0.45);
+  line-height: 1.65; margin-bottom: 20px;
+}
+.paper-card-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 14px; border-top: 1px solid rgba(244,239,230,0.07);
+}
+.paper-card-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.paper-card-status.prep { color: var(--accent2); }
+.paper-card-status.coming { color: rgba(244,239,230,0.2); }
 </style>
 </head>
 <body>
@@ -358,7 +437,7 @@
     <p class="hero-deck">A series by Amit Krishnan</p>
     <p class="hero-sub">A hundred years of asking the right questions in the wrong framework. This series is about changing that — and about what becomes possible when we do.</p>
     <div class="hero-actions">
-      <a href="article-03.html" class="btn-primary">Read Series 03</a>
+      <a href="article-04.html" class="btn-primary">Read Series 04</a>
       <a href="series.html" class="btn-ghost">View All Articles</a>
     </div>
   </div>
@@ -408,12 +487,74 @@
         </div>
       </a>
 
-      <div class="card" style="opacity:0.4; cursor:default; pointer-events:none;">
+      <a href="article-04.html" class="card">
         <p class="card-num">Series 04</p>
         <h3 class="card-title">The Most Expensive Assumption in Science</h3>
         <p class="card-desc">Seven Nobel Prizes have established that the vacuum is not empty — and that what fills it interacts with matter by mechanisms that remain physically unnamed. The full inventory, and what follows from it.</p>
         <div class="card-foot">
+          <span class="card-status live">Published</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+
+      <div class="card" style="opacity:0.4; cursor:default; pointer-events:none;">
+        <p class="card-num">Series 05</p>
+        <h3 class="card-title">They Worship Galileo While Building the Inquisition</h3>
+        <p class="card-desc">The scientific system that had all the evidence and chose not to look. On institutional gatekeeping, the tech parallel, and the energy crisis as the cost of a century of the wrong priorities.</p>
+        <div class="card-foot">
           <span class="card-status coming">Coming Soon</span>
+        </div>
+      </div>
+
+      <div class="card" style="opacity:0.4; cursor:default; pointer-events:none;">
+        <p class="card-num">Series 06</p>
+        <h3 class="card-title">Physics Has Mastered 5% of Gravity</h3>
+        <p class="card-desc">Newton scores 28.3%. Einstein scores 53.9%. Seven confirmed observational properties of gravity are unaddressed by either theory. This article does the arithmetic.</p>
+        <div class="card-foot">
+          <span class="card-status coming">Coming Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PAPERS STRIP -->
+<section class="papers-strip">
+  <div class="strip-inner">
+    <div class="strip-header">
+      <div>
+        <p class="strip-eyebrow">The Physical Universe — Academic Programme</p>
+        <h2 class="strip-heading">The Papers</h2>
+      </div>
+      <a href="series.html#papers" class="strip-link">View all papers →</a>
+    </div>
+
+    <div class="cards">
+      <div class="paper-card paper-flagship">
+        <p class="paper-card-num">Paper 0 — The Framework</p>
+        <h3 class="paper-card-title">The Condensation Model of the Universe</h3>
+        <p class="paper-card-desc">One postulate. Four phases. Three threshold densities. Derives gravity, dark energy, galactic rotation curves, wave-function collapse, thermodynamics, and the uncertainty principle. No dark matter. No extra dimensions. Four falsifiable predictions.</p>
+        <div class="paper-card-foot">
+          <span class="paper-card-status prep">◎ In Preparation — arXiv</span>
+        </div>
+      </div>
+
+      <div class="paper-card paper-locked">
+        <p class="paper-card-num">Paper 1 — In Preparation</p>
+        <h3 class="paper-card-title">Elasticity as the Stability of Vacuum-Driven Flow</h3>
+        <p class="paper-card-desc">Elastic restoring force reframed as the stability of Madelung flow driven by the zero-point field. Novel prediction: elastic constants differ measurably inside a Casimir cavity.</p>
+        <div class="paper-card-foot">
+          <span class="paper-card-status coming">◌ Physical Review Letters</span>
+        </div>
+      </div>
+
+      <div class="paper-card paper-locked">
+        <p class="paper-card-num">Paper 2 — In Preparation</p>
+        <h3 class="paper-card-title">The Measurement Problem in Gravitational Physics</h3>
+        <p class="paper-card-desc">G is known to 4–5 significant figures. Solar mass is derived, not measured. Every celestial mass is downstream of a circularity. Plus a temperature-weight smoking gun that directly falsifies a GR prediction.</p>
+        <div class="paper-card-foot">
+          <span class="paper-card-status coming">◌ Foundations of Physics</span>
         </div>
       </div>
     </div>
@@ -464,8 +605,18 @@
         <li><a href="article-01.html">Series 01 — It's All About the Resources</a></li>
         <li><a href="article-02.html">Series 02 — Why Elon Musk Is Dead Wrong About Solar</a></li>
         <li><a href="article-03.html">Series 03 — A Hundred Years of the Wrong Question</a></li>
-        <li style="color:var(--muted); opacity:0.5;">Series 04 — Coming Soon</li>
+        <li><a href="article-04.html">Series 04 — The Most Expensive Assumption in Science</a></li>
+        <li style="color:var(--muted); opacity:0.5;">Series 05 — Coming Soon</li>
+        <li style="color:var(--muted); opacity:0.5;">Series 06 — Coming Soon</li>
         <li><a href="series.html">View all →</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Papers</p>
+      <ul>
+        <li style="color:var(--muted); opacity:0.5;">P0 — Condensation Model — arXiv Soon</li>
+        <li style="color:var(--muted); opacity:0.5;">P1 — Elasticity — In Preparation</li>
+        <li style="color:var(--muted); opacity:0.5;">P2 — Measurement Problem — In Preparation</li>
       </ul>
     </div>
     <div class="footer-col">

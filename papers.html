@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Papers — The Physical Universe</title>
+<link rel="stylesheet" href="style.css">
+<style>
+
+.page-hero {
+  background: var(--ink);
+  padding: 160px 48px 100px;
+  position: relative; overflow: hidden;
+}
+.page-hero-atmos {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 80% 40%, rgba(212,131,10,0.08) 0%, transparent 55%),
+              radial-gradient(ellipse 50% 50% at 10% 70%, rgba(181,39,30,0.10) 0%, transparent 55%);
+}
+.page-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 2; }
+.page-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0; animation: rise 0.8s ease forwards 0.2s;
+}
+.page-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(42px, 6vw, 76px);
+  font-weight: 900; line-height: 1.04;
+  letter-spacing: -0.025em; color: var(--paper);
+  margin-bottom: 24px;
+  opacity: 0; animation: rise 1s ease forwards 0.4s;
+}
+.page-title em { font-style: italic; color: var(--accent2); }
+.page-sub {
+  font-size: 17px; color: rgba(244,239,230,0.5);
+  max-width: 520px; line-height: 1.7; font-weight: 300;
+  opacity: 0; animation: rise 1s ease forwards 0.6s;
+}
+
+/* Meta bar */
+.series-meta {
+  background: rgba(244,239,230,0.04);
+  border-top: 1px solid rgba(244,239,230,0.06);
+  padding: 28px 48px;
+  position: relative; z-index: 2;
+}
+.series-meta-inner {
+  max-width: 760px; margin: 0 auto;
+  display: flex; gap: 48px; flex-wrap: wrap;
+}
+.meta-item { display: flex; flex-direction: column; gap: 4px; }
+.meta-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700; color: var(--paper);
+}
+.meta-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: rgba(244,239,230,0.3);
+}
+
+/* Main content */
+.papers-body {
+  max-width: 760px; margin: 0 auto;
+  padding: 80px 48px 80px;
+}
+.papers-body > p {
+  font-size: 17px; color: #3a3530;
+  line-height: 1.85; margin-bottom: 1.5em;
+}
+
+.section-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 10px; margin-top: 64px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+.section-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 3.5vw, 32px);
+  font-weight: 700; line-height: 1.2;
+  color: var(--ink); margin-bottom: 28px;
+  letter-spacing: -0.015em;
+}
+
+/* Strategy callout */
+.strategy-box {
+  background: var(--soft);
+  border-left: 3px solid var(--accent2);
+  padding: 26px 32px;
+  margin: 32px 0 48px;
+}
+.strategy-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--accent2);
+  margin-bottom: 10px;
+}
+.strategy-box p {
+  font-size: 15px; color: var(--muted);
+  line-height: 1.75; margin: 0;
+}
+
+/* Paper entries */
+.paper-list {
+  border-top: 1px solid var(--rule);
+}
+
+.paper-entry {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 0 28px;
+  padding: 48px 0;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+.paper-entry::before {
+  content: ''; position: absolute;
+  left: -48px; top: 0; bottom: 0;
+  width: 3px; background: var(--accent);
+  opacity: 0; transition: opacity 0.25s;
+}
+.paper-entry:hover::before { opacity: 1; }
+.paper-entry.locked { opacity: 0.4; }
+
+.paper-entry-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; letter-spacing: 0.1em;
+  color: var(--accent); padding-top: 4px;
+}
+.paper-entry.flagship .paper-entry-num {
+  color: var(--accent2);
+  font-size: 9px; text-transform: uppercase; letter-spacing: 0.16em;
+}
+
+.paper-entry-body {}
+
+.paper-entry-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px; letter-spacing: 0.18em;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.status-prep { color: var(--accent2); }
+.status-coming { color: var(--muted); }
+
+.paper-entry-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(19px, 2.5vw, 24px);
+  font-weight: 700; line-height: 1.2;
+  color: var(--ink); margin-bottom: 14px;
+  letter-spacing: -0.01em;
+}
+
+.paper-entry-claim {
+  font-size: 15px; color: var(--muted);
+  line-height: 1.75; margin-bottom: 20px;
+}
+
+.paper-entry-meta {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+}
+.paper-journal {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted);
+}
+.paper-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent);
+  border: 1px solid rgba(181,39,30,0.25);
+  padding: 3px 9px;
+}
+.paper-tag.amber {
+  color: var(--accent2);
+  border-color: rgba(212,131,10,0.3);
+}
+
+/* Two-col relationship section */
+.rel-section {
+  background: var(--soft);
+  padding: 64px 48px;
+  border-top: 1px solid var(--rule);
+}
+.rel-inner { max-width: 760px; margin: 0 auto; }
+.rel-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 10px;
+}
+.rel-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 700;
+  color: var(--ink); margin-bottom: 36px;
+  letter-spacing: -0.015em;
+}
+.rel-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+.rel-col {
+  background: var(--paper);
+  padding: 28px 28px;
+  border: 1px solid var(--rule);
+}
+.rel-col-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 12px;
+}
+.rel-col.papers-col .rel-col-label { color: var(--accent2); }
+.rel-col-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px; font-weight: 700;
+  color: var(--ink); margin-bottom: 10px;
+}
+.rel-col p {
+  font-size: 14px; color: var(--muted);
+  line-height: 1.7; margin: 0;
+}
+
+@media (max-width: 720px) {
+  .page-hero, .papers-body { padding-left: 24px; padding-right: 24px; }
+  .series-meta { padding-left: 24px; padding-right: 24px; }
+  .paper-entry { grid-template-columns: 48px 1fr; gap: 0 16px; }
+  .rel-section { padding-left: 24px; padding-right: 24px; }
+  .rel-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><em>AK</em> &nbsp;/&nbsp; The Physical Universe</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="series.html">Series</a></li>
+    <li><a href="papers.html" class="active">Papers</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Collaborate</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-atmos"></div>
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">The Physical Universe — Academic Programme</p>
+    <h1 class="page-title">The <em>Papers</em></h1>
+    <p class="page-sub">The series makes the argument in plain language. The papers make it in the language of physics — with formalism, citations, and falsifiable predictions that can be tested by anyone.</p>
+  </div>
+  <div class="series-meta">
+    <div class="series-meta-inner">
+      <div class="meta-item">
+        <span class="meta-val">3</span>
+        <span class="meta-label">In Preparation</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-val">arXiv</span>
+        <span class="meta-label">Target Platform</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-val">1</span>
+        <span class="meta-label">Core Postulate</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="background:var(--paper);">
+  <div class="papers-body">
+
+    <p class="fade-up">The articles in this series build the argument for anyone willing to follow it. The papers build it for the scientific record — with the formalism, citations, and specific falsifiable predictions that distinguish a serious physical proposal from an opinion. Both tracks are necessary. Neither alone is sufficient.</p>
+
+    <p class="fade-up">The strategy is micro papers first, unified framework last — the same sequence Maxwell used in the 1860s and Einstein used between 1905 and 1915. Each micro paper makes one verifiable claim, builds a citation trail, and exposes weak points before they become load-bearing in the larger structure.</p>
+
+    <div class="strategy-box fade-up">
+      <p class="strategy-label">Publication Strategy</p>
+      <p>All papers target arXiv first. A posted paper has a DOI, it is in the permanent scientific record, it can be cited. Journal peer review is the goal for each paper but it is not the gate. The programme succeeds on the strength of the argument and the evidence trail. Critique is as welcome as agreement — if a claim is wrong, the correct outcome is that it is shown to be wrong, specifically and on the evidence, before it becomes load-bearing.</p>
+    </div>
+
+    <div class="section-eyebrow fade-up">The Papers</div>
+    <h2 class="section-heading fade-up">Three papers. One direction.</h2>
+
+    <div class="paper-list fade-up">
+
+      <!-- Paper 1: Condensation Model -->
+      <div class="paper-entry flagship">
+        <div class="paper-entry-num" style="color:var(--accent2);">Paper<br>0</div>
+        <div class="paper-entry-body">
+          <p class="paper-entry-status status-prep">◎ In Preparation — arXiv Submission</p>
+          <h2 class="paper-entry-title">The Condensation Model of the Universe — A Unified Framework for Gravity, Electromagnetism, Thermodynamics and Quantum Mechanics as Phase Transitions in a Continuous Density Field</h2>
+          <p class="paper-entry-claim">The Universe consists of a single continuous condensation field in four stable phases separated by three threshold densities. From this one postulate — with no additional dimensions, no invisible particles, no fitted parameters — the paper derives gravity as an inward liquid-phase density gradient toward solid-phase matter; dark energy as the outward liquid-phase divergence at cosmological scale; galactic rotation curves without dark matter; wave-function collapse as a T₂ phase transition completing; wave-particle duality; thermodynamics as statistical expression of condensation rates; and the uncertainty principle as the resolution limit of the condensation field. Four falsifiable experimental predictions, each testable with existing equipment, are formally stated and distinguish the framework from the Standard Model.</p>
+          <div class="paper-entry-meta">
+            <span class="paper-journal">Target: arXiv · Physics</span>
+            <span class="paper-tag amber">One Postulate</span>
+            <span class="paper-tag amber">4 Falsifiable Predictions</span>
+            <span class="paper-tag amber">No Dark Matter Required</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paper 2: Elasticity -->
+      <div class="paper-entry">
+        <div class="paper-entry-num">02</div>
+        <div class="paper-entry-body">
+          <p class="paper-entry-status status-prep">◎ In Preparation</p>
+          <h2 class="paper-entry-title">Elasticity as the Stability of Vacuum-Driven Quantum Hydrodynamic Flow</h2>
+          <p class="paper-entry-claim">Elastic restoring force is not an intrinsic material property — it is the stability of a Madelung flow configuration driven by the zero-point field. When a material deforms, it is not the atoms resisting displacement; it is the vacuum-driven flow being displaced from its stationary attractor and returning. This reframes elasticity from a phenomenological constant to a derived property of the vacuum medium, and connects it directly to the condensation field framework. Novel falsifiable prediction: elastic constants differ measurably inside a Casimir cavity, where the zero-point field spectrum is geometrically modified. First proposed mechanism by which macroscopic mechanical properties of matter can be influenced by vacuum geometry. Secondary implication: Navier-Stokes remains unsolved because its mathematical framework describes a fluid without a physical account of what a fluid is at the medium level. The elasticity framework, if correct, hands Navier-Stokes the physical foundation it has never had.</p>
+          <div class="paper-entry-meta">
+            <span class="paper-journal">Target: Physical Review Letters</span>
+            <span class="paper-tag">Casimir Cavity Prediction</span>
+            <span class="paper-tag">Navier-Stokes Connection</span>
+            <span class="paper-tag">Zero-Point Field</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Paper 3: Measurement / G circularity -->
+      <div class="paper-entry">
+        <div class="paper-entry-num">03</div>
+        <div class="paper-entry-body">
+          <p class="paper-entry-status status-prep">◎ In Preparation</p>
+          <h2 class="paper-entry-title">The Measurement Problem in Gravitational Physics — G, Solar Mass, and the Circular Foundation of Celestial Mechanics</h2>
+          <p class="paper-entry-claim">G is the least precisely known fundamental constant in physics — known to only 4–5 significant figures, with precision experiments disagreeing by 500 parts per million, far outside stated error bars. This is not an engineering problem awaiting better instruments. It is an epistemological problem: G was extracted by Cavendish by assuming Newton's inverse square law is correct and complete. Every celestial mass in the standard model — the Sun, every planet, every black hole expressed in kilograms — is therefore a downstream consequence of that assumption, not an independent measurement. The framework validates itself by construction. Additionally: GR's energy-momentum tensor predicts that heated objects weigh more — thermal energy is a gravitational source. Precision experiments consistently find decreased weight with temperature. This is a directly testable smoking gun distinguishing GR from the density-field model, executable with existing laboratory equipment at negligible cost.</p>
+          <div class="paper-entry-meta">
+            <span class="paper-journal">Target: Foundations of Physics</span>
+            <span class="paper-tag">Temperature-Weight Smoking Gun</span>
+            <span class="paper-tag">G Circularity Exposed</span>
+            <span class="paper-tag">Falsifies GR Prediction</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- Relationship section -->
+<section class="rel-section">
+  <div class="rel-inner">
+    <p class="rel-eyebrow fade-up">Articles and Papers — Why Both</p>
+    <h2 class="rel-heading fade-up">Two tracks. One argument.</h2>
+    <div class="rel-grid fade-up">
+      <div class="rel-col">
+        <div class="rel-col-label">The Series Articles</div>
+        <div class="rel-col-title">Plain language. Full argument. No credentials required.</div>
+        <p>Build the case for anyone willing to follow it — scientists, engineers, investors, curious readers. No equations. No citations. The aim is to show that the questions are open and that the evidence for opening them is already in the published record. Articles can be read without the papers and the argument stands.</p>
+      </div>
+      <div class="rel-col papers-col">
+        <div class="rel-col-label">The Academic Papers</div>
+        <div class="rel-col-title">Formal claims. Precise predictions. Testable by anyone.</div>
+        <p>Build the same argument in the language physics requires for a claim to be taken seriously — with formalism, citations, and predictions precise enough to be falsified. Papers can be evaluated without reading the articles. Together, they constitute a programme that cannot be dismissed as either "just a blog" or "equations with no physical motivation."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <p class="footer-name">Amit Krishnan</p>
+      <p>Working on creating a second Sun on Earth. Mechanical Engineer with an MBA from IIM Ahmedabad.</p>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">The Series</p>
+      <ul>
+        <li><a href="article-01.html">Series 01 — It's All About the Resources</a></li>
+        <li><a href="article-02.html">Series 02 — Why Elon Musk Is Dead Wrong About Solar</a></li>
+        <li><a href="article-03.html">Series 03 — A Hundred Years of the Wrong Question</a></li>
+        <li><a href="article-04.html">Series 04 — The Most Expensive Assumption</a></li>
+        <li><a href="article-05.html">Series 05 — They Worship Galileo</a></li>
+        <li style="color:var(--muted); opacity:0.5;">Series 06 — Coming Soon</li>
+        <li style="color:var(--muted); opacity:0.5;">Series 07 — Coming Soon</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Connect</p>
+      <ul>
+        <li><a href="about.html">About the author</a></li>
+        <li><a href="contact.html">Collaborate / invest</a></li>
+        <li><a href="https://medium.com/@amit.1krishnan" target="_blank">Medium →</a></li>
+        <li><a href="https://www.youtube.com/@amit.krishnan" target="_blank">YouTube →</a></li>
+        <li><a href="https://www.linkedin.com/in/amitkris/" target="_blank">LinkedIn →</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Amit Krishnan — The Physical Universe</p>
+    <p>Ideas survive. People do not.</p>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('bar').style.width =
+      (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('navLinks');
+  ham.addEventListener('click', () => nav.classList.toggle('open'));
+</script>
+</body>
+</html>

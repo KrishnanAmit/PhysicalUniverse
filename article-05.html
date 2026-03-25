@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>They Worship Galileo While Building the Inquisition — The Physical Universe Series 05</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #12100e;
+    --paper: #f4efe6;
+    --accent: #b5271e;
+    --accent2: #d4830a;
+    --muted: #6b6155;
+    --rule: #d6ccb8;
+    --soft: #ede8dd;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 20px;
+    line-height: 1.8;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.5;
+  }
+
+  #bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0%; z-index: 999; transition: width 0.08s linear; }
+
+  .hero { min-height: 100vh; background: var(--ink); display: grid; grid-template-rows: 1fr auto; position: relative; overflow: hidden; }
+  .hero-atmos { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 15% 85%, rgba(181,39,30,0.18) 0%, transparent 55%), radial-gradient(ellipse 50% 60% at 85% 15%, rgba(212,131,10,0.06) 0%, transparent 55%); }
+
+  .fh-canvas { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0.09; }
+  .fh-canvas svg { width: min(800px, 96vw); }
+  .gate-line { stroke: #f4efe6; fill: none; stroke-dasharray: 400; stroke-dashoffset: 400; animation: trace 3.5s cubic-bezier(0.4,0,0.2,1) forwards; }
+  .gate-line:nth-child(1)  { animation-delay: 0.2s; stroke-width: 1.4; }
+  .gate-line:nth-child(2)  { animation-delay: 0.5s; stroke-width: 1.4; }
+  .gate-line:nth-child(3)  { animation-delay: 0.8s; stroke-width: 0.7; }
+  .gate-line:nth-child(4)  { animation-delay: 1.0s; stroke-width: 0.7; }
+  .gate-line:nth-child(5)  { animation-delay: 1.2s; stroke-width: 0.7; }
+  .gate-line:nth-child(6)  { animation-delay: 1.4s; stroke-width: 0.7; }
+  .gate-line:nth-child(7)  { animation-delay: 1.6s; stroke-width: 0.7; }
+  .gate-line:nth-child(8)  { animation-delay: 1.8s; stroke-width: 0.9; }
+  .gate-line:nth-child(9)  { animation-delay: 2.0s; stroke-width: 0.9; }
+  .gate-line:nth-child(10) { animation-delay: 2.2s; stroke-width: 0.4; }
+  .gate-line:nth-child(11) { animation-delay: 2.4s; stroke-width: 0.4; }
+  .gate-text { opacity: 0; animation: appear 1.2s ease forwards 3s; font-family: 'JetBrains Mono', monospace; fill: rgba(244,239,230,0.12); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+  @keyframes trace  { to { stroke-dashoffset: 0; } }
+  @keyframes appear { to { opacity: 1; } }
+
+  .hero-body { position: relative; z-index: 10; align-self: end; max-width: 820px; margin: 0 auto; padding: 0 48px 88px; width: 100%; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 32px; display: flex; align-items: center; gap: 14px; opacity: 0; animation: rise 0.9s ease forwards 0.2s; }
+  .eyebrow::before { content: ''; display: block; width: 36px; height: 1px; background: var(--accent); }
+  h1.title { font-family: 'Playfair Display', serif; font-size: clamp(36px, 5.5vw, 74px); font-weight: 900; line-height: 1.04; letter-spacing: -0.025em; color: var(--paper); margin-bottom: 28px; opacity: 0; animation: rise 1s ease forwards 0.4s; }
+  h1.title em { font-style: italic; color: var(--accent2); }
+  .subtitle-deck { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(244,239,230,0.45); margin-bottom: 20px; opacity: 0; animation: rise 1s ease forwards 0.55s; }
+  .subtitle { font-size: 19px; color: rgba(244,239,230,0.55); max-width: 520px; line-height: 1.65; font-weight: 300; opacity: 0; animation: rise 1s ease forwards 0.6s; }
+  .hero-meta { display: flex; align-items: center; gap: 20px; margin-top: 48px; padding-top: 28px; border-top: 1px solid rgba(244,239,230,0.1); opacity: 0; animation: rise 1s ease forwards 0.8s; }
+  .mpill { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.06em; color: rgba(244,239,230,0.35); }
+  .msep { width: 3px; height: 3px; border-radius: 50%; background: rgba(244,239,230,0.2); }
+  @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .scroll-hint { position: absolute; bottom: 32px; right: 48px; z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: 0.3; animation: bob 2.4s ease-in-out infinite, rise 1s ease forwards 1.2s; }
+  .scroll-hint span { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; color: var(--paper); writing-mode: vertical-rl; text-transform: uppercase; }
+  .scroll-hint::after { content: ''; width: 1px; height: 44px; background: linear-gradient(to bottom, var(--paper), transparent); }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+
+  .article { max-width: 700px; margin: 0 auto; padding: 96px 48px 140px; }
+
+  .lead-para::first-letter { font-family: 'Playfair Display', serif; font-size: 5.8em; font-weight: 900; float: left; line-height: 0.72; margin: 0.1em 0.12em 0 0; color: var(--accent); }
+
+  p { margin-bottom: 1.7em; color: #1f1c17; }
+  h2 { font-family: 'Playfair Display', serif; font-size: clamp(26px, 3.5vw, 34px); font-weight: 700; line-height: 1.22; color: var(--ink); margin: 80px 0 24px; letter-spacing: -0.015em; }
+  strong { font-weight: 600; color: var(--ink); }
+  em { font-style: italic; }
+
+  .pullquote { margin: 64px -56px; padding: 44px 56px 44px 52px; border-left: 3px solid var(--accent); background: rgba(181,39,30,0.03); position: relative; }
+  .pullquote::before { content: '\201C'; font-family: 'Playfair Display', serif; font-size: 140px; line-height: 1; color: var(--accent); opacity: 0.1; position: absolute; top: -10px; left: 14px; pointer-events: none; }
+  .pullquote p { font-family: 'Playfair Display', serif; font-size: clamp(20px, 2.8vw, 26px); font-style: italic; font-weight: 400; line-height: 1.5; color: var(--ink); margin: 0; }
+
+  .callout { margin: 56px 0; background: var(--ink); padding: 36px 40px; position: relative; overflow: hidden; }
+  .callout::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent2); }
+  .callout-tag { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent2); margin-bottom: 14px; }
+  .callout p { color: rgba(244,239,230,0.82); font-size: 17px; margin: 0; line-height: 1.72; }
+  .callout p + p { margin-top: 14px; }
+
+  /* Series recap strip */
+  .recap-strip { margin: 64px -48px; background: var(--ink); padding: 44px 48px; position: relative; overflow: hidden; }
+  .recap-strip::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(181,39,30,0.06) 0%, transparent 70%); }
+  .recap-tag { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; position: relative; z-index: 2; }
+  .recap-grid { display: flex; flex-direction: column; gap: 2px; position: relative; z-index: 2; }
+  .recap-item { display: grid; grid-template-columns: 88px 1fr; background: rgba(244,239,230,0.03); transition: background 0.2s; }
+  .recap-item:hover { background: rgba(244,239,230,0.06); }
+  .recap-num { padding: 19px 20px; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent2); border-right: 1px solid rgba(244,239,230,0.05); }
+  .recap-body { padding: 16px 20px; }
+  .recap-title { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244,239,230,0.55); margin-bottom: 5px; }
+  .recap-verdict { font-size: 14.5px; color: rgba(244,239,230,0.72); line-height: 1.6; margin: 0; font-style: italic; }
+  .recap-cap { font-size: 12px; color: rgba(244,239,230,0.25); margin-top: 20px; font-style: italic; font-family: 'Source Serif 4', serif; position: relative; z-index: 2; }
+
+  /* Strike cards */
+  .strike-list { margin: 48px 0; display: flex; flex-direction: column; gap: 2px; }
+  .strike { display: grid; grid-template-columns: 56px 1fr; background: var(--soft); transition: background 0.2s; }
+  .strike:hover { background: rgba(181,39,30,0.05); }
+  .strike-num { background: var(--ink); display: flex; align-items: flex-start; justify-content: center; padding: 22px 0 0; font-family: 'Playfair Display', serif; font-size: 11px; font-style: italic; color: var(--accent); opacity: 0.7; letter-spacing: 0.04em; }
+  .strike-body { padding: 20px 24px 20px 20px; }
+  .strike-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); font-weight: 500; margin-bottom: 8px; }
+  .strike-desc { font-size: 16px; line-height: 1.65; color: #2a2520; margin: 0; }
+
+  /* Comparison block */
+  .compare-wrap { margin: 64px -48px; background: var(--ink); padding: 48px; position: relative; overflow: hidden; }
+  .compare-wrap::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(212,131,10,0.04) 0%, transparent 70%); }
+  .compare-tag { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent2); margin-bottom: 32px; position: relative; z-index: 2; }
+  .compare-grid { display: grid; grid-template-columns: 1fr 1px 1fr; position: relative; z-index: 2; }
+  .compare-divider { background: rgba(244,239,230,0.07); margin: 0 32px; }
+  .compare-head { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid rgba(244,239,230,0.08); }
+  .compare-head.science { color: var(--accent); }
+  .compare-head.tech { color: var(--accent2); }
+  .compare-item { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+  .compare-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; margin-top: 9px; }
+  .compare-dot.science { background: var(--accent); opacity: 0.7; }
+  .compare-dot.tech { background: var(--accent2); opacity: 0.7; }
+  .compare-text { font-size: 14.5px; color: rgba(244,239,230,0.65); line-height: 1.65; margin: 0; }
+  .compare-cap { font-size: 12px; color: rgba(244,239,230,0.25); margin-top: 28px; font-style: italic; font-family: 'Source Serif 4', serif; position: relative; z-index: 2; }
+
+  /* Two-outcome block */
+  .outcome-wrap { margin: 64px -48px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+  .outcome-card { background: var(--ink); padding: 36px 32px; position: relative; overflow: hidden; }
+  .outcome-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; }
+  .outcome-card.good::before { background: var(--accent2); }
+  .outcome-card.bleak::before { background: var(--accent); }
+  .outcome-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 16px; }
+  .outcome-label.good { color: var(--accent2); }
+  .outcome-label.bleak { color: var(--accent); }
+  .outcome-head { font-family: 'Playfair Display', serif; font-size: clamp(18px, 2.5vw, 22px); font-weight: 700; line-height: 1.25; color: var(--paper); margin-bottom: 16px; }
+  .outcome-body { font-size: 14.5px; color: rgba(244,239,230,0.62); line-height: 1.68; margin: 0; }
+
+  .stat-block { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1px; background: var(--rule); margin: 64px -48px; border: 1px solid var(--rule); }
+  .stat-cell { background: var(--paper); padding: 36px 32px; text-align: center; position: relative; }
+  .stat-cell::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 24px; height: 2px; background: var(--accent); opacity: 0; transition: opacity 0.3s, width 0.3s; }
+  .stat-cell:hover::after { opacity: 1; width: 40px; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 64px); font-weight: 900; line-height: 1; color: var(--accent); letter-spacing: -0.03em; display: block; margin-bottom: 10px; }
+  .stat-label { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); line-height: 1.6; display: block; }
+  .stat-verdict { font-family: 'Playfair Display', serif; font-size: clamp(13px, 1.8vw, 15px); font-style: italic; color: var(--ink); margin-top: 10px; display: block; line-height: 1.4; }
+  .stat-connector { background: var(--ink) !important; display: flex; align-items: center; justify-content: center; padding: 20px 28px; }
+  .stat-connector span { font-family: 'Playfair Display', serif; font-size: 22px; font-style: italic; color: rgba(244,239,230,0.22); white-space: nowrap; }
+
+  .ornament { text-align: center; margin: 72px 0; color: var(--rule); font-size: 18px; letter-spacing: 0.7em; }
+  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .fade-up.in { opacity: 1; transform: translateY(0); }
+
+  .foot { border-top: 1px solid var(--rule); padding-top: 56px; margin-top: 96px; }
+  .foot-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px; }
+  .foot-closer { font-family: 'Playfair Display', serif; font-size: clamp(22px, 3vw, 30px); font-style: italic; line-height: 1.4; color: var(--ink); max-width: 500px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 48px; }
+  .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.12em; padding: 6px 14px; border: 1px solid var(--rule); color: var(--muted); text-transform: uppercase; cursor: default; transition: all 0.2s; }
+  .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+  .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 64px; background: rgba(18,16,14,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(244,239,230,0.06); }
+  .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+  .nav-logo:hover { opacity: 1; }
+  .nav-logo em { font-style: normal; color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links a { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(244,239,230,0.45); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--paper); }
+  .nav-links a.active::after { content: ''; display: block; width: 100%; height: 1px; background: var(--accent); margin-top: 2px; }
+  .nav-cta { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; padding: 8px 18px; border: 1px solid rgba(181,39,30,0.5); color: var(--accent) !important; text-decoration: none; white-space: nowrap; transition: all 0.2s !important; }
+  .nav-cta:hover { background: var(--accent) !important; color: var(--paper) !important; }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--paper); opacity: 0.6; }
+
+  @media (max-width: 660px) {
+    .site-nav { padding: 0 24px; }
+    .nav-links { display: none; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: var(--ink); padding: 32px 24px; gap: 24px; border-bottom: 1px solid rgba(244,239,230,0.08); }
+    .nav-links.open { display: flex; }
+    .nav-hamburger { display: flex; }
+    .hero-body { padding: 0 24px 64px; }
+    .article { padding: 64px 24px 100px; }
+    .pullquote { margin: 48px 0; padding: 32px 24px 32px 22px; }
+    .recap-strip { margin: 48px -24px; padding: 36px 24px; }
+    .recap-item { grid-template-columns: 60px 1fr; }
+    .compare-wrap { margin: 48px -24px; padding: 36px 24px; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .compare-divider { display: none; }
+    .stat-block { grid-template-columns: 1fr; margin: 48px 0; }
+    .stat-connector { display: none; }
+    .outcome-wrap { grid-template-columns: 1fr; margin: 48px 0; }
+    .strike { grid-template-columns: 40px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><em>AK</em> &nbsp;/&nbsp; The Physical Universe</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="series.html" class="active">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Collaborate</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-atmos"></div>
+  <div class="fh-canvas">
+    <svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
+      <line class="gate-line" x1="160" y1="40" x2="160" y2="320"/>
+      <line class="gate-line" x1="640" y1="40" x2="640" y2="320"/>
+      <line class="gate-line" x1="160" y1="40" x2="640" y2="40"/>
+      <line class="gate-line" x1="210" y1="40" x2="210" y2="320"/>
+      <line class="gate-line" x1="260" y1="40" x2="260" y2="320"/>
+      <line class="gate-line" x1="310" y1="40" x2="310" y2="320"/>
+      <line class="gate-line" x1="360" y1="40" x2="360" y2="320"/>
+      <line class="gate-line" x1="420" y1="40" x2="455" y2="320"/>
+      <line class="gate-line" x1="490" y1="40" x2="545" y2="320"/>
+      <line class="gate-line" x1="560" y1="40" x2="624" y2="320"/>
+      <text class="gate-text" x="400" y="348" text-anchor="middle">entry by endorsement only</text>
+    </svg>
+  </div>
+
+  <div class="hero-body">
+    <div class="eyebrow">The Physical Universe — Series 05 &nbsp;·&nbsp; 18 min read</div>
+    <h1 class="title">They Worship <em>Galileo</em><br>While Building<br>the Inquisition</h1>
+    <p class="subtitle-deck">On the scientific system that had all the evidence and chose not to look</p>
+    <p class="subtitle">The Sun has been running a fusion reactor for four and a half billion years. We have been trying to replicate it for seventy. This article is about why the gap exists — and who built it.</p>
+    <div class="hero-meta">
+      <span class="mpill">Physical Universe Series</span>
+      <span class="msep"></span>
+      <span class="mpill">Institutions &amp; Innovation</span>
+      <span class="msep"></span>
+      <span class="mpill">The Energy Crisis</span>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>scroll</span></div>
+</section>
+
+<article class="article">
+
+  <p class="lead-para fade-up">The previous four articles in this series built a technical case. It has a specific shape: we started with the energy crisis — humanity's central unsolved problem after three centuries of science — and traced it back to its cause. What we found at every step was not a shortage of data, not a failure of engineering, not a lack of intelligence. What we found was a failure of the question. Science has been exquisitely good at measuring the effects of the physical world and systematically incurious about the causes. And that incuriosity is not an accident. It has been built, funded, endorsed, and defended by the system that is supposed to be doing the science.</p>
+
+  <p class="fade-up">This article is about that system. What it has built. What it has cost. And why it cannot reform itself from within.</p>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">Where the Series Has Arrived</h2>
+
+  <p class="fade-up">It is worth being precise about what the first four articles established before going further. The argument has not been philosophical. It has been built from published data, Nobel Prize records, and the internal consistency — or lack of it — of the framework itself.</p>
+
+  <div class="recap-strip fade-up">
+    <div class="recap-tag">The Case So Far</div>
+    <div class="recap-grid">
+
+      <div class="recap-item">
+        <div class="recap-num">Series 01</div>
+        <div class="recap-body">
+          <div class="recap-title">It's All About the Resources</div>
+          <p class="recap-verdict">Science has had three hundred years. We are still digging things out of the ground and setting them on fire. Force and energy are labels applied to measurements — calculations, not physical things in themselves. The physical mechanism underneath the equations was quietly dropped, and nobody noticed, because the equations kept working. This is where the crisis begins: not in the engineering, but in the question physics stopped asking.</p>
+        </div>
+      </div>
+
+      <div class="recap-item">
+        <div class="recap-num">Series 02</div>
+        <div class="recap-body">
+          <div class="recap-title">Why Elon Musk Is Dead Wrong About Solar</div>
+          <p class="recap-verdict">We chose solar as the answer to the energy problem. Solar fails on energy density — 63 million watts per square metre at the Sun's surface becomes 200 watts at Earth's surface after your panel. It fails on intermittency. Trillions committed to it; nuclear fusion starved of both funding and serious physics for decades. Promoting solar as the civilisational energy solution is the caveman saying we don't need fire because we have sunlight. The sunlight is not the Sun. The distance matters.</p>
+        </div>
+      </div>
+
+      <div class="recap-item">
+        <div class="recap-num">Series 03</div>
+        <div class="recap-body">
+          <div class="recap-title">The Mechanical Universe</div>
+          <p class="recap-verdict">We confuse observation with explanation. The Franck-Hertz experiment won a Nobel Prize. The explanation given — that electrons lose discrete energy in collisions — was wrong. The Nobel was awarded anyway. The pattern repeats: one observation generates a cascade of increasingly sophisticated models, each wrapping the observation in more mathematics, each throwing the observation back without asking why. The community is comfortable in this. It has no structural drive to notice the difference between describing what happens and understanding what causes it.</p>
+        </div>
+      </div>
+
+      <div class="recap-item">
+        <div class="recap-num">Series 04</div>
+        <div class="recap-body">
+          <div class="recap-title">The Most Expensive Assumption in Science</div>
+          <p class="recap-verdict">Space is not empty. Seven Nobel Prizes confirm it — from Lamb to Higgs. The vacuum has energy. It has measurable effects on matter. It carries fields. It has a temperature. Every experiment returns the same signal: something is there, and it acts on everything inside it. The community's response to any attempt to describe what that something physically is: "sounds like aether." A legitimate physical question, dismissed with a word, as though naming the error is the same as refuting the argument. This is the single most expensive scientific error of the last century.</p>
+        </div>
+      </div>
+
+    </div>
+    <p class="recap-cap">These are not opinions. They are conclusions that follow directly from the published record, if you follow the evidence without stopping where the institution stopped.</p>
+  </div>
+
+  <p class="fade-up">The question this article asks is simple: who stopped there, and why? Not as an accusation. The answer does not require malice. It requires something more durable and more banal — a system that has organised itself to produce a specific kind of output, and has quietly become unable to produce anything else.</p>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">We Have Been Here Before</h2>
+
+  <p class="fade-up">In the seventeenth century, a Florentine astronomer pointed a telescope at Jupiter and observed four moons that the dominant institution of the age found inconvenient. The institution did not examine the observations. It questioned the observer's credentials, demanded adherence to the established framework, and required a public recantation. The observations were correct. The institution was wrong. The delay cost European science approximately a century.</p>
+
+  <p class="fade-up">We remember Galileo as a hero. We name telescopes and buildings and missions after him. We cite him approvingly in speeches about the importance of following evidence wherever it leads. And then, in the same institutions that carry his name in their mottos, we have built a system that would do to Galileo exactly what the Church did — more politely, with better paperwork, but with the same functional result. He would not have been published. He would not have received funding. He would have been called a crackpot. And the community would have moved on.</p>
+
+  <div class="pullquote fade-up">
+    <p>The Church did not think of itself as the enemy of truth. It thought of itself as the guardian of it. That distinction is the important part — and it is identical to how the modern scientific institution describes itself.</p>
+  </div>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">How a System Closes</h2>
+
+  <p class="fade-up">No single decision closed science to genuinely new ideas. It happened the way all institutional decay happens — through the accumulation of individually reasonable rules that together produce an unreasonable outcome. Each rule made sense at the time it was introduced. Together, they function like a pressure vessel: enormous force applied inward, nothing new admitted.</p>
+
+  <div class="strike-list fade-up">
+
+    <div class="strike">
+      <div class="strike-num">i</div>
+      <div class="strike-body">
+        <div class="strike-title">Conformity by Credential</div>
+        <p class="strike-desc">Entry into research is filtered through examinations that test, almost exclusively, proficiency with the existing mathematical toolkit. The selection mechanism for the people who will do the science is optimised to produce people who are very good at the existing science. A student who cannot reproduce standard solutions in four coordinate systems will not pass. A student who asks whether the equations are describing the right physical picture — the question Feynman said was the most important question for the next generation — has no examination to sit and no pathway to funding. The pipeline from first exam to tenured position is a decade-long filter for conformity, dressed as rigour.</p>
+      </div>
+    </div>
+
+    <div class="strike">
+      <div class="strike-num">ii</div>
+      <div class="strike-body">
+        <div class="strike-title">Entry by Endorsement Only</div>
+        <p class="strike-desc">To post a paper to the major preprint servers, you need endorsement from an established researcher. To publish in a peer-reviewed journal, you need peer reviewers who consider your approach legitimate — reviewers who are, by definition, invested in the existing framework. The logic is quality control. The effect is that the first filter on any new idea is whether someone already inside the system finds it acceptable enough to sponsor. Ideas that challenge the foundations of what established researchers have spent careers building face a structurally higher barrier before a single person outside the system has seen them. It says "entry by endorsement only" on the gate. The gate is real.</p>
+      </div>
+    </div>
+
+    <div class="strike">
+      <div class="strike-num">iii</div>
+      <div class="strike-body">
+        <div class="strike-title">Grovelling as Career Strategy</div>
+        <p class="strike-desc">The culture of physics academia is among the most rigidly hierarchical in any knowledge profession. The deference to senior figures, the careful management of what you say in whose presence, the shared understanding that a bad word from the right person closes a career — these are not aberrations. They are the operating system. A young researcher who publicly challenges a senior figure's framework, however carefully and however correctly, risks their letters of recommendation, their conference invitations, their grant reviews. The system does not need to punish independent thought explicitly. It just needs to make compliance the rational career choice. It has done exactly that, at every level, for decades.</p>
+      </div>
+    </div>
+
+    <div class="strike">
+      <div class="strike-num">iv</div>
+      <div class="strike-body">
+        <div class="strike-title">Volume Over Truth</div>
+        <p class="strike-desc">The stated purpose of peer review is to ensure published science meets a minimum standard of rigour. The actual output is approximately three million papers per year, growing at 4% annually, with replication rates in some fields below 50%. The incentive structure — publish or perish, measured by publication count and citation metrics — has produced a system that publishes a great deal and verifies very little. Charges of data manipulation and plagiarism are not occasional scandals; they are symptoms of a measurement system that rewards the metric over the substance. The gatekeeping is producing more gates and less kept, and the institution defends the gates because the gates are where its authority lives.</p>
+      </div>
+    </div>
+
+    <div class="strike">
+      <div class="strike-num">v</div>
+      <div class="strike-body">
+        <div class="strike-title">The Crackpot Label</div>
+        <p class="strike-desc">The community has a term — "crackpot" — for anyone who challenges the foundations of established physics from outside the credentialled structure. It does double duty: sometimes it is accurate, sometimes it is applied to anyone who questions the framework regardless of the coherence or evidence behind their argument. A system that reserves its harshest social sanction not for bad arguments but for unauthorised arguments — arguments from the wrong people, about the wrong subjects — has made a structural decision about what kinds of thinking are permitted. Whether it intended to make that decision is irrelevant. The decision has been made and enforced consistently. The label is the enforcement mechanism.</p>
+      </div>
+    </div>
+
+    <div class="strike">
+      <div class="strike-num">vi</div>
+      <div class="strike-body">
+        <div class="strike-title">Scheduled Innovation</div>
+        <p class="strike-desc">Institutions that wish to appear open to new ideas have created formal channels: grant windows that open once or twice a year, idea submission portals with annual review cycles, innovation competitions judged by committees using established criteria. The implicit message — that new ideas are welcome at designated intervals, evaluated by the same people against the same standards — reflects a fundamental misunderstanding of how important ideas actually arrive. They arrive when someone has been thinking about the right problem for long enough, without being told to stop, that the answer becomes unavoidable. You cannot schedule that. You can only obstruct it. The current system obstructs it at every stage, systematically, and calls the obstruction quality control.</p>
+      </div>
+    </div>
+
+    <div class="strike">
+      <div class="strike-num">vii</div>
+      <div class="strike-body">
+        <div class="strike-title">Unfalsifiable Frontiers</div>
+        <p class="strike-desc">The most prestigious areas of theoretical physics — string theory, the multiverse, certain quantum interpretations — have produced no confirmed predictions in decades and proposed no experiments that could, even in principle, return a negative result. Tens of thousands of papers. Full departments. Conference circuits. Careers. Built on frameworks that cannot be wrong because they have been constructed to accommodate any result. A field that cannot be wrong is not doing physics. It is doing something else, wearing physics' clothes, holding physics' funding, occupying physics' positions — and displacing the questions that can actually be tested, the ones that, if answered, change what we are able to build in the physical world. The ones this series has been asking since the first article.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="fade-up">None of these, taken alone, would be fatal. Together, they describe a system that has quietly re-oriented itself around its own perpetuation. The science it produces within its accepted framework is real. A great deal of it is excellent. But the question it will not ask — <em>what is actually happening physically?</em> — is exactly the question that would deliver fusion, that would explain what the vacuum is, that would tell us what the Sun is actually doing at its core. That question has been systematically discouraged, dismissed, and defunded. Not maliciously. Structurally. Which is harder to fix.</p>
+
+  <div class="callout fade-up">
+    <div class="callout-tag">The Specific, Measurable Cost</div>
+    <p>Fusion has been "thirty years away" for seventy years. Global public investment in fusion research now exceeds $100 billion — ITER alone has ballooned from an original €5 billion estimate to a projected €18–20 billion and counting, with first plasma now pushed to 2033 at the earliest and deuterium-tritium operations not until 2039. Add the US Department of Energy's fusion programme spending since the 1950s, the parallel national programmes of China, Russia, Japan, South Korea, and the EU, and the figure comfortably crosses $100 billion in public money alone. The private sector has added a further $15 billion since 2020. All of it aimed at a specification derived from particle bombardment experiments conducted a century ago — not from a physical understanding of what the Sun actually does. The physical account of the Sun's fusion mechanism requires understanding what gravity is as a physical process. That question was labelled intractable and defunded. The fusion programme continued on the wrong specification. These are the same decision, made by the same system, in the same period. The cost is not abstract. It is the energy crisis.</p>
+  </div>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">Meanwhile, a Different Industry Asked a Different Question</h2>
+
+  <p class="fade-up">In roughly the same period that theoretical physics was perfecting frameworks that cannot be falsified and searching for particles that have still not appeared, a different ecosystem was doing something structurally different. Not more rigorous. Not run by smarter people. But organised around a different question — not <em>what does the framework permit?</em> but <em>does it work?</em></p>
+
+  <p class="fade-up">The technology industry, from the transistor through to large language models, was built on one principle: the person who solves the problem gets the reward, not the person with the right institutional affiliation. It built structures — open source, venture capital, startup culture, public markets — that made it cheap to attempt and expensive to fail slowly without result. The incumbent's established framework was not a qualification. If anything, it was a disadvantage. The question that mattered was whether the thing worked, and the market answered that question with a speed and accuracy no grant committee has ever matched.</p>
+
+  <div class="compare-wrap fade-up">
+    <div class="compare-tag">Two Systems — Same Era — Radically Different Outputs</div>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-head science">Physics Institution</div>
+        <div class="compare-item"><div class="compare-dot science"></div><p class="compare-text">Entry filtered by a decade of credential training, optimised for conformity with existing methods</p></div>
+        <div class="compare-item"><div class="compare-dot science"></div><p class="compare-text">Funding allocated by committee review within the framework being funded</p></div>
+        <div class="compare-item"><div class="compare-dot science"></div><p class="compare-text">Reward measured by publication count and citation metrics — not physical breakthroughs delivered</p></div>
+        <div class="compare-item"><div class="compare-dot science"></div><p class="compare-text">New ideas evaluated by people whose careers are invested in the framework the new idea challenges</p></div>
+        <div class="compare-item"><div class="compare-dot science"></div><p class="compare-text">Failure to work within orthodoxy ends the challenger's career, not the orthodoxy</p></div>
+        <div class="compare-item"><div class="compare-dot science"></div><p class="compare-text">$100B+ on fusion globally: net energy output still negative. Dark matter: five decades, nothing detected. Hubble constant: two independent methods, two irreconcilable answers.</p></div>
+      </div>
+      <div class="compare-divider"></div>
+      <div class="compare-col">
+        <div class="compare-head tech">Technology Ecosystem</div>
+        <div class="compare-item"><div class="compare-dot tech"></div><p class="compare-text">Entry determined by ability to build something that demonstrably works — pedigree irrelevant</p></div>
+        <div class="compare-item"><div class="compare-dot tech"></div><p class="compare-text">Funding allocated to demonstrated progress, with fast feedback loops and no institutional loyalty</p></div>
+        <div class="compare-item"><div class="compare-dot tech"></div><p class="compare-text">Reward measured by problems solved and value created — asymmetric upside for being right early</p></div>
+        <div class="compare-item"><div class="compare-dot tech"></div><p class="compare-text">New ideas evaluated by whether they work — the market is the peer reviewer, and it has no prior investments to protect</p></div>
+        <div class="compare-item"><div class="compare-dot tech"></div><p class="compare-text">Failure ends the venture, not the person — failure is information, not career death</p></div>
+        <div class="compare-item"><div class="compare-dot tech"></div><p class="compare-text">Personal computing. The internet. GPS. Smartphones. Genome sequencing. mRNA vaccines. Large language models. All in fifty years. None of it asked permission.</p></div>
+      </div>
+    </div>
+    <p class="compare-cap">The comparison is not about which domain is more intellectually demanding. Physics is harder. The comparison is about what different incentive structures produce when applied to hard problems over the same period.</p>
+  </div>
+
+  <p class="fade-up">Bell Labs dismissed the transistor's commercial potential. IBM thought personal computing was a niche. Nokia had the smartphone before Apple and declined to launch it because it would cannibalise the handset business. The people inside those incumbents were not stupid. They were wrong in the specific way that successful institutions are always wrong: they confused their model of the world for the world, and they had built structures that rewarded the people who agreed with them and discouraged the ones who did not.</p>
+
+  <p class="fade-up">The physics establishment has done the same thing, with one important difference: it has not yet been exposed to the competitive pressure that ended Kodak. It does not face a rival that can take its grant funding. The endorsement system, the journal system, the grant review system, and the career structure have all been built to ensure that the people who control the framework cannot be competed out of it. This is not a conspiracy. It is how every institution that has existed long enough behaves. It is also, eventually, how every institution that has behaved this way ends.</p>
+
+  <div class="stat-block fade-up">
+    <div class="stat-cell">
+      <span class="stat-num">$100B+</span>
+      <span class="stat-label">Global public investment in fusion<br>research since the 1950s</span>
+      <span class="stat-verdict">Net energy output still negative. First plasma now pushed to 2033. Specification unchanged.</span>
+    </div>
+    <div class="stat-cell stat-connector"><span>vs.</span></div>
+    <div class="stat-cell">
+      <span class="stat-num">$0</span>
+      <span class="stat-label">Spent re-examining the<br>physical model of the Sun</span>
+      <span class="stat-verdict">The specification was derived from particle guns in 1919. It has never been independently verified.</span>
+    </div>
+  </div>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">The Bill Has Started to Arrive</h2>
+
+  <p class="fade-up">For most of the last century, the failure of institutional physics to complete the physical description of the Universe was a problem with no immediate deadline. The energy system was uncomfortable but functional. The geopolitical situation was managed. The opportunity cost of not solving fusion was real but abstract. That has changed. The bill for the incomplete physics is arriving in four simultaneous columns.</p>
+
+  <p class="fade-up"><strong>The fossil fuel fragility.</strong> India imports over $100 billion in fossil fuels annually. Europe discovered in 2022 that a single pipeline decision could destabilise its industrial base within eighteen months. Every country that imports energy is operating with a structural vulnerability that no diplomatic hedging fully addresses. The physics that would eliminate that vulnerability — fusion, a second Sun on Earth — has not been delivered. Not because it is impossible. Because the system tasked with delivering it stopped asking the physical question.</p>
+
+  <p class="fade-up"><strong>The solar trap.</strong> The energy transition, as currently designed, is a civilisational bet on the lowest energy density source available: diffuse photons spread across weather, night, and latitude, requiring storage at a scale no current technology can economically deliver. Solar and wind are real and useful. But they are a management system for scarcity at a higher level of comfort, not a physical answer to energy abundance. The gap between a civilisation that runs on Earth-collected sunlight and one that runs on fusion — if the physical specification were corrected — is not a marginal improvement. It is a different category of existence.</p>
+
+  <p class="fade-up"><strong>The AI energy paradox.</strong> The most sophisticated technology ever built is being powered by coal. The AI infrastructure buildout — tracking toward $1 trillion in committed capital — requires power at a scale and reliability that the existing grid, and every planned renewable addition to it, cannot supply on the timelines the industry requires. For the first time, the people with both the capital and the urgency to fund physics outside the institutional structure have a direct, personal stake in whether the physics gets done. This pressure did not exist ten years ago. It may be sufficient to change the terms.</p>
+
+  <p class="fade-up"><strong>The geopolitical fuse.</strong> The conditions for resource conflict are more fully assembled today than at any point since 1939: energy import dependency concentrated in volatile regions, supply route fragility, economic stress intersecting with military capability, and the pace of technological change outrunning the diplomatic frameworks built for a slower world. The history of the last century suggests that when these conditions converge without a technological release valve, they do not stabilise. The release valve is energy abundance. The physics exists as an incomplete description. The institution responsible for completing it has other priorities.</p>
+
+  <div class="pullquote fade-up">
+    <p>Everything humanity has built — the cities, the supply chains, the interconnectedness, the freedom that cheap energy has given to individuals — is more fragile than it appears. And the fragility is not an engineering problem. It is a physics problem that was left unsolved because the system responsible for solving it decided it was not a priority.</p>
+  </div>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">What a Different System Would Have Done by Now</h2>
+
+  <p class="fade-up">The questions this series has raised are not new. Physicists have privately noticed the gaps in the gravity account, in the solar model, in the physical meaning of the vacuum, for decades. The problem is not that nobody has seen them. The problem is that the system provides no pathway for someone who sees them to pursue them seriously without career risk — and no reward for the person who, against all institutional pressure, pursues them anyway.</p>
+
+  <p class="fade-up">A system organised around the technology industry's principles would have handled these anomalies differently. Not by funding grand unified theories — by funding small, specific, cheap experiments aimed directly at the falsification candidates. The blueshift asymmetry test. The temperature-weight relationship across materials. The inverse square law at intermediate solar distances with existing deep-space missions. None of these require a new accelerator. All of them could have been run for a fraction of a percent of what has been spent on ITER. The technology industry does not wait for permission to test a hypothesis that might invalidate the dominant framework. It runs the test and finds out. The physics establishment has not run these tests. It has not run them because the tests, if positive, would be inconvenient for the people who hold the grants.</p>
+
+  <p class="fade-up">That is what $100 billion of institutional capture looks like. Not fraud. Not malice. A system that has quietly decided which questions are worth asking — and has built a funding structure, a career structure, and a publication structure that enforces that decision at every level.</p>
+
+  <div class="callout fade-up">
+    <div class="callout-tag">About This Series</div>
+    <p>The Physical Universe is written by Amit Krishnan — Mechanical Engineer, MBA from IIM Ahmedabad, and the originator of a framework for the physical description of the Universe that has been in development since 2024 and is documented in a formal academic manuscript currently in preparation for publication. The series has been building since early 2025, beginning with the energy crisis and working backward, article by article, to its physical cause. The popular record predates the academic one — deliberately, as a timestamped public account of the argument's development.</p>
+    <p>This article is the fifth in the series. Articles 06 and 07 will make the case for what the physical description looks like — not as a finished theory asking for belief, but as a set of specific, falsifiable, affordable experiments that any competent team could run. The series does not ask you to trust it. It asks you to look at the evidence and decide whether the institution has been asking the right questions.</p>
+  </div>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">The Bubble, and What Comes After</h2>
+
+  <p class="fade-up">Institutions that refused to adapt when the conditions required it have a consistent history. Kodak invented the digital camera in 1975 and shelved it to protect the film business. Nokia had the smartphone before Apple and chose not to launch it because it would cannibalise the handset. Blockbuster could have bought Netflix for $50 million and declined. In each case: the information was present, the capability was present, and the institution chose its existing model over the evidence that the model was ending. In each case, the institution did not survive the choice.</p>
+
+  <p class="fade-up">The physics establishment is in an analogous position with one important difference: it has not yet been exposed to the competitive pressure that ended those companies, because it has successfully insulated itself from competition. You cannot take a grant committee's market share. You cannot outcompete a journal's network effect by publishing something better in a field it does not recognise. The structures that protect the institution from external challenge were built deliberately, and they have worked. For now.</p>
+
+  <p class="fade-up">The insulation is ending. Not because the institution will choose to end it — it will not. But because the AI energy crisis, the geopolitical pressure, and the growing visibility of fusion's seventy-year failure are creating, for the first time, a class of funders with both the resources and the urgency to fund physics outside the institutional structure. People who have watched the fusion timeline extend past every deadline and started to ask whether the specification — not the engineering — is the binding constraint. People spending $1 trillion on compute infrastructure who cannot answer where the power comes from in 2030. These people do not need the institution's permission. They need the correct physical specification. Those are different things.</p>
+
+  <p class="fade-up">The correct response to this moment is not another petition to the institution to change. It has demonstrated, across fifty years of consistent decisions, that it will not. Every anomaly becomes a calibration footnote. Every challenge becomes a crackpot. Every window for submissions opens once a year and evaluates against existing criteria. The institution has made its position clear.</p>
+
+  <p class="fade-up">The correct response is to build the parallel structure — one that operates on the principles the technology industry proved work: problem first, pedigree never, outcomes over process, disproportionate reward for being right. One institution. One paper. One experiment at a time. One that takes the observational record seriously, holds every claim to the standard of falsifiability, and has no career investment in any particular answer to the physical questions.</p>
+
+  <div class="outcome-wrap fade-up">
+    <div class="outcome-card good">
+      <div class="outcome-label good">How This Ends Well</div>
+      <div class="outcome-head">The Physics Arrives Before the Crisis Does</div>
+      <p class="outcome-body">A physical description of the gravitational mechanism is developed, tested, and survives. The fusion specification is corrected. The engineering programme that follows solves the energy problem on a timeline of years rather than generations. The geopolitical pressure assembling toward resource conflict finds a release valve. The cities, the supply chains, the interconnected world — all of it gets the energy it needs, without the leverage point of geography. This has happened before at smaller scales. The steam engine changed the terms of industrial competition within a generation. Cheap, abundant energy is the steam engine of the next one.</p>
+    </div>
+    <div class="outcome-card bleak">
+      <div class="outcome-label bleak">How This Ends Badly</div>
+      <div class="outcome-head">The Crisis Arrives Before the Physics Does</div>
+      <p class="outcome-body">The energy and geopolitical pressures converge before the physical description is completed. The institution continues producing papers on unfalsifiable theories and searching for particles that do not appear, while the power infrastructure supporting modern civilisation becomes a flashpoint. What we have built — the better quality of life, the freedom machines have given to individuals, the global interconnectedness, the cities, the pipelines — proves more fragile than it appeared when energy was cheap and the physics question could be deferred. The verdict does not arrive in a journal. It arrives in the world, on a timeline the institution did not choose and cannot control.</p>
+    </div>
+  </div>
+
+  <p class="fade-up">The moment the institution told Galileo to recant was not the moment the heliocentric model died. It was the moment the clock started on how long the institution had left. We are at an equivalent moment — not in astronomy, but in energy physics, in the physical description of the medium that governs everything we are trying to build. The clock is running. The question is not whether the institution will eventually be replaced. The question is whether the physics arrives in time.</p>
+
+  <div class="pullquote fade-up">
+    <p>We do not need to convince the institution. We need to build the telescope, make the observations, and publish them where anyone who wants to look can look. The institution will handle the rest on its own timeline. It always does.</p>
+  </div>
+
+  <div class="callout fade-up">
+    <div class="callout-tag">The Invitation</div>
+    <p>The Physical Universe series is building a case — article by article, experiment by experiment — for the physical description that 350 years of equations have not provided. The next two articles in the series make the case for what the physical questions actually are and what a serious experimental programme aimed at answering them looks like. They are not asking for belief. They are asking for the willingness to look at the evidence and follow it.</p>
+    <p>If you are a scientist who has noticed the gaps described in this series and been told to work on something more tractable — this is where those observations belong. If you are an engineer who has watched the fusion timeline extend past every deadline and started to wonder whether the specification is the binding constraint — the argument above is the case. If you are an investor who has connected the AI power problem to the incomplete physics upstream of it — the experiments that would test the physical account are affordable, and the upside, if the account is correct, ends the energy constraint permanently. The contact page is the place to start.</p>
+  </div>
+
+  <div class="foot fade-up">
+    <div class="foot-label">Series 05 — The Physical Universe</div>
+    <div class="foot-closer">"The institution is not the enemy of truth. It believes it is the guardian of it. That is why it cannot reform itself — and why the only answer is to build what it has refused to build, and let the world decide whether it was worth building."</div>
+    <div class="tags">
+      <span class="tag">Physical Universe</span>
+      <span class="tag">Scientific Institutions</span>
+      <span class="tag">Fusion Energy</span>
+      <span class="tag">Innovation</span>
+      <span class="tag">Energy Crisis</span>
+      <span class="tag">Peer Review</span>
+      <span class="tag">Galileo</span>
+      <span class="tag">Technology</span>
+      <span class="tag">Foundational Physics</span>
+      <span class="tag">Second Sun</span>
+      <span class="tag">Paradigm Shift</span>
+    </div>
+  </div>
+
+</article>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('bar').style.width =
+      (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

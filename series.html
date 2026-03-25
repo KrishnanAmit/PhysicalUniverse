@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Series — Amit Krishnan</title>
+<title>Articles &amp; Papers — The Physical Universe</title>
 <link rel="stylesheet" href="style.css">
 <style>
 
@@ -14,9 +14,10 @@
 }
 .page-hero-atmos {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 20% 60%, rgba(181,39,30,0.12) 0%, transparent 55%);
+  background: radial-gradient(ellipse 70% 60% at 20% 60%, rgba(181,39,30,0.12) 0%, transparent 55%),
+              radial-gradient(ellipse 50% 40% at 80% 30%, rgba(212,131,10,0.07) 0%, transparent 55%);
 }
-.page-hero-inner { max-width: 760px; margin: 0 auto; position: relative; z-index: 2; }
+.page-hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; padding: 0; }
 .page-eyebrow {
   font-family: 'JetBrains Mono', monospace;
   font-size: 9.5px; letter-spacing: 0.24em;
@@ -37,11 +38,9 @@
 .page-title em { font-style: italic; color: var(--accent2); }
 .page-sub {
   font-size: 17px; color: rgba(244,239,230,0.5);
-  max-width: 520px; line-height: 1.7; font-weight: 300;
+  max-width: 560px; line-height: 1.7; font-weight: 300;
   opacity: 0; animation: rise 1s ease forwards 0.6s;
 }
-
-/* Series overview bar */
 .series-meta {
   background: rgba(244,239,230,0.04);
   border-top: 1px solid rgba(244,239,230,0.06);
@@ -49,7 +48,7 @@
   position: relative; z-index: 2;
 }
 .series-meta-inner {
-  max-width: 760px; margin: 0 auto;
+  max-width: 1200px; margin: 0 auto;
   display: flex; gap: 48px; flex-wrap: wrap;
 }
 .meta-item { display: flex; flex-direction: column; gap: 4px; }
@@ -63,114 +62,140 @@
   text-transform: uppercase; color: rgba(244,239,230,0.3);
 }
 
-/* Article list */
-.article-list {
-  max-width: 760px; margin: 0 auto;
-  padding: 80px 48px 120px;
+/* Two-column body */
+.two-col-body {
+  background: var(--paper);
+}
+.two-col-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 0 48px;
+  align-items: start;
 }
 
-.article-entry {
-  display: grid; grid-template-columns: 80px 1fr;
-  gap: 0 32px; align-items: start;
-  padding: 48px 0;
+/* Column headers */
+.col-articles, .col-papers {
+  padding: 64px 0 100px;
+}
+.col-articles {
+  border-right: 1px solid var(--rule);
+  padding-right: 56px;
+}
+.col-papers {
+  padding-left: 56px;
+}
+
+.col-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px; letter-spacing: 0.24em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 8px;
+}
+.papers-eyebrow { color: var(--accent2); }
+.col-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 700; line-height: 1.2;
+  color: var(--ink); margin-bottom: 10px;
+  letter-spacing: -0.015em;
+}
+.col-sub {
+  font-size: 14px; color: var(--muted);
+  line-height: 1.65; margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Entry items */
+.entry-list { display: flex; flex-direction: column; }
+.entry-item {
+  display: grid; grid-template-columns: 44px 1fr;
+  gap: 0 20px; align-items: start;
+  padding: 28px 0;
   border-bottom: 1px solid var(--rule);
   text-decoration: none; color: inherit;
   position: relative;
-  transition: padding-left 0.25s;
+  transition: padding-left 0.2s;
 }
-.article-entry:first-child { border-top: 1px solid var(--rule); }
-.article-entry::before {
+.entry-item:first-child { border-top: 1px solid var(--rule); }
+a.entry-item::before {
   content: ''; position: absolute;
-  left: -48px; top: 0; bottom: 0;
+  left: -56px; top: 0; bottom: 0;
   width: 3px; background: var(--accent);
-  opacity: 0; transition: opacity 0.25s;
+  opacity: 0; transition: opacity 0.2s;
 }
-.article-entry:hover { padding-left: 12px; }
-.article-entry:hover::before { opacity: 1; }
-.article-entry.locked { opacity: 0.45; pointer-events: none; }
+a.entry-item:hover { padding-left: 8px; }
+a.entry-item:hover::before { opacity: 1; }
+.entry-item.locked { opacity: 0.4; }
 
 .entry-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px; letter-spacing: 0.1em;
-  color: var(--accent); padding-top: 6px;
+  font-size: 10px; letter-spacing: 0.1em;
+  color: var(--accent); padding-top: 3px;
 }
-
-.entry-body {}
+.papers-num { color: var(--accent2); }
 
 .entry-status {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 8.5px; letter-spacing: 0.18em;
-  text-transform: uppercase; margin-bottom: 12px;
+  font-size: 8px; letter-spacing: 0.18em;
+  text-transform: uppercase; margin-bottom: 8px;
 }
 .entry-status.live { color: var(--accent); }
+.entry-status.prep { color: var(--accent2); }
 .entry-status.coming { color: var(--muted); }
 
 .entry-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(20px, 2.8vw, 28px);
-  font-weight: 700; line-height: 1.2;
-  color: var(--ink); margin-bottom: 14px;
-  letter-spacing: -0.015em;
+  font-size: clamp(15px, 2vw, 18px);
+  font-weight: 700; line-height: 1.25;
+  color: var(--ink); margin-bottom: 8px;
+  letter-spacing: -0.01em;
 }
-.article-entry:hover .entry-title { color: var(--accent); }
+a.entry-item:hover .entry-title { color: var(--accent); }
+.paper-item .entry-title { }
+.paper-item.flagship-paper .entry-title { color: var(--ink); }
 
 .entry-desc {
-  font-size: 15px; color: var(--muted);
-  line-height: 1.7; margin-bottom: 20px;
+  font-size: 13px; color: var(--muted);
+  line-height: 1.65; margin-bottom: 12px;
+}
+.entry-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag-amber {
+  background: rgba(212,131,10,0.08);
+  border-color: rgba(212,131,10,0.2) !important;
+  color: var(--accent2) !important;
 }
 
-.entry-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-
-/* What's coming */
-.coming-section {
-  background: var(--soft);
-  padding: 80px 48px;
-  border-top: 1px solid var(--rule);
+.flagship-paper {
+  background: rgba(212,131,10,0.04);
+  margin: 0 -16px; padding: 28px 16px;
+  border-left: 2px solid var(--accent2);
 }
-.coming-inner { max-width: 760px; margin: 0 auto; }
-.coming-eyebrow {
+
+.papers-more {
+  padding: 24px 0;
+}
+.papers-more-link {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 9.5px; letter-spacing: 0.22em;
-  text-transform: uppercase; color: var(--accent);
-  margin-bottom: 16px;
+  font-size: 9.5px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--accent2);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(212,131,10,0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
 }
-.coming-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 30px; font-weight: 700;
-  color: var(--ink); margin-bottom: 40px;
-  letter-spacing: -0.015em;
-}
-.coming-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 2px;
-}
-.coming-item {
-  background: var(--paper);
-  padding: 28px 28px;
-  border: 1px solid var(--rule);
-}
-.coming-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px; letter-spacing: 0.2em;
-  text-transform: uppercase; color: var(--muted);
-  margin-bottom: 10px;
-}
-.coming-item-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 17px; font-weight: 700;
-  color: var(--ink); margin-bottom: 8px;
-}
-.coming-item-desc {
-  font-size: 13px; color: var(--muted); line-height: 1.6;
-}
+.papers-more-link:hover { border-color: var(--accent2); }
 
-@media (max-width: 720px) {
-  .page-hero, .article-list, .coming-section { padding-left: 24px; padding-right: 24px; }
+@media (max-width: 860px) {
+  .two-col-inner { grid-template-columns: 1fr; padding: 0 24px; }
+  .col-articles { border-right: none; padding-right: 0; border-bottom: 2px solid var(--rule); padding-bottom: 48px; }
+  .col-papers { padding-left: 0; }
+  .page-hero, .two-col-body { padding-left: 0; padding-right: 0; }
   .series-meta { padding-left: 24px; padding-right: 24px; }
-  .article-entry { grid-template-columns: 52px 1fr; gap: 0 16px; }
-  .coming-grid { grid-template-columns: 1fr; }
-  .series-meta-inner { gap: 28px; }
+  a.entry-item::before { left: -24px; }
 }
+
 </style>
 </head>
 <body>
@@ -194,18 +219,18 @@
   <div class="page-hero-atmos"></div>
   <div class="page-hero-inner">
     <p class="page-eyebrow">The Physical Universe</p>
-    <h1 class="page-title">The <em>Series</em></h1>
-    <p class="page-sub">A physical description of the Universe — built to explain what centuries of equations have catalogued but never fully accounted for. Published as the work develops.</p>
+    <h1 class="page-title">Articles &amp; <em>Papers</em></h1>
+    <p class="page-sub">Two tracks. One argument. The articles build the case in plain language. The papers build it in the language of physics — with formalism, citations, and falsifiable predictions.</p>
   </div>
   <div class="series-meta">
     <div class="series-meta-inner">
       <div class="meta-item">
-        <span class="meta-val">3</span>
-        <span class="meta-label">Published</span>
+        <span class="meta-val">5</span>
+        <span class="meta-label">Articles Published</span>
       </div>
       <div class="meta-item">
-        <span class="meta-val">∞</span>
-        <span class="meta-label">Planned</span>
+        <span class="meta-val">3</span>
+        <span class="meta-label">Papers in Preparation</span>
       </div>
       <div class="meta-item">
         <span class="meta-val">1</span>
@@ -215,64 +240,146 @@
   </div>
 </section>
 
-<div style="background:var(--paper);">
-  <div class="article-list">
+<div class="two-col-body">
+  <div class="two-col-inner">
 
-    <a href="article-01.html" class="article-entry fade-up">
-      <div class="entry-num">01</div>
-      <div class="entry-body">
-        <p class="entry-status live">● Published — Jan 7, 2026</p>
-        <h2 class="entry-title">It's All About the Resources</h2>
-        <p class="entry-desc">From India's Aravalli range to Venezuela's oil fields and Greenland's minerals — the same ancient logic repeating at civilisational scale. Every convenience requires materials and energy. Modern science was supposed to change that equation. It has not. This article asks why, and traces the answer back to the foundational concepts of force and energy — neither of which is a physical entity.</p>
-        <div class="entry-tags">
-          <span class="tag">Resources</span>
-          <span class="tag">Force &amp; Energy</span>
-          <span class="tag">Mechanical Universe</span>
-        </div>
+    <!-- LEFT: ARTICLES -->
+    <div class="col-articles">
+      <div class="col-header">
+        <p class="col-eyebrow">Articles</p>
+        <h2 class="col-heading">The Series</h2>
+        <p class="col-sub">Plain language. No equations. The full argument, from the energy crisis to its physical cause.</p>
       </div>
-    </a>
 
-    <a href="article-02.html" class="article-entry fade-up">
-      <div class="entry-num">02</div>
-      <div class="entry-body">
-        <p class="entry-status live">● Published — Feb 2026</p>
-        <h2 class="entry-title">Why Elon Musk Is Dead Wrong About Solar: The Math That Destroys the Dream</h2>
-        <p class="entry-desc">The caveman invented fire because sunlight was too dilute to cook meat, stay warm, or see in the dark. Sunlight was free, it was everywhere, and it was not enough. So he built something denser. Hundreds of thousands of years later, the world's most prominent technologist is championing what even the caveman rejected. This article does the one calculation the energy debate refuses to do — energy density — and shows why that rejection was correct then and remains correct now.</p>
-        <div class="entry-tags">
-          <span class="tag">Solar vs Fusion</span>
-          <span class="tag">Elon Musk</span>
-          <span class="tag">Energy Density</span>
+      <div class="entry-list">
+
+        <a href="article-01.html" class="entry-item fade-up">
+          <div class="entry-num">01</div>
+          <div class="entry-body">
+            <p class="entry-status live">● Published</p>
+            <h3 class="entry-title">It's All About the Resources</h3>
+            <p class="entry-desc">Force and energy are labels on measurements — not physical things. The mechanism was abandoned. Three hundred years later we are still digging things out of the ground.</p>
+            <div class="entry-tags"><span class="tag">Resources</span><span class="tag">Force &amp; Energy</span></div>
+          </div>
+        </a>
+
+        <a href="article-02.html" class="entry-item fade-up">
+          <div class="entry-num">02</div>
+          <div class="entry-body">
+            <p class="entry-status live">● Published</p>
+            <h3 class="entry-title">Why Elon Musk Is Dead Wrong About Solar</h3>
+            <p class="entry-desc">The caveman invented fire because sunlight was too dilute. One number — energy density — explains why that rejection was correct then and remains correct now.</p>
+            <div class="entry-tags"><span class="tag">Solar vs Fusion</span><span class="tag">Energy Density</span></div>
+          </div>
+        </a>
+
+        <a href="article-03.html" class="entry-item fade-up">
+          <div class="entry-num">03</div>
+          <div class="entry-body">
+            <p class="entry-status live">● Published</p>
+            <h3 class="entry-title">A Hundred Years of the Wrong Question</h3>
+            <p class="entry-desc">The Franck-Hertz experiment won a Nobel Prize. The explanation given was wrong. The Nobel was awarded anyway. Prediction is not understanding.</p>
+            <div class="entry-tags"><span class="tag">Franck-Hertz</span><span class="tag">Fusion</span></div>
+          </div>
+        </a>
+
+        <a href="article-04.html" class="entry-item fade-up">
+          <div class="entry-num">04</div>
+          <div class="entry-body">
+            <p class="entry-status live">● Published</p>
+            <h3 class="entry-title">The Most Expensive Assumption in Science</h3>
+            <p class="entry-desc">Seven Nobel Prizes confirm the vacuum is not empty. The community's response to any attempt to describe what fills it: "sounds like aether."</p>
+            <div class="entry-tags"><span class="tag">Vacuum Energy</span><span class="tag">Higgs Field</span></div>
+          </div>
+        </a>
+
+        <a href="article-05.html" class="entry-item fade-up">
+          <div class="entry-num">05</div>
+          <div class="entry-body">
+            <p class="entry-status live">● Published</p>
+            <h3 class="entry-title">They Worship Galileo While Building the Inquisition</h3>
+            <p class="entry-desc">The scientific system that had all the evidence and chose not to look. On gatekeeping, the crackpot label, and why the AI energy crisis may finally change the terms.</p>
+            <div class="entry-tags"><span class="tag">Institutions</span><span class="tag">Energy Crisis</span></div>
+          </div>
+        </a>
+
+        <div class="entry-item fade-up locked">
+          <div class="entry-num" style="color:var(--muted);">06</div>
+          <div class="entry-body">
+            <p class="entry-status coming">◌ Coming Soon</p>
+            <h3 class="entry-title">Physics Has Mastered 5% of Gravity</h3>
+            <p class="entry-desc">Newton: 28.3%. Einstein: 53.9%. Seven confirmed properties of gravity unaddressed by either. This article does the arithmetic.</p>
+            <div class="entry-tags"><span class="tag">Gravity</span><span class="tag">Dark Matter</span></div>
+          </div>
         </div>
+
+        <div class="entry-item fade-up locked">
+          <div class="entry-num" style="color:var(--muted);">07</div>
+          <div class="entry-body">
+            <p class="entry-status coming">◌ Coming Soon</p>
+            <h3 class="entry-title">The Only Explanation That Fits</h3>
+            <p class="entry-desc">The positive case. One mechanism. All 23 observational properties of gravity. The experiments that would confirm or falsify it.</p>
+            <div class="entry-tags"><span class="tag">Condensation Model</span><span class="tag">Experiments</span></div>
+          </div>
+        </div>
+
       </div>
-    </a>
+    </div>
 
-    <a href="article-03.html" class="article-entry fade-up">
-      <div class="entry-num">03</div>
-      <div class="entry-body">
-        <p class="entry-status live">● Published — Mar 2026</p>
-        <h2 class="entry-title">A Hundred Years of the Wrong Question</h2>
-        <p class="entry-desc">The AI industry will spend $650 billion on infrastructure in 2026 and has no answer to where the power comes from. Fusion has been thirty years away for a hundred years. This article uses the Franck-Hertz experiment — a Nobel Prize-winning result that its own discoverers misunderstood — as a precise demonstration of why prediction is not the same as understanding, and why that difference is now costing us the future.</p>
-        <div class="entry-tags">
-          <span class="tag">Fusion</span>
-          <span class="tag">AI Energy</span>
-          <span class="tag">Quantum Mechanics</span>
-          <span class="tag">Franck-Hertz</span>
-        </div>
+    <!-- RIGHT: PAPERS -->
+    <div class="col-papers">
+      <div class="col-header">
+        <p class="col-eyebrow papers-eyebrow">Papers</p>
+        <h2 class="col-heading">The Academic Record</h2>
+        <p class="col-sub">Formalism, citations, and falsifiable predictions. The same argument, in the language physics requires.</p>
       </div>
-    </a>
 
-    <div class="article-entry fade-up" style="opacity:0.45; cursor:default; pointer-events:none;">
-      <div class="entry-num" style="color:var(--muted);">04</div>
-      <div class="entry-body">
-        <p class="entry-status" style="color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase;">◌ Coming Soon</p>
-        <h2 class="entry-title">The Most Expensive Assumption in Science</h2>
-        <p class="entry-desc">Seven Nobel Prizes have established that the vacuum of space is not empty — and that whatever fills it interacts with matter continuously, at every scale, by mechanisms that remain physically unnamed. This article takes the full inventory, names three conclusions the evidence demands, and asks what it would mean to take the question seriously for the first time.</p>
-        <div class="entry-tags">
-          <span class="tag">Vacuum Energy</span>
-          <span class="tag">Higgs Field</span>
-          <span class="tag">Casimir Effect</span>
-          <span class="tag">Foundation of Physics</span>
+      <div class="entry-list">
+
+        <div class="entry-item paper-item fade-up flagship-paper">
+          <div class="entry-num papers-num">P0</div>
+          <div class="entry-body">
+            <p class="entry-status prep">◎ In Preparation — arXiv</p>
+            <h3 class="entry-title">The Condensation Model of the Universe</h3>
+            <p class="entry-desc">One postulate. Four phases. Three threshold densities. Derives gravity, dark energy, rotation curves, wave-function collapse, thermodynamics, and the uncertainty principle. No dark matter. No fitted parameters. Four falsifiable experimental predictions.</p>
+            <div class="entry-tags"><span class="tag tag-amber">Paper 0 — Framework</span><span class="tag tag-amber">One Postulate</span></div>
+          </div>
         </div>
+
+        <div class="entry-item paper-item fade-up locked">
+          <div class="entry-num papers-num" style="color:var(--muted);">P1</div>
+          <div class="entry-body">
+            <p class="entry-status coming">◌ In Preparation</p>
+            <h3 class="entry-title">Elasticity as the Stability of Vacuum-Driven Flow</h3>
+            <p class="entry-desc">Elastic restoring force is not a material property — it is the stability of the Madelung flow driven by the zero-point field. Novel prediction: elastic constants differ inside a Casimir cavity.</p>
+            <div class="entry-tags"><span class="tag">Physical Review Letters</span><span class="tag">Casimir Prediction</span></div>
+          </div>
+        </div>
+
+        <div class="entry-item paper-item fade-up locked">
+          <div class="entry-num papers-num" style="color:var(--muted);">P2</div>
+          <div class="entry-body">
+            <p class="entry-status coming">◌ In Preparation</p>
+            <h3 class="entry-title">The Measurement Problem in Gravitational Physics</h3>
+            <p class="entry-desc">G is known to only 4–5 significant figures. Solar mass is not measured — it is derived from G. Every celestial mass is downstream of a circularity. Plus a temperature-weight smoking gun that falsifies a GR prediction.</p>
+            <div class="entry-tags"><span class="tag">Foundations of Physics</span><span class="tag">GR Smoking Gun</span></div>
+          </div>
+        </div>
+
+        <div class="entry-item paper-item fade-up locked">
+          <div class="entry-num papers-num" style="color:var(--muted);">P3</div>
+          <div class="entry-body">
+            <p class="entry-status coming">◌ Planned</p>
+            <h3 class="entry-title">Archimedes, Density Contrast, and Rotation Curves</h3>
+            <p class="entry-desc">Newtonian mass as a special case of density contrast. Flat galactic rotation curves without dark matter — derived from the same mechanism as Archimedes' principle.</p>
+            <div class="entry-tags"><span class="tag">MNRAS / ApJ</span><span class="tag">No Dark Matter</span></div>
+          </div>
+        </div>
+
+        <div class="papers-more fade-up">
+          <a href="papers.html" class="papers-more-link">Full papers programme →</a>
+        </div>
+
       </div>
     </div>
 
@@ -286,12 +393,25 @@
       <p>Working on creating a second Sun on Earth. Mechanical Engineer with an MBA from IIM Ahmedabad.</p>
     </div>
     <div class="footer-col">
-      <p class="footer-col-title">The Series</p>
+      <p class="footer-col-title">Articles</p>
       <ul>
-        <li><a href="article-01.html">Series 01 — It's All About the Resources</a></li>
-        <li><a href="article-02.html">Series 02 — Why Elon Musk Is Dead Wrong About Solar</a></li>
-        <li><a href="article-03.html">Series 03 — A Hundred Years of the Wrong Question</a></li>
-        <li style="color:var(--muted); opacity:0.5;">Series 04 — The Most Expensive Assumption in Science <span style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.15em;">— COMING SOON</span></li>
+        <li><a href="article-01.html">01 — It's All About the Resources</a></li>
+        <li><a href="article-02.html">02 — Why Elon Musk Is Dead Wrong</a></li>
+        <li><a href="article-03.html">03 — A Hundred Years of the Wrong Question</a></li>
+        <li><a href="article-04.html">04 — The Most Expensive Assumption</a></li>
+        <li><a href="article-05.html">05 — They Worship Galileo</a></li>
+        <li style="color:var(--muted); opacity:0.5;">06 — Coming Soon</li>
+        <li style="color:var(--muted); opacity:0.5;">07 — Coming Soon</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Papers</p>
+      <ul>
+        <li style="color:var(--muted); opacity:0.5;">P0 — Condensation Model — arXiv Soon</li>
+        <li style="color:var(--muted); opacity:0.5;">P1 — Elasticity — In Preparation</li>
+        <li style="color:var(--muted); opacity:0.5;">P2 — Measurement Problem — In Preparation</li>
+        <li style="color:var(--muted); opacity:0.5;">P3 — Rotation Curves — Planned</li>
+        <li><a href="papers.html">Full programme →</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -319,9 +439,8 @@
   });
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
   document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-
   const ham = document.getElementById('hamburger');
   const nav = document.getElementById('navLinks');
   ham.addEventListener('click', () => nav.classList.toggle('open'));
