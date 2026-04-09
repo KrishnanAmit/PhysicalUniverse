@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Nuclear Myth: Why Fission Cannot Save Us">
+<meta property="og:description" content="Forty nations just pledged to triple nuclear capacity. The math says they can't. From uranium scarcity to ballooning costs, the case against fission as humanity's energy answer.">
+<meta property="og:url" content="https://krishnanamit.github.io/PhysicalUniverse/article-06.html">
+<meta property="og:site_name" content="The Physical Universe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Nuclear Myth: Why Fission Cannot Save Us">
+<meta name="twitter:description" content="Forty nations just pledged to triple nuclear capacity. The math says they can't. From uranium scarcity to ballooning costs, the case against fission as humanity's energy answer.">
+<meta name="description" content="Forty nations just pledged to triple nuclear capacity. The math says they can't. From uranium scarcity to ballooning costs, the case against fission as humanity's energy answer.">
+<title>The Nuclear Myth: Why Fission Cannot Save Us — The Physical Universe Series 06</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #12100e;
+    --paper: #f4efe6;
+    --accent: #b5271e;
+    --accent2: #d4830a;
+    --muted: #6b6155;
+    --rule: #d6ccb8;
+    --soft: #ede8dd;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper); color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 20px; line-height: 1.8; font-weight: 300; overflow-x: hidden;
+  }
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.5;
+  }
+  #bar { position: fixed; top: 0; left: 0; height: 2px; background: var(--accent); width: 0%; z-index: 999; transition: width 0.08s linear; }
+
+  .hero {
+    min-height: 100vh; background: var(--ink);
+    display: grid; grid-template-rows: 1fr auto;
+    position: relative; overflow: hidden;
+  }
+  .hero-atmos {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 65%, rgba(181,39,30,0.14) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 70% at 80% 35%, rgba(212,131,10,0.06) 0%, transparent 55%);
+  }
+  .fh-canvas {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0.06;
+  }
+  .fh-canvas svg { width: min(55vw, 340px); height: auto; }
+  .trefoil { fill: none; stroke: rgba(244,239,230,0.5); stroke-width: 1.2; animation: tpulse 4s ease-in-out infinite; }
+  .trefoil:nth-child(2) { animation-delay: 0.5s; }
+  .trefoil:nth-child(3) { animation-delay: 1s; }
+  @keyframes tpulse { 0%,100% { opacity: 0.35; } 50% { opacity: 1; } }
+
+  .hero-body {
+    position: relative; z-index: 2; align-self: end;
+    padding: 0 clamp(24px, 6vw, 120px) 72px; max-width: 900px;
+  }
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 28px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::before { content: ''; display: inline-block; width: 36px; height: 1px; background: var(--accent); }
+  .title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 7vw, 82px); font-weight: 900;
+    line-height: 1.05; color: var(--paper); margin-bottom: 20px;
+  }
+  .title em { color: var(--accent2); font-style: italic; }
+  .subtitle-deck {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px;
+  }
+  .subtitle {
+    font-size: clamp(16px, 2.2vw, 21px); color: rgba(244,239,230,0.6);
+    max-width: 620px; line-height: 1.7; font-weight: 300;
+  }
+  .hero-meta { margin-top: 36px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .mpill {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(244,239,230,0.3); border: 1px solid rgba(244,239,230,0.08); padding: 5px 12px;
+  }
+  .msep { width: 3px; height: 3px; border-radius: 50%; background: rgba(244,239,230,0.15); }
+  .scroll-hint {
+    justify-self: center; padding-bottom: 28px;
+    font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    letter-spacing: 0.3em; text-transform: uppercase; color: rgba(244,239,230,0.18);
+    animation: drift 2.5s ease-in-out infinite;
+  }
+  @keyframes drift { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+  .article {
+    max-width: 720px; margin: 0 auto;
+    padding: 80px clamp(24px, 6vw, 48px) 120px;
+  }
+  .lead-para { font-size: 22px; line-height: 1.85; font-weight: 400; margin-bottom: 40px; }
+  .article p { margin-bottom: 28px; }
+  .article h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 4vw, 34px); font-weight: 700;
+    line-height: 1.25; margin: 64px 0 28px; color: var(--ink);
+  }
+  .pullquote {
+    margin: 56px 0; padding: 36px 32px 36px 28px;
+    border-left: 3px solid var(--accent); background: var(--soft);
+  }
+  .pullquote p {
+    font-family: 'Playfair Display', serif; font-size: clamp(20px, 3vw, 26px);
+    font-style: italic; line-height: 1.5; margin: 0; color: var(--ink);
+  }
+  .callout {
+    background: var(--soft); padding: 32px 36px; margin: 40px 0;
+    border-left: 3px solid var(--accent2);
+  }
+  .callout-tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent2);
+    margin-bottom: 12px;
+  }
+  .callout p { margin: 0; font-size: 16px; line-height: 1.75; }
+
+  .data-table {
+    width: 100%; border-collapse: collapse; margin: 48px 0;
+    font-family: 'JetBrains Mono', monospace; font-size: 15px;
+  }
+  .data-table th {
+    border-bottom: 1px solid var(--rule); padding: 14px 16px; text-align: left;
+    font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); font-weight: 400;
+  }
+  .data-table td {
+    padding: 14px 16px; border-bottom: 1px solid rgba(214,204,184,0.4);
+    color: #1f1c17; font-size: 14px; vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: rgba(181,39,30,0.025); }
+  .td-label { color: var(--ink); font-weight: 500; }
+  .td-num { color: var(--accent2); font-weight: 500; }
+  .td-note { color: var(--muted); font-size: 12px; }
+
+  .ornament { text-align: center; margin: 72px 0; color: var(--rule); font-size: 18px; letter-spacing: 0.7em; }
+
+  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.75s ease, transform 0.75s ease; }
+  .fade-up.in { opacity: 1; transform: translateY(0); }
+
+  .foot { border-top: 1px solid var(--rule); padding-top: 56px; margin-top: 96px; }
+  .foot-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 18px;
+  }
+  .foot-closer {
+    font-family: 'Playfair Display', serif; font-size: clamp(22px, 3vw, 30px);
+    font-style: italic; line-height: 1.4; color: var(--ink); max-width: 480px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 48px; }
+  .tag {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.12em; padding: 6px 14px; border: 1px solid var(--rule);
+    color: var(--muted); text-transform: uppercase; cursor: default; transition: all 0.2s;
+  }
+  .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+  .site-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 64px; background: rgba(18,16,14,0.92);
+    backdrop-filter: blur(12px); border-bottom: 1px solid rgba(244,239,230,0.06);
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper);
+    text-decoration: none; opacity: 0.7; transition: opacity 0.2s;
+  }
+  .nav-logo:hover { opacity: 1; }
+  .nav-logo em { font-style: normal; color: var(--accent); }
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+  .nav-links a {
+    font-family: 'JetBrains Mono', monospace; font-size: 9.5px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(244,239,230,0.45); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--paper); }
+  .nav-links .nav-cta { border: 1px solid rgba(181,39,30,0.5); padding: 7px 16px; color: var(--accent); }
+  .nav-links .nav-cta:hover { background: var(--accent); color: var(--paper); }
+  .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+  .nav-hamburger span { display: block; width: 22px; height: 1.5px; background: var(--paper); transition: all 0.3s; }
+  @media (max-width: 660px) {
+    .site-nav { padding: 0 24px; }
+    .nav-links { display: none; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; background: var(--ink); padding: 32px 24px; gap: 24px; border-bottom: 1px solid rgba(244,239,230,0.08); }
+    .nav-links.open { display: flex; }
+    .nav-hamburger { display: flex; }
+    .hero-body { padding: 0 24px 64px; }
+    .article { padding: 64px 24px 100px; }
+    .pullquote { margin: 48px 0; padding: 32px 24px 32px 22px; }
+    .data-table { font-size: 12px; }
+    .data-table td, .data-table th { padding: 10px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><em>AK</em> &nbsp;/&nbsp; The Physical Universe</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="series.html" class="active">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Collaborate</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-atmos"></div>
+
+  <!-- Hero SVG: stylised radiation trefoil -->
+  <div class="fh-canvas">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <circle class="trefoil" cx="100" cy="68" r="32"/>
+      <circle class="trefoil" cx="72" cy="118" r="32"/>
+      <circle class="trefoil" cx="128" cy="118" r="32"/>
+      <circle cx="100" cy="100" r="10" fill="none" stroke="rgba(244,239,230,0.3)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <div class="hero-body">
+    <div class="eyebrow">The Physical Universe — Series 06 &nbsp;·&nbsp; 14 min read</div>
+    <h1 class="title">The Nuclear Myth:<br>Why Fission <em>Cannot</em> Save Us</h1>
+    <p class="subtitle-deck">Are You Ready to Pay the Nuclear Bill?</p>
+    <p class="subtitle">Every crisis is an opportunity — for a few rich men to get richer, for leaders to make announcements, for scientists to make promises. The Iran war rattles energy markets. AI demands power. Forty nations pledge a nuclear renaissance. And the people, none the wiser, will be asked to foot the bill. Again.</p>
+    <div class="hero-meta">
+      <span class="mpill">Physical Universe Series</span>
+      <span class="msep"></span>
+      <span class="mpill">Energy &amp; Physics</span>
+      <span class="msep"></span>
+      <span class="mpill">Nuclear Fission</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><span>scroll</span></div>
+</section>
+
+<article class="article">
+
+  <p class="lead-para fade-up">In Article 02 of this series, we dismantled the solar myth — the idea that a dilute, intermittent source could power civilisation. Now the pendulum has swung the other way. Nuclear fission is being presented as the saviour: clean, reliable, energy-dense. The hype is deafening. The numbers tell a different story.</p>
+
+  <p class="fade-up">Let us be clear at the outset. This article is not anti-nuclear in principle. The energy density of the atomic nucleus is extraordinary — a million times greater than any chemical bond. The problem is not the physics. The problem is everything around it: the fuel, the cost, the time, the waste, the risk, and the politics. Fission, as it exists today, is not the answer to the world's energy crisis. It is a spectacularly expensive, geopolitically fraught, environmentally hazardous detour from the technology we actually need — nuclear fusion.</p>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">1. The Fuel Problem: Running on Fumes</h2>
+
+  <p class="fade-up">The world consumes roughly 70,000 metric tonnes of natural uranium per year to fuel its existing fleet of about 440 reactors, which produce approximately 10% of global electricity. Total identified uranium resources stand at roughly 6 million tonnes at current extraction costs. That is about 85 years of supply at today's consumption — not at triple capacity.</p>
+
+  <p class="fade-up">Now recall the Paris pledge: nearly 40 nations committed to tripling nuclear capacity by 2050. Triple the reactors, triple the fuel burn. At 210,000 tonnes per year, those 6 million tonnes last less than 30 years. The nuclear renaissance would burn through its own fuel supply before the first generation of new reactors reaches end-of-life.</p>
+
+  <p class="fade-up">But here is the real killer. Nuclear currently produces 10% of the world's electricity — and electricity itself is only about 20% of total global energy consumption. The remaining 80% is transport, heating, and industrial processes still dominated by fossil fuels. If nuclear were to replace all fossil fuels — the actual goal of energy security — it would need not triple but roughly 15 to 20 times its current capacity. The uranium runs out in a decade.</p>
+
+  <div class="callout fade-up">
+    <div class="callout-tag">The Scale Problem</div>
+    <p>Global energy demand in 2024 hit 592 exajoules. Nuclear provided roughly 30 EJ — about 5% of total energy. To replace fossil fuels entirely, nuclear would need to supply approximately 500 EJ. That requires roughly 8,000 large reactors. We currently have 440. The world has never built more than 30 reactors in a single year.</p>
+  </div>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">2. The Cost Catastrophe: Every Project, Every Time</h2>
+
+  <p class="fade-up">Nuclear construction cost overruns are not exceptions. They are the rule. Every major reactor project completed in the West in the last two decades has blown through its budget by multiples.</p>
+
+  <table class="data-table fade-up">
+    <thead>
+      <tr><th>Project</th><th>Original Estimate</th><th>Final / Current Cost</th><th>Delay</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="td-label">Vogtle 3 & 4, USA</td><td class="td-num">$14 billion</td><td class="td-num">$31 billion</td><td class="td-note">7 years late</td></tr>
+      <tr><td class="td-label">Hinkley Point C, UK</td><td class="td-num">£18 billion</td><td class="td-num">£35 billion (2015 prices)<br>~£48 billion (2026 prices)</td><td class="td-note">5+ years late, now 2030</td></tr>
+      <tr><td class="td-label">Flamanville, France</td><td class="td-num">€3.3 billion</td><td class="td-num">€13+ billion</td><td class="td-note">12 years late</td></tr>
+      <tr><td class="td-label">Olkiluoto 3, Finland</td><td class="td-num">€3.2 billion</td><td class="td-num">€11+ billion</td><td class="td-note">14 years late</td></tr>
+      <tr><td class="td-label">V.C. Summer, USA</td><td class="td-num">$11.5 billion</td><td class="td-num">Cancelled at $9 billion spent</td><td class="td-note">Abandoned</td></tr>
+    </tbody>
+  </table>
+
+  <p class="fade-up">Hinkley Point C will produce electricity at approximately £127 per MWh — more than double the current wholesale price and several times the cost of onshore wind or solar. A UK government report in 2025 found Britain to be the most expensive place in the world to build nuclear power plants and recommended a radical regulatory reset. EDF, the French state-owned builder, has already written off billions on the project. Georgia Power ratepayers in the United States will pay an estimated $35 more per month for decades because of Vogtle.</p>
+
+  <p class="fade-up">These are not teething problems. Westinghouse went bankrupt building Vogtle. Areva needed a €5 billion state bailout after Olkiluoto. The pattern repeats because the fundamental economics are broken: nuclear plants are bespoke megaprojects in an era when no country has a trained nuclear construction workforce, no supply chain exists at scale, and every reactor is essentially a prototype.</p>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">3. The Time Problem: Too Slow for the Crisis</h2>
+
+  <p class="fade-up">The minimum time to build a nuclear reactor in the United States increased from 4 years in the late 1960s to 10–14 years today. Hinkley Point C broke ground in 2017 and will not produce power until 2030 at the earliest — 13 years. Flamanville took 17 years. Even in China, widely cited as the fastest builder, AP1000 reactors averaged 9 years from groundbreaking to commissioning.</p>
+
+  <p class="fade-up">If a nation decided today to pursue nuclear as its primary energy source, the first reactor would not be online until the mid-2030s. A fleet sufficient to make a meaningful difference would not exist until the 2050s or 2060s. The climate crisis, the energy security crisis, the AI power demand crisis — none of these will wait 30 years for nuclear construction to catch up.</p>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">4. The Geopolitical Nightmare: Bombs, Blackmail, and Proliferation</h2>
+
+  <p class="fade-up">Every nuclear power programme creates the infrastructure for nuclear weapons. Enrichment facilities that produce reactor-grade uranium can be reconfigured to produce weapons-grade material. Spent fuel contains plutonium. Reprocessing plants extract it. The line between civilian nuclear energy and military capability is a policy choice, not a physical barrier.</p>
+
+  <p class="fade-up">Today, Southeast Asian nations that have never produced a single watt of nuclear power are racing to build reactors — backed overwhelmingly by Russian and Chinese state nuclear companies. Vietnam just advanced a nuclear deal with Rosatom as the Iran war rattles energy markets. Five ASEAN nations are actively pursuing nuclear. This is not energy independence. It is a new form of geopolitical dependency, with the additional feature that the technology involved can, with modest additional investment, produce weapons of mass destruction.</p>
+
+  <p class="fade-up">The dirty bomb threat alone should give pause. Every operating reactor, every spent fuel pool, every transport convoy is a potential target. The more reactors we build, the more targets we create, and the more fissile material circulates through supply chains that span politically unstable regions.</p>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">5. The Waste Crisis: A Burden That Outlasts Civilisations</h2>
+
+  <p class="fade-up">More than 95,000 metric tonnes of spent nuclear fuel sits in temporary storage across 79 sites in the United States alone. Globally, the figure exceeds 250,000 metric tonnes. This material remains dangerously radioactive for tens of thousands of years. And after seven decades of commercial nuclear power, not a single permanent repository is operational anywhere on Earth.</p>
+
+  <p class="fade-up">Finland is closest — its deep geological repository at Olkiluoto is expected to accept waste by the mid-2020s. The United States abandoned its Yucca Mountain repository in 2010 after decades of political deadlock and has no replacement plan. The U.S. government has paid over $11 billion in damages to utilities for failing to take their waste, with projected future liabilities of $44.5 billion. Holtec cancelled its proposed New Mexico storage facility in 2025 after state opposition. France reprocesses its fuel, releasing 90% of iodine-129 — radioactive for 16 million years — directly into the English Channel.</p>
+
+  <p class="fade-up">Every new reactor adds roughly 20–30 tonnes of spent fuel per year. Triple the fleet and you triple the waste stream for a problem that no nation has yet solved. We are asking future generations — for millennia — to guard our waste because we wanted electricity for a few decades.</p>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">6. The Environmental Reality of a Running Plant</h2>
+
+  <p class="fade-up">Nuclear plants require vast quantities of cooling water — typically 40–80 billion litres per year for a large reactor. In a warming world with increasing droughts and water stress, this is not a trivial concern. France was forced to reduce reactor output during European heatwaves in 2022 because river temperatures exceeded the limits for cooling water discharge. The irony: the clean energy source became unavailable precisely when demand peaked.</p>
+
+  <p class="fade-up">Thermal discharge into rivers and coastal waters raises local water temperatures by 5–10°C, disrupting aquatic ecosystems. Tritium and other low-level radioactive isotopes are routinely released into waterways during normal operations. Each reactor has an exclusion zone. Each spent fuel pool is a potential contamination source. The environmental footprint of a nuclear plant is not zero — it is merely invisible until something goes wrong.</p>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">7. The Thorium Dream: Seventy Years of "Almost Ready"</h2>
+
+  <p class="fade-up">Thorium has been "the future of nuclear" since the 1950s. Homi Bhabha proposed it for India in that decade. Oak Ridge National Laboratory ran a molten salt experiment in the 1960s. It is now 2026. Not a single commercial thorium reactor operates anywhere on Earth.</p>
+
+  <p class="fade-up">China's experimental 2 MW thorium molten salt reactor in the Gobi Desert achieved criticality in 2023 and recently demonstrated thorium-to-uranium conversion. Impressive — but commercialisation is targeted for 2040 at the earliest. India's Prototype Fast Breeder Reactor at Kalpakkam just reached criticality in April 2026, after being originally due in 2010 — sixteen years behind schedule. Its Advanced Heavy Water Reactor, designed to use thorium, has not even begun construction despite being in "final stages of validation" since 2017. Copenhagen Atomics targets a 1 MW pilot by 2026. ThorCon targets a 500 MW plant in Indonesia by 2029.</p>
+
+  <p class="fade-up">The pattern is always the same: ambitious targets, perpetual delays, commercialisation receding into the next decade. Thorium requires breeding uranium-233 from thorium-232 — a process that introduces its own proliferation risks, materials challenges, and fuel cycle complexities. The technology may work eventually. But "eventually" is not an energy policy. It is a prayer.</p>
+
+  <div class="callout fade-up">
+    <div class="callout-tag">The SMR Fantasy</div>
+    <p>And then there is the latest repackaging: Small Modular Reactors. The pitch is irresistible — factory-built, truck-delivered, one for every town and data centre. There are 74 designs on paper worldwide. How many are commercially operating? Two. A Russian floating barge powering an Arctic mining town, and a Chinese high-temperature gas reactor. NuScale — America's flagship SMR company, the first to receive US regulatory approval — cancelled its debut project in 2023 when costs doubled and its only customer walked away. The rest are PowerPoint reactors. Meanwhile, consider what "one for every town" actually means: millions of individual uranium fuel loads distributed across thousands of sites, each one a proliferation risk, each one producing spent fuel with nowhere to go, each one a target, and each one close enough to a population centre to poison it. The nuclear industry has failed to build large reactors on time or on budget for seventy years. The solution, apparently, is to build thousands of small ones instead. This is not innovation. It is miniaturised wishful thinking.</p>
+  </div>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">8. The Uninsurable Risk: What Actually Happens When It Goes Wrong</h2>
+
+  <p class="fade-up">There is a reason humanity has never used a nuclear weapon in war since Hiroshima and Nagasaki. It is not because we lack the weapons — there are over 12,000 warheads on this planet. It is because what happened in those two cities was so horrifying, so fundamentally incompatible with anything resembling civilised existence, that even the coldest strategists of the Cold War recoiled. The burns that melted skin from bone. The shadows of human beings seared into concrete. The radiation sickness that killed slowly over weeks as organs dissolved from the inside. The children born deformed for generations. The lesson of Hiroshima was not strategic. It was visceral. Humanity looked at what nuclear detonation does to human flesh and collectively decided: never again.</p>
+
+  <p class="fade-up">Chernobyl taught the same lesson in slow motion. On 26 April 1986, Reactor No. 4 exploded and the core was exposed to the open air. The firefighters who responded — young men, most of them — absorbed lethal doses of radiation within minutes. Their skin blistered and peeled. Their bone marrow died. They were conscious as their bodies disintegrated from the inside over days and weeks in a Moscow hospital, recognisable only by their names on the door. An exclusion zone the size of Luxembourg was emptied of all human life. Thirty-eight years later, it remains uninhabitable. The concrete sarcophagus built over the reactor has already had to be replaced with a second containment structure because the first one was failing. The molten core — the "elephant's foot" — is still lethally radioactive and will remain so for thousands of years. The topsoil across a vast area of northern Ukraine and southern Belarus is contaminated with caesium-137 and strontium-90. It is in the food chain. It will be for generations.</p>
+
+  <p class="fade-up">Fukushima, 2011. A tsunami exceeded every historical model. Three reactor cores melted down. 154,000 people were evacuated. Over a million tonnes of radioactive water was eventually released into the Pacific Ocean because there was no other option. The decommissioning will take forty years and cost over $200 billion — a figure that continues to climb. Entire towns remain ghost cities. People lost their homes, their livelihoods, their communities, and their health. Not because of war. Because of a power plant.</p>
+
+  <p class="fade-up">This is what is at stake every time a reactor operates. Not a financial loss. Not a regulatory inconvenience. The permanent poisoning of land, water, and human bodies. Earthquakes, tsunamis, volcanic eruptions, extreme floods, and wildfires are increasing in frequency and intensity. Every nuclear plant is designed for a specific set of anticipated threats. Fukushima was hit by the unanticipated one. The Turkey–Syria earthquake of 2023 struck a fault considered low-risk. Nature does not consult our safety assessments.</p>
+
+  <p class="fade-up">No private insurer in the world will fully underwrite a nuclear power plant. The liability is socialised — meaning taxpayers bear the cost of catastrophic failure. When the insurance industry — whose entire business is pricing risk — refuses to price this one, it is because the downside is not merely large. It is the permanent loss of habitable land and the slow destruction of human bodies by invisible poison. That is not a risk to be managed. It is a consequence to be avoided.</p>
+
+  <div class="pullquote fade-up">
+    <p>Hiroshima taught us what a nuclear detonation does to a city. Chernobyl taught us what a nuclear accident does to a region. The lesson is the same: once this force escapes containment, there is no cleanup. There is only abandonment.</p>
+  </div>
+
+  <div class="ornament fade-up">· · ·</div>
+
+  <h2 class="fade-up">So Is Nuclear Fission Even Feasible as Total Energy Replacement?</h2>
+
+  <p class="fade-up">No. Not even close. The fuel supply cannot sustain it. The cost makes it uncompetitive. The construction timeline makes it irrelevant to current crises. The waste problem is unsolved. The proliferation risk is unacceptable at scale. The environmental footprint is non-trivial. And the catastrophic risk, however low in probability, is infinite in consequence.</p>
+
+  <p class="fade-up">But feasibility has never stopped a lucrative industry from selling itself. Nuclear fission is the kind of promise that sounds transformative on paper and has the potential to plunge the world into oblivion in practice. It will not solve the energy crisis. What it will do is make uranium miners, reactor vendors, and state nuclear corporations spectacularly wealthy. Leaders will hold summits and sign pledges. Scientists will present timelines that slip by decades. Consultants will produce reports. And ordinary people — in Georgia, in Somerset, in Fukushima, in every nation that signs a Rosatom contract — will be asked to pay the bill. In higher electricity prices. In unsolved waste. In proliferation risk. In the quiet, permanent contamination of their water, their soil, and their children's futures.</p>
+
+  <p class="fade-up">Every crisis is an opportunity. The question is: an opportunity for whom? The Iran war rattles energy markets — and Rosatom signs deals across Southeast Asia. AI data centres demand power — and nuclear lobbyists repackage a seventy-year-old technology as innovation. Climate targets slip — and politicians announce reactor programmes they will not live long enough to see completed or be held accountable for.</p>
+
+  <p class="fade-up">Meanwhile, the deeper failure goes unexamined. Solar cannot do it. Fission cannot do it. And the mainstream fusion programme — ITER and its tokamak descendants — has consumed $50 billion and seventy years without producing a single watt of net energy. The pattern is the same everywhere: enormous investment, perpetual delays, targets that recede with every passing decade. These are not isolated failures. They are symptoms of a single underlying problem: we do not understand the process we are trying to engineer.</p>
+
+  <p class="fade-up">Consider what has actually happened. We said Newton is correct. We said Einstein is correct. And then we failed to explain how a galaxy rotates. Models and debates continue to this day — dark matter, modified gravity, new particles — and still no resolution. But nobody pauses to examine the logical chain that led here. We estimated the mass of the Sun using Newton and Einstein. That mass gave us a density. We assumed that density meant the Sun is a ball of hydrogen. And from that assumption, we concluded that stellar energy comes from hydrogen-to-hydrogen fusion. The entire fusion programme — seventy years, tens of billions of dollars — is built on this chain. And the chain is broken at the first link. If the mass estimate produces a galaxy rotation curve that doesn't match observation, then the mass estimate is wrong. If the mass estimate is wrong, the density is wrong. If the density is wrong, the fusion mechanism may be wrong. This is not speculative. It is the logical consequence of the data we already have.</p>
+
+  <p class="fade-up">This is, at best, illogical. At par, it is negligence. In the long run — with the energy security of the entire human species at stake — it is something worse. And the maddening thing is that it is all solvable. It can be done. But it requires being brutally honest about what is at stake, looking at the numbers and the logical chain without flinching, and searching for a solution rather than sitting on a high horse and blustering about peer review. Do they realise what is at stake here? Not careers. Not funding cycles. Not institutional prestige. The ability of eight billion people to keep the lights on.</p>
+
+  <p class="fade-up">That is the argument of this series and the research programme it supports. The answer is nuclear fusion — but not more of the same approach built on the same unexamined assumptions that have failed for seven decades. What is required is a radically new understanding of the physics itself. Until that arrives, every energy strategy — solar, fission, tokamak fusion — is a stopgap dressed up as a solution. And every stopgap is an invoice addressed to the public.</p>
+
+  <div class="foot fade-up">
+    <div class="foot-label">Series 06 — The Physical Universe</div>
+    <div class="foot-closer">"A few will get rich. Leaders will announce. Scientists will promise. And you will be asked to pay — in money, in risk, in waste that outlasts your civilisation. The question is not whether nuclear fission works. The question is whether you are ready to foot the bill for a technology that cannot deliver what it promises."</div>
+    <div class="tags">
+      <span class="tag">Nuclear Fission</span>
+      <span class="tag">Nuclear Fusion</span>
+      <span class="tag">Energy Security</span>
+      <span class="tag">Uranium</span>
+      <span class="tag">Thorium</span>
+      <span class="tag">Nuclear Waste</span>
+      <span class="tag">Energy Policy</span>
+    </div>
+  </div>
+
+</article>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('bar').style.width = (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+  });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -36px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
