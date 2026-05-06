@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Open Graph / WhatsApp / Facebook -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Why Fusion Has Failed for 74 Years and How We're Fixing It">
+<meta property="og:description" content="$200B spent. 100 companies active. Not a single sustained reaction. The specification was wrong. We recalculated it.">
+<meta property="og:image" content="https://krishnanamit.github.io/PhysicalUniverse/ogarticle09.png">
+<meta property="og:url" content="https://krishnanamit.github.io/PhysicalUniverse/article-09.html">
+<meta property="og:site_name" content="The Physical Universe">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Why Fusion Has Failed for 74 Years and How We're Fixing It">
+<meta name="twitter:description" content="$200B spent. 100 companies active. Not a single sustained reaction. The specification was wrong. We recalculated it.">
+<meta name="twitter:image" content="https://krishnanamit.github.io/PhysicalUniverse/ogarticle09.png">
+<!-- Standard meta description -->
+<meta name="description" content="$200B spent. 100 companies active. Not a single sustained reaction. The specification was wrong. We recalculated it.">
+<title>Why Fusion Has Failed for 74 Years and How We're Fixing It — The Physical Universe Series 09</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#12100e;--paper:#f4efe6;--accent:#b5271e;--accent2:#d4830a;--muted:#6b6155;--rule:#d6ccb8;--soft:#ede8dd; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-size:20px;line-height:1.8;font-weight:300;overflow-x:hidden}
+  body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+  #bar{position:fixed;top:0;left:0;height:2px;background:var(--accent);width:0%;z-index:999;transition:width .08s linear}
+
+  /* NAV */
+  .site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(18,16,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(244,239,230,.06)}
+  .nav-logo{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper);text-decoration:none;opacity:.7;transition:opacity .2s}
+  .nav-logo:hover{opacity:1}
+  .nav-logo em{font-style:normal;color:var(--accent)}
+  .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+  .nav-links a{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,239,230,.45);text-decoration:none;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--paper)}
+  .nav-links a.active::after{content:'';display:block;width:100%;height:1px;background:var(--accent);margin-top:2px}
+  .nav-cta{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;padding:8px 18px;border:1px solid rgba(181,39,30,.5);color:var(--accent)!important;text-decoration:none;white-space:nowrap;transition:all .2s!important}
+  .nav-cta:hover{background:var(--accent)!important;color:var(--paper)!important}
+  .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+  .nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--paper);opacity:.6}
+
+  /* HERO */
+  .hero{min-height:100vh;background:var(--ink);display:grid;grid-template-rows:1fr auto;position:relative;overflow:hidden}
+  .hero-atmos{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 15% 75%,rgba(181,39,30,.18) 0%,transparent 60%),radial-gradient(ellipse 50% 70% at 85% 25%,rgba(212,131,10,.08) 0%,transparent 60%)}
+  
+  .hero-body{position:relative;z-index:10;align-self:end;max-width:900px;margin:0 auto;padding:0 48px 88px;width:100%}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:32px;display:flex;align-items:center;gap:14px;opacity:0;animation:rise .9s ease forwards .2s}
+  .eyebrow::before{content:'';display:block;width:36px;height:1px;background:var(--accent)}
+  h1.title{font-family:'Playfair Display',serif;font-size:clamp(38px,5.8vw,72px);font-weight:900;line-height:1.08;letter-spacing:-.028em;color:var(--paper);margin-bottom:28px;opacity:0;animation:rise 1s ease forwards .4s}
+  h1.title em{font-style:italic;color:var(--accent2)}
+  .subtitle{font-size:19px;color:rgba(244,239,230,.58);max-width:680px;line-height:1.68;font-weight:300;opacity:0;animation:rise 1s ease forwards .6s}
+  .hero-meta{display:flex;align-items:center;gap:20px;margin-top:48px;padding-top:28px;border-top:1px solid rgba(244,239,230,.1);opacity:0;animation:rise 1s ease forwards .8s}
+  .mpill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:rgba(244,239,230,.35)}
+  .msep{width:3px;height:3px;border-radius:50%;background:rgba(244,239,230,.2)}
+  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .scroll-hint{position:absolute;bottom:32px;right:48px;z-index:10;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.3;animation:bob 2.4s ease-in-out infinite,rise 1s ease forwards 1.2s}
+  .scroll-hint span{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--paper);writing-mode:vertical-rl;text-transform:uppercase}
+  .scroll-hint::after{content:'';width:1px;height:44px;background:linear-gradient(to bottom,var(--paper),transparent)}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+  /* ARTICLE */
+  .article{max-width:700px;margin:0 auto;padding:96px 48px 140px}
+  .lead-para::first-letter{font-family:'Playfair Display',serif;font-size:5.8em;font-weight:900;float:left;line-height:.72;margin:.1em .12em 0 0;color:var(--accent)}
+  p{margin-bottom:1.7em;color:#1f1c17}
+  h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3.8vw,38px);font-weight:700;line-height:1.2;color:var(--ink);margin:84px 0 24px;letter-spacing:-.018em}
+  strong{font-weight:600;color:var(--ink)}
+  em{font-style:italic}
+
+  .pullquote{margin:60px -56px;padding:40px 56px 40px 52px;border-left:3px solid var(--accent);background:rgba(181,39,30,.03);position:relative}
+  .pullquote::before{content:'\201C';font-family:'Playfair Display',serif;font-size:140px;line-height:1;color:var(--accent);opacity:.1;position:absolute;top:-10px;left:14px;pointer-events:none}
+  .pullquote p{font-family:'Playfair Display',serif;font-size:clamp(20px,2.8vw,26px);font-style:italic;font-weight:400;line-height:1.5;color:var(--ink);margin:0}
+
+  .ornament{text-align:center;margin:72px 0;color:var(--rule);font-size:18px;letter-spacing:.7em}
+
+  /* Data boxes */
+  .data-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:48px 0;background:var(--rule)}
+  .data-cell{background:var(--paper);padding:32px 28px;position:relative}
+  .data-cell::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--accent2)}
+  .data-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:8px}
+  .data-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);line-height:1.6}
+
+  /* Stat blocks */
+  .stat-block{background:var(--ink);padding:48px 44px;margin:56px 0;position:relative}
+  .stat-block::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+  .stat-num{font-family:'Playfair Display',serif;font-size:clamp(52px,7vw,82px);font-weight:900;color:var(--accent2);line-height:1;margin-bottom:16px}
+  .stat-text{font-size:18px;color:rgba(244,239,230,.72);line-height:1.7;margin:0}
+
+  /* Chain steps */
+  .chain-list{margin:48px 0;display:flex;flex-direction:column;gap:2px}
+  .chain-step{display:grid;grid-template-columns:64px 1fr;gap:0;background:var(--soft)}
+  .chain-num{background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--accent2)}
+  .chain-body{padding:20px 24px}
+  .chain-title{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);font-weight:500;margin-bottom:6px}
+  .chain-desc{font-size:16px;line-height:1.65;color:#2a2520;margin:0}
+
+  /* Callout boxes */
+  .callout{margin:56px 0;background:var(--ink);padding:36px 40px;position:relative;overflow:hidden}
+  .callout::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent2)}
+  .callout-tag{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px}
+  .callout p{color:rgba(244,239,230,.82);font-size:17px;margin:0;line-height:1.72}
+  .callout p + p{margin-top:14px}
+
+  /* Comparison table */
+  .compare-table{margin:56px 0;border:1px solid var(--rule);overflow:hidden}
+  .compare-row{display:grid;grid-template-columns:2fr 3fr;border-bottom:1px solid var(--rule)}
+  .compare-row:last-child{border-bottom:none}
+  .compare-label{background:var(--soft);padding:20px 24px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);font-weight:500}
+  .compare-value{background:var(--paper);padding:20px 24px;font-size:17px;line-height:1.65;color:#2a2520}
+
+  .foot{margin-top:120px;padding-top:48px;border-top:1px solid var(--rule)}
+  .foot-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .foot-closer{font-size:17px;font-style:italic;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:580px}
+  .next-link{display:block;padding:24px 28px;background:var(--soft);border-left:3px solid var(--accent);text-decoration:none;transition:background .2s;margin-bottom:32px}
+  .next-link:hover{background:#e6dcc8}
+  .next-tag{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:8px}
+  .next-title{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:6px}
+  .next-desc{font-size:15px;color:var(--muted);line-height:1.6;margin:0}
+
+  @media (max-width:660px){
+    .site-nav{padding:0 24px}
+    .nav-links{display:none;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--ink);padding:32px 24px;gap:24px;border-bottom:1px solid rgba(244,239,230,.08)}
+    .nav-links.open{display:flex}
+    .nav-hamburger{display:flex}
+    .hero-body{padding:0 24px 64px}
+    .article{padding:64px 24px 100px}
+    .pullquote{margin:48px 0;padding:32px 24px 32px 22px}
+    .data-grid{grid-template-columns:1fr}
+    .chain-step{grid-template-columns:48px 1fr}
+    .chain-num{font-size:16px}
+    .compare-row{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><em>AK</em> &nbsp;/&nbsp; The Physical Universe</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="series.html" class="active">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Collaborate</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-atmos"></div>
+
+  <div class="hero-body">
+    <div class="eyebrow">The Physical Universe — Series 09 &nbsp;·&nbsp; 18 min read</div>
+    <h1 class="title">Why Fusion Has Failed for 74 Years<br>and How We're <em>Fixing It</em></h1>
+    <p class="subtitle">$200 billion spent. 100 companies active. Not a single sustained reaction. Everyone chasing the same specification. We went back to the gravity model that calculated it. Here's what we found.</p>
+    <div class="hero-meta">
+      <span class="mpill">Physical Universe Series</span>
+      <span class="msep"></span>
+      <span class="mpill">Fusion Energy</span>
+      <span class="msep"></span>
+      <span class="mpill">Gravity Foundation</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><span>scroll</span></div>
+</section>
+
+<article class="article">
+
+  <p class="lead-para">The artificial intelligence revolution is hitting a wall. Not a software wall. Not a compute wall. An energy wall. And the only technology that can break through it at the scale needed has failed for seventy-four years straight.</p>
+
+  <h2>The Energy Crisis Nobody's Talking About</h2>
+
+  <p>AI data centers consumed 1,100 terawatt-hours of electricity in 2026. That's equal to Japan's entire national grid. The International Energy Agency projects this will double by 2030. Power — not compute — is now the binding constraint on AI development.</p>
+
+  <p>Hyperscalers are spending $7 trillion on infrastructure, and most of it is for one thing: finding power. Oracle announced a $20 billion funding shortfall for data centers because power wasn't available. Microsoft committed $15.2 billion to the UAE explicitly because they could provide it. Grid interconnection queues now stretch years into the future.</p>
+
+  <p>The new metric in data centers isn't efficiency anymore. It's "tokens per watt" — revenue per unit of available power. Because power is what's running out.</p>
+
+  <div class="data-grid">
+    <div class="data-cell">
+      <div class="data-num">1,100</div>
+      <div class="data-label">Terawatt-hours consumed by AI data centers in 2026</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-num">$7T</div>
+      <div class="data-label">Capital expenditure on AI infrastructure — mostly for power</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-num">100</div>
+      <div class="data-label">Gigawatts of AI load expected by 2028 in US alone</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-num">50%</div>
+      <div class="data-label">Year-over-year growth in AI-specific electricity demand</div>
+    </div>
+  </div>
+
+  <p>This isn't an abstract problem for tech companies. This is hitting you directly. Electricity bills are rising as utilities pass AI load onto consumers. Blackouts are becoming more frequent during peak demand. Industrial jobs are moving to countries with cheaper, more reliable power. Energy poverty is spreading — people who can't afford heating in winter or cooling in summer.</p>
+
+  <p>And the geopolitical stakes are existential. Strategic competition between nations is now energy competition. China, Japan, South Korea, India, and Europe all have massive import dependencies:</p>
+
+  <div class="compare-table">
+    <div class="compare-row">
+      <div class="compare-label">China</div>
+      <div class="compare-value">70%+ import dependency for oil and gas</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">Japan</div>
+      <div class="compare-value">90%+ import dependency across energy sources</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">South Korea</div>
+      <div class="compare-value">95%+ import dependency for primary energy</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">India</div>
+      <div class="compare-value">85% oil imports, 50% gas imports, $100B annual energy bill</div>
+    </div>
+    <div class="compare-row">
+      <div class="compare-label">Europe</div>
+      <div class="compare-value">60%+ import dependency, vulnerable to supply disruptions</div>
+    </div>
+  </div>
+
+  <p>Energy imports are leverage points. Countries with energy independence have strategic advantage. Countries without it are vulnerable — economically, politically, and militarily.</p>
+
+  <p>We're in new territory. Oil markets are volatile. Renewables can't scale fast enough — solar peaks midday and delivers zero by evening; wind is intermittent; storage at grid scale doesn't exist at viable cost. AI needs 24/7 baseload power, and solar can't provide it. (<a href="article-02.html" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(181,39,30,.3)">See Article 02: Why Solar Can't Power AI Data Centers</a>)</p>
+
+  <p>Nuclear fission won't save us either. It takes decades to build reactors. Uranium has its own import dependencies. Waste storage remains unsolved. Costs keep ballooning. (<a href="article-06.html" style="color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(181,39,30,.3)">See Article 06: The Nuclear Myth — Why Fission Cannot Save Us</a>)</p>
+
+  <p>The grid is aging faster than replacement rates. Fossil fuel dependency is growing despite transition promises. Climate commitments are colliding with economic reality.</p>
+
+  <p>The Sun has been producing 3.8 × 10²⁶ watts continuously for 4.6 billion years. It's definitely not burning coal. If we understand what the Sun actually does and can replicate it, we have access to clean, uninterrupted, nearly infinite energy. Exactly what every serious nation needs.</p>
+
+  <p>But there's a problem.</p>
+
+  <div class="stat-block">
+    <div class="stat-num">74 years</div>
+    <p class="stat-text">Of fusion research. $200 billion invested. Fifty to one hundred companies currently active. Not a single sustained fusion reaction achieved. Not in any lab. Not by any approach. Not even close to commercialization.</p>
+  </div>
+
+  <div class="ornament">· · ·</div>
+
+  <h2>The Pattern Everyone Sees But Won't Say</h2>
+
+  <p>The fusion industry has a talking point they repeat to investors, governments, and journalists: "Fusion is hard. It's an engineering challenge. We're making progress. We just need more funding and another decade."</p>
+
+  <p>But seventy-four years without a single sustained chain reaction is not "making progress." It's a pattern. And it's not an engineering pattern.</p>
+
+  <p>Consider what has been tried:</p>
+
+  <p>Tokamaks — magnetic confinement in a toroidal chamber. Dozens of variants built across multiple countries over five decades. Stellarators — twisted magnetic coils for better stability. Inertial confinement — compress fuel pellets with lasers (NIF achieved ignition in 2022 but can't sustain it). Magneto-inertial fusion — hybrid magnetic and inertial approaches. Mirror machines, Z-pinches, field-reversed configurations.</p>
+
+  <p>Different geometries. Different confinement methods. Different heating approaches. Different fuel cycles.</p>
+
+  <p>Same result: nothing sustains.</p>
+
+  <p>If this were purely an engineering challenge, someone would have accidentally hit the right conditions by now. $200 billion is more than the inflation-adjusted cost of the Manhattan Project ($28 billion). It's comparable to the Apollo Program ($280 billion), which actually worked. The Large Hadron Collider cost $13 billion and found the Higgs boson.</p>
+
+  <p>Fusion has had more funding, more time, and more attempts than any of those programs. And it has delivered zero sustained reactions.</p>
+
+  <div class="pullquote">
+    <p>When every approach fails the same way, the problem isn't the approach. The problem is the specification.</p>
+  </div>
+
+  <p>But nobody in the industry will say this out loud. Because saying the specification is wrong means admitting that seventy-four years of research and $200 billion in capital were spent chasing the wrong target.</p>
+
+  <p>That takes more courage than most scientists and investors have.</p>
+
+  <div class="ornament">· · ·</div>
+
+  <h2>How We Got to 150 Million Kelvin</h2>
+
+  <p>Every fusion program on Earth is targeting roughly the same conditions: heat hydrogen plasma to 150 million Kelvin — ten times the estimated temperature of the Sun's core — confine it long enough for nuclei to overcome their electromagnetic repulsion and fuse.</p>
+
+  <p>This specification didn't come from trial and error. It came from a calculation. And that calculation flows from a specific chain of assumptions:</p>
+
+  <div class="chain-list">
+    <div class="chain-step">
+      <div class="chain-num">1</div>
+      <div class="chain-body">
+        <div class="chain-title">Cavendish + Newton</div>
+        <p class="chain-desc">1798: Henry Cavendish measures gravitational attraction between lead spheres. Assumes Newton's inverse-square law F = GM₁M₂/r² is correct. Calculates the gravitational constant G.</p>
+      </div>
+    </div>
+    <div class="chain-step">
+      <div class="chain-num">2</div>
+      <div class="chain-body">
+        <div class="chain-title">Solar Mass Calculation</div>
+        <p class="chain-desc">Use G + orbital mechanics of planets → calculate solar mass M☉ = 2.0 × 10³⁰ kg. This assumes Newton's 1/r² holds throughout the solar system.</p>
+      </div>
+    </div>
+    <div class="chain-step">
+      <div class="chain-num">3</div>
+      <div class="chain-body">
+        <div class="chain-title">Density Profile</div>
+        <p class="chain-desc">From mass, assume hydrostatic equilibrium and density distribution → average solar density ≈ 1,400 kg/m³ (gas-like, slightly denser than water).</p>
+      </div>
+    </div>
+    <div class="chain-step">
+      <div class="chain-num">4</div>
+      <div class="chain-body">
+        <div class="chain-title">Core Pressure</div>
+        <p class="chain-desc">From mass and density profile → calculate pressure at solar core ≈ 2.5 × 10¹¹ bar.</p>
+      </div>
+    </div>
+    <div class="chain-step">
+      <div class="chain-num">5</div>
+      <div class="chain-body">
+        <div class="chain-title">Core Temperature</div>
+        <p class="chain-desc">From pressure + ideal gas law → core temperature ≈ 15 million K.</p>
+      </div>
+    </div>
+    <div class="chain-step">
+      <div class="chain-num">6</div>
+      <div class="chain-body">
+        <div class="chain-title">Fusion Specification</div>
+        <p class="chain-desc">From core temperature + particle collision cross-sections measured in accelerator experiments → target for terrestrial fusion: 150 million K (10× solar core estimate to overcome Coulomb barrier by brute kinetic energy).</p>
+      </div>
+    </div>
+  </div>
+
+  <p>This chain has been accepted for decades. It's in every textbook. It underpins the Standard Solar Model. It sets the target every fusion program is engineering toward.</p>
+
+  <p>But there are problems with this chain that nobody talks about.</p>
+
+  <div class="callout">
+    <div class="callout-tag">Problem 1: High-Energy Collisions Fragment, Not Fuse</div>
+    <p>CERN has been colliding particles at high energies for decades. Proton-proton collisions at the Large Hadron Collider don't produce fusion. They produce fragmentation — showers of quarks, gluons, and exotic particles that decay almost immediately.</p>
+    <p>The fusion specification says: heat plasma to extreme temperatures, give nuclei enough kinetic energy, and they'll fuse. But high-energy particle collisions don't make things stick together. They make things break apart.</p>
+    <p>Why would tokamaks produce fusion when particle accelerators produce fragmentation? Both are "smash particles together with high kinetic energy." Nobody has a satisfying answer.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-tag">Problem 2: Hydrogen Shows Absorption Lines, Not Emission</div>
+    <p>We know the Sun contains hydrogen because of Fraunhofer lines — dark lines in the solar spectrum at hydrogen's characteristic wavelengths. But these are <em>absorption</em> lines, not emission lines.</p>
+    <p>Absorption means hydrogen is absorbing energy at those frequencies. Emission means hydrogen is releasing energy. If hydrogen nuclei are fusing in the core and releasing energy, why does the solar spectrum show hydrogen absorbing energy?</p>
+    <p>The standard answer: fusion happens in the core, absorption happens in the photosphere — different regions. But that's not a physical mechanism. That's accounting.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-tag">Problem 3: The Gas-Ball Assumption</div>
+    <p>The entire "Sun is a hot gas ball" conclusion flows from Newton's gravity. We observed the Sun's gravitational effect on planets, applied Newton's F = GM₁M₂/r², calculated solar mass, assumed hydrostatic equilibrium, and concluded it must be gaseous plasma.</p>
+    <p>But what if the gravity model in Step 1 is incomplete?</p>
+  </div>
+
+  <div class="ornament">· · ·</div>
+
+  <h2>We Audited the Gravity Model</h2>
+
+  <p>Most people assume Newton's gravity "works" because it's been around for 350 years and it's in every physics textbook. General Relativity is treated as the more accurate version, confirmed by GPS, gravitational waves, and black hole imaging.</p>
+
+  <p>But how well do these models actually perform when you score them against what gravity observably does?</p>
+
+  <p>We catalogued 23 confirmed, measurable properties of gravity — things we can observe and test. Not theoretical predictions. Not mathematical elegance. Observable phenomena that any complete theory of gravity should explain.</p>
+
+  <p>Then we scored the models:</p>
+
+  <div class="stat-block">
+    <div class="stat-num">28.3%</div>
+    <p class="stat-text">Newton's gravity: 6.50 out of 23 observable properties explained.</p>
+  </div>
+
+  <div class="stat-block">
+    <div class="stat-num">53.9%</div>
+    <p class="stat-text">General Relativity: 12.40 out of 23 observable properties explained.</p>
+  </div>
+
+  <p>Together, Newton and Einstein — 350 years of the best physics ever practiced — cannot account for approximately half of what gravity demonstrably does.</p>
+
+  <p>The seven properties both models score zero on are not edge cases. They are the properties most directly relevant to stellar structure and fusion:</p>
+
+  <p><strong>P7 — Volume phenomenon:</strong> Gravity responds to density, not point mass. Both models treat mass as concentrated points. Score: 0.00 both.</p>
+
+  <p><strong>P9 — Fusion extends gravitational radius:</strong> When fusion occurs in a stellar core, the gravitational field's radius of action increases. Neither model predicts or explains this. Score: 0.00 both.</p>
+
+  <p><strong>P11 — Apparent inertia as density contrast:</strong> Archimedes' principle in gravitational fields — objects appear lighter or heavier depending on the density of the surrounding medium. Neither model addresses this. Score: 0.00 both.</p>
+
+  <p><strong>P16 — Field sets pressure and temperature envelope:</strong> The gravitational field itself determines the pressure and temperature distribution in a body. Both models require separate thermodynamic calculations. Score: 0.00 both.</p>
+
+  <p><strong>P17 — Compression field:</strong> Gravity acts simultaneously as compressor and container. Neither model provides a physical mechanism for this dual role. Score: 0.00 both.</p>
+
+  <p><strong>P19 — Galactic flat rotation curves:</strong> Velocity remains constant with radius (v ∝ constant), not v ∝ 1/√r as Newton predicts. Confirmed in thousands of galaxies. Score: 0.00 both.</p>
+
+  <p><strong>P22 — Immediate disc formation:</strong> Rotating systems form equatorial discs before dissipation can operate. Neither model explains why. Score: 0.00 both.</p>
+
+  <p>These aren't peripheral curiosities. These are core properties of how gravity organizes matter, compresses it, heats it, and enables fusion.</p>
+
+  <p>And when these models fail everywhere else we can test them, the scientific community has a standard response:</p>
+
+  <p><strong>Add invisible mass.</strong></p>
+
+  <div class="ornament">· · ·</div>
+
+  <h2>The 5× Correction Nobody Applied to the Sun</h2>
+
+  <p>When Newton's 1/r² gravity fails to match observations, the solution is always the same: add more mass, or make the gravitational field larger.</p>
+
+  <p><strong>Galaxy rotation curves:</strong> Observations show velocity stays constant with radius (flat rotation curves). Newton's model predicts velocity should drop as 1/√r. Solution: add 5× more mass in the form of dark matter — invisible, undetected, hypothetical particles that only interact gravitationally.</p>
+
+  <p><strong>Oort Cloud:</strong> The Sun's gravitational influence extends to ~100,000 AU (astronomical units). Newton's 1/r² predicts it should end around 20,000 AU. Solution: invoke modified gravity (MOND) or distributed dark matter to extend the field 5× farther than predicted.</p>
+
+  <p><strong>Wide binary stars:</strong> Gravity deviates from Newton's inverse-square law at large separations. Solution: more dark matter, or modify gravity at those scales.</p>
+
+  <p><strong>Cosmic expansion:</strong> The universe's expansion is accelerating. Solution: dark energy — 68% of everything, physical nature completely unknown.</p>
+
+  <p>Notice the pattern. When the model fails, we don't question the model. We add invisible components to make the observations fit.</p>
+
+  <p><strong>Running total of what physics doesn't understand:</strong></p>
+
+  <div class="data-grid">
+    <div class="data-cell">
+      <div class="data-num">68%</div>
+      <div class="data-label">Dark energy — physical nature completely unknown</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-num">27%</div>
+      <div class="data-label">Dark matter — 5× more mass than visible, never detected</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-num">5%</div>
+      <div class="data-label">Ordinary matter — where equations sort of work</div>
+    </div>
+    <div class="data-cell">
+      <div class="data-num">5×</div>
+      <div class="data-label">Correction factor applied everywhere — except the Sun</div>
+    </div>
+  </div>
+
+  <p>Here's the question nobody asks:</p>
+
+  <p>If the same gravity model used to calculate the Sun's mass requires 5× more mass to explain galaxies, and 5× larger fields to explain the Oort Cloud, and scores only 28.3% on observable properties — why are we confident the solar mass calculation is correct?</p>
+
+  <p>We did the calculation everyone else avoided.</p>
+
+  <p><strong>Current solar parameters (from Newton's gravity):</strong></p>
+  <p>Mass: 2.0 × 10³⁰ kg<br>
+  Average density: 1,400 kg/m³<br>
+  Core density: 160,000 kg/m³</p>
+
+  <p><strong>For reference:</strong></p>
+  <p>Water: 1,000 kg/m³<br>
+  Air at sea level: 1.2 kg/m³<br>
+  Iron: 7,870 kg/m³<br>
+  Steel: 7,850 kg/m³</p>
+
+  <p>The Sun, according to current models, has an average density slightly higher than water — consistent with it being a hot gas ball of hydrogen and helium.</p>
+
+  <p><strong>If we apply the same 5× dark matter correction used everywhere else:</strong></p>
+
+  <div class="stat-block">
+    <div class="stat-num">7,000 kg/m³</div>
+    <p class="stat-text">New average solar density: 1,400 × 5 = 7,000 kg/m³. That's not hydrogen gas. That's approaching the density of iron and steel. That's a metallic object, not a gas ball.</p>
+  </div>
+
+  <p>If the core needs similar correction: 160,000 × 5 = 800,000 kg/m³ — far beyond any known terrestrial material under normal conditions.</p>
+
+  <p>This is not a small adjustment. This is not measurement error.</p>
+
+  <p><strong>A model that can be off by a factor of 5 in one regime cannot be trusted in another.</strong></p>
+
+  <p>You wouldn't trust a bridge designed with structural equations that require 5× more steel than calculated to match real-world loads. You wouldn't bet a trillion-dollar industry on a specification derived from a model that scores 28% on observable properties.</p>
+
+  <p>Yet that's exactly what's happening.</p>
+
+  <div class="pullquote">
+    <p>If the Sun's actual mass is different — because the gravity model is incomplete — then core pressure is different, core temperature is different, and the fusion conditions are completely different. That would explain why $200 billion and 74 years hasn't produced a sustained reaction. Because everyone is solving for the wrong conditions.</p>
+  </div>
+
+  <div class="ornament">· · ·</div>
+
+  <h2>We Went Back to the Fundamentals</h2>
+
+  <p>Not because we enjoy theoretical discussions. Because we were searching for clues.</p>
+
+  <p>If you're trying to build a better model of gravity — one that actually explains observations without requiring 5× invisible mass — you need to understand where the current models fail and why.</p>
+
+  <p>So we did something most researchers don't have time for: we revisited gravity in detail.</p>
+
+  <p>Not the textbook version. The observational record.</p>
+
+  <p>We scored existing models against all 23 confirmed properties. We identified the gaps. We looked for patterns in what was missing. And we asked: what kind of physical model would explain all of these properties without adding invisible components?</p>
+
+  <p>The answer that emerged: treat gravity not as action-at-a-distance or pure geometric curvature, but as a physical phenomenon with a physical medium. A field with spatial extent, internal structure, and material properties.</p>
+
+  <p>From that starting point, we built a model from first principles.</p>
+
+  <p><strong>The early indications are good.</strong></p>
+
+  <p>The model, as it stands today, potentially covers all 23 observable properties — not by adding parameters, not by invoking dark matter, but by deriving them from the physical structure of the gravitational field itself.</p>
+
+  <p>We've tested it against:</p>
+  <p>• Galactic rotation curves → derives flat rotation (v ∝ constant) without dark matter<br>
+  • Solar differential rotation → matches observed velocity profile<br>
+  • Tangential velocity profiles → derived from field geometry, not fitted<br>
+  • The seven properties Newton and GR both miss → explained by field compression mechanics</p>
+
+  <p>We're not claiming victory. We're reporting results.</p>
+
+  <p>If this model is correct, it changes the solar mass calculation. And if the solar mass is different, the core conditions are different. And if the core conditions are different, the fusion specification is different.</p>
+
+  <p>Not incrementally different. Fundamentally different.</p>
+
+  <div class="ornament">· · ·</div>
+
+  <h2>We Need Your Help</h2>
+
+  <p>We're sharing the model openly. The derivations. The scorecard. The observational tests. The predictions.</p>
+
+  <p>Why?</p>
+
+  <p>Because we need validation, not congratulations.</p>
+
+  <p>This isn't a claim that we've solved fusion. This is a claim that we might have the correct gravity model — and if we do, that model recalculates what the Sun actually does from a foundation that works.</p>
+
+  <p>But we can't validate this alone.</p>
+
+  <p><strong>If you're a physicist:</strong> Check the derivations. Look for errors. Test it against edge cases we haven't considered.</p>
+
+  <p><strong>If you're an astronomer:</strong> Apply it to more observational data. Does it hold for different galaxy types? Does it predict stellar behavior we haven't tested yet?</p>
+
+  <p><strong>If you're an engineer:</strong> Explore what different fusion conditions would mean. What does stable, continuous fusion look like at conditions the Sun actually achieves versus conditions we've been targeting?</p>
+
+  <p><strong>If you're an investor:</strong> Understand what's at stake. If fusion has failed for 74 years because the specification is wrong, and we have a model that derives the correct specification, that's not an incremental improvement. That's a first-mover advantage in the most consequential energy race in history.</p>
+
+  <p>The AI energy wall is here. Strategic competition is intensifying. Countries are spending hundreds of billions on fusion programs all targeting the same potentially wrong specification.</p>
+
+  <p>We went back to the fundamentals because nobody else would.</p>
+
+  <p>We recalculated solar mass because nobody else did.</p>
+
+  <p>We built a complete gravity model because the incomplete ones weren't good enough.</p>
+
+  <p>And now we're sharing it — because if we're right, everyone needs to know. And if we're wrong, we need to know why.</p>
+
+  <div class="callout">
+    <div class="callout-tag">This Is an Open Programme</div>
+    <p>The model is available. The scorecard is public. The tests are documented.</p>
+    <p>Come verify it. Come challenge it. Come improve it.</p>
+    <p>The 74-year curse doesn't break with better engineering toward the wrong target.</p>
+    <p>It breaks when someone has the integrity to question the foundational physics — and the courage to share what they find.</p>
+  </div>
+
+  <div class="pullquote">
+    <p>We did the first part. We need your help with the second.</p>
+  </div>
+
+  <div class="foot">
+    <div class="foot-label">Series 09 — The Physical Universe</div>
+    <div class="foot-closer">"Seventy-four years without a sustained reaction. Everyone knows something's wrong. We went back to the gravity model, recalculated solar mass, and found the specification might be fundamentally different. If we're right, everything changes. If we're wrong, we need better minds to show us why. This is an open programme. Come challenge it."</div>
+    
+    <a href="contact.html" class="next-link">
+      <span class="next-tag">Get Involved</span>
+      <div class="next-title">Join the Programme</div>
+      <p class="next-desc">Physicists, astronomers, engineers, and investors — if you see something we missed or want to help validate the model, we want to hear from you.</p>
+    </a>
+  </div>
+
+</article>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('bar').style.width =
+      (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+  });
+
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>

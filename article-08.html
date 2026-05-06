@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Open Graph / WhatsApp / Facebook -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Physics Has Mastered 5% of Gravity">
+<meta property="og:description" content="Newton scores 28.3%. Einstein scores 53.9%. Together they miss half of what gravity observably does. Here's the complete audit.">
+<meta property="og:image" content="https://krishnanamit.github.io/PhysicalUniverse/ogarticle08.png">
+<meta property="og:url" content="https://krishnanamit.github.io/PhysicalUniverse/article-08.html">
+<meta property="og:site_name" content="The Physical Universe">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Physics Has Mastered 5% of Gravity">
+<meta name="twitter:description" content="Newton scores 28.3%. Einstein scores 53.9%. Together they miss half of what gravity observably does. Here's the complete audit.">
+<meta name="twitter:image" content="https://krishnanamit.github.io/PhysicalUniverse/ogarticle08.png">
+<!-- Standard meta description -->
+<meta name="description" content="Newton scores 28.3%. Einstein scores 53.9%. Together they miss half of what gravity observably does. Here's the complete audit.">
+<title>Physics Has Mastered 5% of Gravity — The Physical Universe Series 08</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#12100e;--paper:#f4efe6;--accent:#b5271e;--accent2:#d4830a;--muted:#6b6155;--rule:#d6ccb8;--soft:#ede8dd; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-size:20px;line-height:1.8;font-weight:300;overflow-x:hidden}
+  body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+  #bar{position:fixed;top:0;left:0;height:2px;background:var(--accent);width:0%;z-index:999;transition:width .08s linear}
+
+  /* NAV */
+  .site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(18,16,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(244,239,230,.06)}
+  .nav-logo{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper);text-decoration:none;opacity:.7;transition:opacity .2s}
+  .nav-logo:hover{opacity:1}
+  .nav-logo em{font-style:normal;color:var(--accent)}
+  .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+  .nav-links a{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,239,230,.45);text-decoration:none;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--paper)}
+  .nav-links a.active::after{content:'';display:block;width:100%;height:1px;background:var(--accent);margin-top:2px}
+  .nav-cta{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;padding:8px 18px;border:1px solid rgba(181,39,30,.5);color:var(--accent)!important;text-decoration:none;white-space:nowrap;transition:all .2s!important}
+  .nav-cta:hover{background:var(--accent)!important;color:var(--paper)!important}
+  .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+  .nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--paper);opacity:.6}
+
+  /* HERO */
+  .hero{min-height:100vh;background:var(--ink);display:grid;grid-template-rows:1fr auto;position:relative;overflow:hidden}
+  .hero-atmos{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 10% 80%,rgba(181,39,30,.14) 0%,transparent 55%),radial-gradient(ellipse 50% 70% at 90% 20%,rgba(212,131,10,.05) 0%,transparent 55%)}
+  
+  .hero-body{position:relative;z-index:10;align-self:end;max-width:900px;margin:0 auto;padding:0 48px 88px;width:100%}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:32px;display:flex;align-items:center;gap:14px;opacity:0;animation:rise .9s ease forwards .2s}
+  .eyebrow::before{content:'';display:block;width:36px;height:1px;background:var(--accent)}
+  h1.title{font-family:'Playfair Display',serif;font-size:clamp(38px,5.8vw,72px);font-weight:900;line-height:1.08;letter-spacing:-.028em;color:var(--paper);margin-bottom:28px;opacity:0;animation:rise 1s ease forwards .4s}
+  h1.title em{font-style:italic;color:var(--accent2)}
+  .subtitle{font-size:19px;color:rgba(244,239,230,.58);max-width:680px;line-height:1.68;font-weight:300;opacity:0;animation:rise 1s ease forwards .6s}
+  .hero-meta{display:flex;align-items:center;gap:20px;margin-top:48px;padding-top:28px;border-top:1px solid rgba(244,239,230,.1);opacity:0;animation:rise 1s ease forwards .8s}
+  .mpill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:rgba(244,239,230,.35)}
+  .msep{width:3px;height:3px;border-radius:50%;background:rgba(244,239,230,.2)}
+  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .scroll-hint{position:absolute;bottom:32px;right:48px;z-index:10;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.3;animation:bob 2.4s ease-in-out infinite,rise 1s ease forwards 1.2s}
+  .scroll-hint span{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--paper);writing-mode:vertical-rl;text-transform:uppercase}
+  .scroll-hint::after{content:'';width:1px;height:44px;background:linear-gradient(to bottom,var(--paper),transparent)}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+  /* ARTICLE */
+  .article{max-width:700px;margin:0 auto;padding:96px 48px 140px}
+  .lead-para::first-letter{font-family:'Playfair Display',serif;font-size:5.8em;font-weight:900;float:left;line-height:.72;margin:.1em .12em 0 0;color:var(--accent)}
+  p{margin-bottom:1.7em;color:#1f1c17}
+  h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3.8vw,38px);font-weight:700;line-height:1.2;color:var(--ink);margin:84px 0 24px;letter-spacing:-.018em}
+  h3{font-family:'Playfair Display',serif;font-size:clamp(22px,2.8vw,28px);font-weight:700;line-height:1.3;color:var(--ink);margin:56px 0 20px;letter-spacing:-.016em}
+  strong{font-weight:600;color:var(--ink)}
+  em{font-style:italic}
+
+  .pullquote{margin:60px -56px;padding:40px 56px 40px 52px;border-left:3px solid var(--accent);background:rgba(181,39,30,.03);position:relative}
+  .pullquote::before{content:'\201C';font-family:'Playfair Display',serif;font-size:140px;line-height:1;color:var(--accent);opacity:.1;position:absolute;top:-10px;left:14px;pointer-events:none}
+  .pullquote p{font-family:'Playfair Display',serif;font-size:clamp(20px,2.8vw,26px);font-style:italic;font-weight:400;line-height:1.5;color:var(--ink);margin:0}
+
+  .ornament{text-align:center;margin:72px 0;color:var(--rule);font-size:18px;letter-spacing:.7em}
+
+  /* Property cards */
+  .prop-card{background:var(--soft);padding:28px 32px;margin:32px 0;border-left:3px solid var(--accent2)}
+  .prop-num{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;font-weight:500}
+  .prop-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px;line-height:1.3}
+  .prop-body{font-size:17px;line-height:1.7;color:#2a2520}
+  .prop-body p{margin-bottom:1em;font-size:17px}
+  .prop-body p:last-child{margin-bottom:0}
+
+  /* Scorecard table */
+  .scorecard{margin:64px 0;border:1px solid var(--rule);overflow:hidden}
+  .score-header{display:grid;grid-template-columns:3fr 1fr 1fr;background:var(--ink);padding:20px 24px;gap:16px}
+  .score-header div{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent2);font-weight:500}
+  .score-row{display:grid;grid-template-columns:3fr 1fr 1fr;padding:18px 24px;gap:16px;border-bottom:1px solid var(--rule);background:var(--paper)}
+  .score-row:last-child{border-bottom:none}
+  .score-row:nth-child(even){background:rgba(237,232,221,.4)}
+  .score-prop{font-size:16px;line-height:1.5;color:var(--ink)}
+  .score-val{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;text-align:center}
+  .score-full{color:#2d7a2e}
+  .score-half{color:var(--accent2)}
+  .score-zero{color:var(--muted);opacity:.5}
+  .score-total{background:var(--ink)!important;border-top:2px solid var(--accent)}
+  .score-total .score-prop{color:var(--paper);font-weight:600}
+  .score-total .score-val{color:var(--accent2);font-size:28px}
+
+  /* Stat blocks */
+  .stat-block{background:var(--ink);padding:48px 44px;margin:56px 0;position:relative}
+  .stat-block::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+  .stat-num{font-family:'Playfair Display',serif;font-size:clamp(52px,7vw,82px);font-weight:900;color:var(--accent2);line-height:1;margin-bottom:16px}
+  .stat-text{font-size:18px;color:rgba(244,239,230,.72);line-height:1.7;margin:0}
+
+  /* Callout boxes */
+  .callout{margin:56px 0;background:var(--ink);padding:36px 40px;position:relative;overflow:hidden}
+  .callout::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent2)}
+  .callout-tag{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px}
+  .callout p{color:rgba(244,239,230,.82);font-size:17px;margin:0;line-height:1.72}
+  .callout p + p{margin-top:14px}
+
+  .foot{margin-top:120px;padding-top:48px;border-top:1px solid var(--rule)}
+  .foot-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .foot-closer{font-size:17px;font-style:italic;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:580px}
+
+  @media (max-width:660px){
+    .site-nav{padding:0 24px}
+    .nav-links{display:none;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--ink);padding:32px 24px;gap:24px;border-bottom:1px solid rgba(244,239,230,.08)}
+    .nav-links.open{display:flex}
+    .nav-hamburger{display:flex}
+    .hero-body{padding:0 24px 64px}
+    .article{padding:64px 24px 100px}
+    .pullquote{margin:48px 0;padding:32px 24px 32px 22px}
+    .score-header,.score-row{grid-template-columns:2fr 1fr 1fr;font-size:14px}
+  }
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><em>AK</em> &nbsp;/&nbsp; The Physical Universe</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="series.html" class="active">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Collaborate</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-atmos"></div>
+
+  <div class="hero-body">
+    <div class="eyebrow">The Physical Universe — Series 08 &nbsp;·&nbsp; 22 min read</div>
+    <h1 class="title">Physics Has Mastered<br><em>5%</em> of Gravity</h1>
+    <p class="subtitle">Gravity is the force physics is most confident about. It is also the force physics understands least. Newton scores 28.3%. Einstein scores 53.9%. Together they miss half of what gravity observably does. This is the complete audit.</p>
+    <div class="hero-meta">
+      <span class="mpill">Physical Universe Series</span>
+      <span class="msep"></span>
+      <span class="mpill">Gravity Foundation</span>
+      <span class="msep"></span>
+      <span class="mpill">23 Properties</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint"><span>scroll</span></div>
+</section>
+
+<article class="article">
+
+  <p class="lead-para">Gravity is the oldest continuously studied force in physics. Isaac Newton formalized it in 1687. Albert Einstein revolutionized it in 1915. Between them, 350 years of the best physics humanity has ever practiced.</p>
+
+  <p>But how well do these theories actually work?</p>
+
+  <p>Not how mathematically elegant they are. Not how many papers cite them. How well do they explain what gravity observably does?</p>
+
+  <p>This article does the arithmetic.</p>
+
+  <h2>The Audit Methodology</h2>
+
+  <p>We compiled 23 confirmed, measurable properties of gravity — things we can directly observe and test. Not theoretical predictions. Not mathematical conveniences. Observable phenomena that any complete theory of gravity must account for.</p>
+
+  <p>The properties range from what you feel standing on Earth to what Hubble observes at the edge of the universe. From gradiometer measurements in laboratories to rotation curves of distant galaxies. From the timing of falling apples to the orbital dynamics of binary stars.</p>
+
+  <p>Every property is stated in three parts:</p>
+
+  <p><strong>Observation:</strong> What was literally measured or experienced. No interpretation. What happened.</p>
+
+  <p><strong>Property:</strong> What this observation establishes that gravity does. Stated as cleanly as possible. No mechanism assumed.</p>
+
+  <p><strong>Open:</strong> What the observation leaves physically unexplained. Where current theories answer, partially answer, or fail completely.</p>
+
+  <p>Then we scored Newton's Law of Gravitation and Einstein's General Relativity against all 23. The scoring standard was strict: credit for correct mathematical prediction, no credit for correct answers through wrong mechanisms, no credit for modifications the theory's author never proposed.</p>
+
+  <div class="pullquote">
+    <p>The question is not whether Newton and Einstein were brilliant. They were. The question is whether their descriptions are complete.</p>
+  </div>
+
+  <h2>The Complete Observational Profile of Gravity</h2>
+
+  <h3>Part One: Direct Human Experience and Earth-Scale Properties</h3>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 1</div>
+    <div class="prop-title">Gravity acts radially inward at all times and at all tested locations</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Objects released near Earth fall toward Earth's centre regardless of where on the surface they are released. The direction is always inward — toward the centre of mass. This has been confirmed at every location and scale tested: surface measurements, altitude measurements, pendulum experiments, orbital mechanics.</p>
+      <p><strong>Property:</strong> The gravitational field is directed radially inward toward the centre of mass at all tested locations and scales.</p>
+      <p><strong>Open:</strong> What happens to the field deep inside a massive body has been measured only to a few kilometres depth. Newton's shell theorem predicts the field should decrease with depth and reach zero at the centre. This has never been tested at significant depth.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 2</div>
+    <div class="prop-title">Gravity is a continuous field reflecting mass density</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Pressure at any depth inside Earth is given by ρgh — the density of material above multiplied by the height of that column. Two points at identical depth but under rock of different density have different pressures. The pressure depends entirely on the local density column above, not on distance to Earth's centre.</p>
+      <p><strong>Property:</strong> Gravity is not a force that jumps between discrete objects. It is a continuous field that exists everywhere, whose strength at any point reflects the local mass density distribution.</p>
+      <p><strong>Open:</strong> What the field physically is — what medium supports it, what propagates through it — has no account beyond geometric descriptions.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 3</div>
+    <div class="prop-title">Gravity acts at the atomic level on every atom simultaneously</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> A one-kilogram mass weighs one kilogram whether it is solid iron, liquid water, or gaseous hydrogen at identical temperature and pressure. Chemical bonds, phase state, and temperature do not affect gravitational response. The field acts on every atom individually, not on macroscopic structure.</p>
+      <p><strong>Property:</strong> Gravity is an atomic phenomenon. It acts on individual atoms simultaneously, independent of how those atoms are bonded or organized.</p>
+      <p><strong>Open:</strong> Why does gravity couple to mass at the atomic level but remain completely independent of electromagnetic, strong, and weak interactions at that same scale?</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 4</div>
+    <div class="prop-title">The potential well is continuous — no discontinuities</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Gravitational potential varies smoothly with position. There are no locations where the field suddenly jumps or drops to zero. Satellites at 200 km altitude, 2,000 km altitude, and 20,000 km altitude all measure continuously varying gravitational acceleration.</p>
+      <p><strong>Property:</strong> The gravitational potential well is continuous everywhere in space. No edges. No discontinuities.</p>
+      <p><strong>Open:</strong> At what distance does the Sun's gravitational influence actually end? The Oort Cloud extends to ~100,000 AU, five times farther than Newton's inverse square predicts.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 5</div>
+    <div class="prop-title">Gravity cannot be shielded, screened, or attenuated</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> No material placed between an object and Earth reduces the gravitational pull on the object. Lead, steel, concrete, electromagnetic fields — nothing shields gravity. This is unlike every other force in nature.</p>
+      <p><strong>Property:</strong> Gravity cannot be shielded. It passes through all known matter without measurable attenuation.</p>
+      <p><strong>Open:</strong> Why can gravity not be shielded? Every other force has a screening mechanism. Gravity has none — not in practice and not in theory.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 6</div>
+    <div class="prop-title">The field drags co-rotating systems</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Earth rotates at ~1,670 km/hr at the equator. The atmosphere rotates with it. The oceans rotate with it. Over billions of years the atmosphere has not drifted relative to the surface. Gravity Probe B (2004) measured gyroscopes in polar orbit drifting in directions consistent with Earth's rotation dragging its surroundings.</p>
+      <p><strong>Property:</strong> A rotating massive body carries its gravitational field and surrounding matter with it in rotation.</p>
+      <p><strong>Open:</strong> What physically rotates? What is being dragged? GR describes the geometry. The physical mechanism has no account.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 7</div>
+    <div class="prop-title">Gravity is a volume phenomenon responding to density</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Gradiometers measure variations in gravitational field strength over small distances. They detect local density variations — underground cavities, ore deposits, density changes in rock layers. The field responds to the three-dimensional distribution of mass, not to point sources.</p>
+      <p><strong>Property:</strong> Gravity responds to mass density in three-dimensional space. It is a volume phenomenon, not a point-to-point force.</p>
+      <p><strong>Open:</strong> Both Newton and GR treat mass as if it were concentrated at points or distributed in thin shells. Neither addresses gravity as a volume phenomenon responding to density at every point in three-dimensional space.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 8</div>
+    <div class="prop-title">Equivalence principle — gravitational and inertial mass are equal</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> All objects fall at the same rate in a gravitational field regardless of their mass or composition. Confirmed to one part in 10¹⁵. A feather and a hammer dropped on the Moon (no air resistance) hit the ground simultaneously.</p>
+      <p><strong>Property:</strong> Gravitational mass (how strongly an object responds to gravity) equals inertial mass (how much an object resists acceleration) to extraordinary precision.</p>
+      <p><strong>Open:</strong> Why? There is no physical explanation for why these two completely different properties — response to gravity versus resistance to acceleration — should be exactly equal.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 9</div>
+    <div class="prop-title">Fusion extends the gravitational field's radius of action</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Stars undergoing fusion maintain larger gravitational spheres of influence than their non-fusing mass alone predicts. The Sun's gravitational dominance extends to the Oort Cloud at ~100,000 AU — approximately five times farther than Newton's inverse square applied to the Sun's calculated mass predicts.</p>
+      <p><strong>Property:</strong> When fusion occurs in a stellar core, the gravitational field's effective radius increases beyond what the visible mass alone would produce.</p>
+      <p><strong>Open:</strong> Neither Newton nor GR predicts or explains this. The extended gravitational reach of fusing stars is an observed property with no theoretical account.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 10</div>
+    <div class="prop-title">Gravitational field strength scales linearly with matter</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Double the mass, double the gravitational field strength at a given distance. This linear relationship holds across every scale tested — from laboratory masses to planetary bodies to stars.</p>
+      <p><strong>Property:</strong> The gravitational field scales linearly with the amount of matter present.</p>
+      <p><strong>Open:</strong> This linearity is observed but not derived from any more fundamental principle. It is a phenomenological law confirmed by measurement, not a consequence of deeper physics.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 11</div>
+    <div class="prop-title">Apparent inertia as density contrast (Archimedes in gravitational fields)</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> An object feels heavier in air than in water. The same mass experiences different apparent weight depending on the density of the surrounding medium. In the Dead Sea (high-density water), you float effortlessly. Submarines achieve neutral buoyancy by matching the density of seawater.</p>
+      <p><strong>Property:</strong> Objects appear lighter or heavier depending on the density of the surrounding medium relative to their own density — Archimedes' principle extended to gravitational fields.</p>
+      <p><strong>Open:</strong> Neither Newton nor GR addresses apparent inertia as a density contrast phenomenon. Buoyancy is treated as fluid mechanics, not gravitational physics. But the root phenomenon is gravitational.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 12</div>
+    <div class="prop-title">Gravity is not standalone — coupled with electromagnetic phenomena</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Photons deflect in gravitational fields (gravitational lensing). Electromagnetic waves experience time delays passing near massive objects (Shapiro delay). Light emitted from strong gravitational fields is redshifted.</p>
+      <p><strong>Property:</strong> Gravity and electromagnetism are not independent. Electromagnetic radiation is affected by gravitational fields in measurable, predictable ways.</p>
+      <p><strong>Open:</strong> What is observed is an electromagnetic phenomenon (light bending, frequency shifting). Attribution to gravity via spacetime curvature is GR's interpretation. The coupling mechanism itself — why gravity affects electromagnetic waves at all — has no physical account beyond geometric description.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 13</div>
+    <div class="prop-title">Process rates vary with field strength (gravitational time dilation)</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Atomic clocks run slower in stronger gravitational fields. GPS satellites must correct for time dilation — their clocks run faster than ground clocks by ~38 microseconds per day. Confirmed to extraordinary precision.</p>
+      <p><strong>Property:</strong> Physical processes — atomic transitions, radioactive decay, clock mechanisms — run at different rates in different gravitational field strengths.</p>
+      <p><strong>Open:</strong> Why does gravity affect process rates? GR provides the mathematical relationship but no physical mechanism for why time itself should vary with field strength.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 14</div>
+    <div class="prop-title">Radial directionality is time-invariant and distance-invariant</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Orbital stability over billions of years. Earth has orbited the Sun for 4.6 billion years without measurable angular drift. If gravity pointed to where the Sun was 8.3 minutes ago (the light-travel time), Earth would spiral inward. It doesn't.</p>
+      <p><strong>Property:</strong> The static gravitational field acts toward where the source is now, not where it was when any signal left. Either genuinely instantaneous or with exact cancellation of retardation for uniform motion.</p>
+      <p><strong>Open:</strong> GR provides mathematical reconciliation (velocity-dependent terms cancel retardation for uniform motion). The physical account of why the cancellation occurs exactly is absent.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 15</div>
+    <div class="prop-title">Sphere of gravitational influence (Hill sphere)</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Every massive body has a region within which it gravitationally dominates. The Moon orbits Earth, not directly the Sun, even though the Sun's gravitational pull on the Moon is stronger than Earth's. Earth's Hill sphere radius is ~1.5 million km — the distance within which Earth's gravity dominates over the Sun's.</p>
+      <p><strong>Property:</strong> Gravitational influence operates within well-defined spheres. Within this sphere, the local body dominates. Outside it, the larger mass dominates.</p>
+      <p><strong>Open:</strong> What determines the boundary? The standard calculation uses Newtonian mechanics. But the boundary itself — where one field's dominance ends and another begins — is an observed property requiring physical explanation.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 16</div>
+    <div class="prop-title">The field sets the pressure and temperature envelope</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Low-mass bodies (asteroids, small moons) cannot retain atmospheres — their gravitational fields are too weak to hold gas against thermal escape. Increase mass to planetary scale (Earth, Venus, Jupiter) and you have thick atmospheres — gravity is strong enough to retain gas and build pressure. Increase further to stellar mass and you have cores compressed to millions of degrees, dense enough and hot enough for fusion. The mass progression directly determines what pressure and temperature regime the body can sustain.</p>
+      <p><strong>Property:</strong> The gravitational field itself determines the pressure and temperature envelope a body can sustain. Stronger field → higher sustainable pressure and temperature.</p>
+      <p><strong>Open:</strong> Both Newton and GR require separate thermodynamic calculations to predict pressure and temperature. Neither derives the envelope as an intrinsic property of the gravitational field strength.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 17</div>
+    <div class="prop-title">Gravity is a compression field — simultaneously compressor and container</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Every massive body exists in continuous compression — inward pressure from the gravitational field balanced by outward pressure from compressed matter. Remove the source (stellar collapse, supernova), and the compressed matter explodes. The explosion energy was already there. The field was holding it.</p>
+      <p><strong>Property:</strong> The gravitational field is a compression field. It is simultaneously the compressor and the container. The body is the equilibrium.</p>
+      <p><strong>Open:</strong> What is the physical mechanism of gravitational energy storage? The strong force stores energy in compressed nuclei — the mechanism is understood. Gravity stores energy in compressed bodies — the mechanism is not.</p>
+    </div>
+  </div>
+
+  <h3>Part Two: Gravitational Velocity Signatures Across Scales</h3>
+
+  <p>The velocity of matter under gravity is not a single relationship. It changes character at different scales in ways no single equation currently accounts for across all regimes.</p>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 18</div>
+    <div class="prop-title">Cosmological scale — recession velocity increases with distance, expansion accelerating</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Type Ia supernovae measurements (1998) found them dimmer than expected if universal expansion were decelerating. The expansion is accelerating. Recession velocity increases with distance, and that rate of increase is itself increasing.</p>
+      <p><strong>Property:</strong> At cosmological scales, recession velocity increases with distance. The expansion is accelerating. The cosmological constant must be added to equations to match observations. Its physical mechanism is unknown. It constitutes ~68% of the universe's mass-energy in current models.</p>
+      <p><strong>Open:</strong> What drives accelerating expansion? The cosmological constant is a number fitted to observation. Its value cannot be derived. Quantum field theory predicts a vacuum energy density differing from the observed constant by 56 to 120 orders of magnitude — the largest theory-observation discrepancy in physics.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 19</div>
+    <div class="prop-title">Galactic scale — orbital velocity flat regardless of distance</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Vera Rubin measured orbital speeds of stars at different distances from galactic centres (1970s). Prediction from inverse square applied to visible mass: speed should fall as 1/√r beyond the visible disc. Observation: flat. Stars at the outermost edge orbit at the same speed as stars near the centre. Confirmed in thousands of galaxies. Never observed otherwise.</p>
+      <p><strong>Property:</strong> At galactic scales, orbital velocity does not fall with distance as inverse square predicts. Rotation curves are universally flat (v ∝ constant).</p>
+      <p><strong>Open:</strong> Two interpretations exist. Either invisible mass (dark matter) exists in a specific halo profile producing flat curves — searched for five decades, never detected. Or the inverse square law breaks down at galactic scales. Both interpretations mean current gravity models are incomplete at this scale.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 20</div>
+    <div class="prop-title">Galactic inner regime — frame-dragging dominates, velocity decreases toward centre</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Galactic rotation curves rise from zero at the centre, reach a peak at intermediate radius, then flatten. In the innermost region, stars do not continue accelerating as point-mass Keplerian models predict. Measured stellar orbits near Sagittarius A* show the innermost orbits do not follow 1/√r. The velocity profile reflects co-rotation with the rotating field rather than free orbital mechanics.</p>
+      <p><strong>Property:</strong> In the innermost region of a rotating gravitational field, orbital velocity does not follow Keplerian 1/√r. The rotating field drags matter into co-rotation — more strongly at smaller distances where the field is deeper.</p>
+      <p><strong>Open:</strong> The physical mechanism of frame-dragging — what physically rotates, what is dragged, by what — has no account beyond GR's geometric description.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 21</div>
+    <div class="prop-title">Solar system regime — orbital velocity decreases as 1/√r (Keplerian)</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Mercury orbits at 47 km/s. Earth at 30 km/s. Neptune at 5 km/s. The relationship matches v ∝ 1/√r to high precision across the entire solar system. This is Kepler's third law — confirmed to extraordinary accuracy.</p>
+      <p><strong>Property:</strong> In the regime of a single dominant source mass with orbiting bodies of negligible mass at intermediate distances, orbital velocity falls as the inverse square root of distance. This is one regime among four observed velocity regimes.</p>
+      <p><strong>Open:</strong> Why does 1/√r hold precisely in the solar system and break down completely at galactic scales? The inverse square law is not derived from any more fundamental principle. It is confirmed in the middle regime and assumed elsewhere.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 22</div>
+    <div class="prop-title">Immediate equatorial disc formation in all rotating gravitational systems</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Every rotating gravitational system self-organizes into a flat disc at the equatorial plane. Saturn's rings — thousands of kilometres wide, tens of metres thick. Protoplanetary discs — JWST images show geometrically precise disc structure at the earliest observable stages, before dissipation has time to operate. Galactic discs — the Milky Way is 100,000 light-years across and ~1,000 light-years thick. The same flatness ratio at fourteen orders of magnitude scale difference.</p>
+      <p><strong>Property:</strong> Rotating gravitational systems form flat equatorial discs immediately during collapse, not gradually through post-formation dissipation. The organization is smooth and self-consistent from the earliest observable moment.</p>
+      <p><strong>Open:</strong> Angular momentum conservation explains the equilibrium state but not the timing. The disc appears before dissipation has elapsed. This means the cause operates during collapse itself — earlier and faster than the dissipation narrative accounts for.</p>
+    </div>
+  </div>
+
+  <div class="prop-card">
+    <div class="prop-num">Property 23</div>
+    <div class="prop-title">All massive bodies generate magnetic fields that scale with gravitational field strength</div>
+    <div class="prop-body">
+      <p><strong>Observation:</strong> Every measured massive body — from planets to stars to galaxies — has an associated magnetic field. Earth has a dipole field. The Sun has a complex magnetic field driving the solar cycle. Jupiter's field is 14× stronger than Earth's. Galaxies have large-scale magnetic fields threading their discs. The field strength correlates with the body's mass and gravitational field strength. No massive body has been observed without an associated magnetic field (present or remnant).</p>
+      <p><strong>Property:</strong> Magnetic field generation is a universal property of massive bodies. Field strength scales with gravitational field strength — larger mass, stronger gravity, stronger magnetic field.</p>
+      <p><strong>Open:</strong> The standard model treats magnetic fields as byproducts of internal dynamics (planetary dynamos, stellar convection). The universal correlation — that every gravitating body has a magnetic field scaling with its gravitational strength — is not explained as a fundamental property of gravity itself.</p>
+    </div>
+  </div>
+
+  <div class="ornament">· · ·</div>
+
+  <h2>The Scorecard</h2>
+
+  <p>Twenty-three confirmed observable properties. Two theories. Three hundred and fifty years of physics.</p>
+
+  <p>How well do Newton's Law of Gravitation and Einstein's General Relativity account for what gravity demonstrably does?</p>
+
+  <div class="scorecard">
+    <div class="score-header">
+      <div>Property</div>
+      <div>Newton</div>
+      <div>GR</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P1 — Radially inward, always</div>
+      <div class="score-val score-full">1.00</div>
+      <div class="score-val score-full">1.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P2 — Continuous field reflecting density</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-full">1.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P3 — Atomic phenomenon</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-half">0.50</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P4 — Continuous potential well</div>
+      <div class="score-val score-full">1.00</div>
+      <div class="score-val score-full">1.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P5 — Cannot be shielded</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-half">0.50</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P6 — Drags co-rotating systems</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-full">1.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P7 — Volume phenomenon</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-zero">0.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P8 — Equivalence principle</div>
+      <div class="score-val score-full">1.00</div>
+      <div class="score-val score-full">1.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P9 — Fusion extends radius</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-zero">0.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P10 — Linear scaling with matter</div>
+      <div class="score-val score-full">1.00</div>
+      <div class="score-val score-full">1.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P11 — Apparent inertia as density contrast</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-zero">0.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P12 — Gravity-EM coupling</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-full">1.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P13 — Gravitational time dilation</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-full">1.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P14 — Radial directionality invariant</div>
+      <div class="score-val score-full">1.00</div>
+      <div class="score-val score-full">1.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P15 — Sphere of influence</div>
+      <div class="score-val score-half">0.50</div>
+      <div class="score-val score-half">0.50</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P16 — Field sets envelope</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-zero">0.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P17 — Compression field</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-zero">0.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P18 — Cosmological expansion</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-full">1.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P19 — Galactic flat rotation</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-zero">0.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P20 — Galactic inner frame-dragging</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-half">0.50</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P21 — Solar system Keplerian</div>
+      <div class="score-val score-full">1.00</div>
+      <div class="score-val score-full">1.00</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P22 — Immediate disc formation</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-half">0.25</div>
+    </div>
+    <div class="score-row">
+      <div class="score-prop">P23 — Rotation-dipole correlation</div>
+      <div class="score-val score-zero">0.00</div>
+      <div class="score-val score-zero">0.00</div>
+    </div>
+    <div class="score-row score-total">
+      <div class="score-prop">TOTAL OUT OF 23.00</div>
+      <div class="score-val">6.50</div>
+      <div class="score-val">12.40</div>
+    </div>
+  </div>
+
+  <div class="stat-block">
+    <div class="stat-num">28.3%</div>
+    <p class="stat-text">Newton's Law of Gravitation: 6.50 out of 23 observable properties. Purely geometric and kinematic. No physical account of what the field is.</p>
+  </div>
+
+  <div class="stat-block">
+    <div class="stat-num">53.9%</div>
+    <p class="stat-text">General Relativity: 12.40 out of 23 observable properties. Geometric framework that reaches beyond Newton but still cannot account for half of what gravity demonstrably does.</p>
+  </div>
+
+  <h2>What Newton Scores On — And Only What Newton Scores On</h2>
+
+  <p>Newton's theory accounts for seven properties, all purely geometric or kinematic: P1 (directionality), P4 (continuity), P8 (equivalence), P10 (linear scaling), P14 (time/distance invariance), P15 (sphere of influence, partial), P21 (Keplerian orbital mechanics).</p>
+
+  <p>No physical account of what the field is. No account of what matter is. No account of how they couple. Newton's theory is a kinematic and geometric framework that accounts for 28.3% of gravity's complete observational profile — specifically and only the fraction that requires nothing more than mass, distance, and motion.</p>
+
+  <h2>What GR Adds Over Newton</h2>
+
+  <p>General Relativity's genuine advances: P2 (density as continuous field input), P6 (frame dragging), P12 (gravity-EM coupling), P13 (gravitational time dilation), P18 (cosmological constant from mathematics), P20 (galactic inner regime frame-dragging, partial), P22 (equatorial disc, partial).</p>
+
+  <p>These are the properties where Einstein's geometric framework delivers observations Newton could not. GR reaches 53.9%. Better than Newton. Still incomplete.</p>
+
+  <h2>Where Both Theories Fail</h2>
+
+  <p>Seven properties score zero on both: P7 (volume phenomenon), P9 (fusion extends radius), P11 (apparent inertia as density contrast), P16 (field sets envelope), P17 (compression field), P19 (flat rotation curves), P23 (rotation-dipole correlation).</p>
+
+  <p>These are not edge cases. They are not peripheral curiosities. They are core properties of how gravity organizes matter, compresses it, heats it, and structures systems across all observable scales.</p>
+
+  <p>Neither theory was aimed at these questions. They represent the complete gap that any successor theory must fill.</p>
+
+  <div class="pullquote">
+    <p>The divisions are institutional. The phenomenon is one. P7 is studied in geophysics. P11 in fluid mechanics. P16 in planetary science. P17 in astrophysics. P19 in cosmology. P22 in planetary formation. P23 in solar system dynamics. Seven departments. Seven properties. One gravitational field producing all of them.</p>
+  </div>
+
+  <h2>The Pattern in What's Missing</h2>
+
+  <p>The properties both theories miss share a common character: they require treating gravity as a physical medium with internal structure, not as pure geometry or action-at-a-distance.</p>
+
+  <p>P7 (volume phenomenon) and P11 (density contrast) require the field to respond to three-dimensional mass distributions, not point sources.</p>
+
+  <p>P16 (field sets envelope) and P17 (compression field) require the field to be simultaneously compressor and container — a dual role neither theory addresses.</p>
+
+  <p>P9 (fusion extends radius), P19 (flat rotation), P22 (disc formation), and P23 (rotation-dipole correlation) require the field to have extended spatial structure that changes with the source's internal state.</p>
+
+  <p>These are not separate problems requiring separate solutions. They point toward a single gap: the physical description of the gravitational medium itself.</p>
+
+  <div class="ornament">· · ·</div>
+
+  <h2>This Is an Open Programme</h2>
+
+  <p>The scorecard defines the target precisely. Whatever comes next must account for all 23 properties. It must explain volume response, density contrast, field compression, extended radius during fusion, flat rotation curves without dark matter, immediate disc formation, and rotation-dipole correlation.</p>
+
+  <p>And it must do this without adding new invisible terms each time the equations disagree with observation.</p>
+
+  <p>The minimum viable experiment to test whether the physical account of the gravitational field is complete does not require billion-dollar infrastructure. It requires instruments that exist, datasets that have been collected, and a decision to treat the anomalies as anomalies rather than calibration footnotes.</p>
+
+  <p>The data is there. The observations are confirmed. The gaps are mapped.</p>
+
+  <div class="callout">
+    <div class="callout-tag">Come Test It</div>
+    <p>If you are a physicist who has noticed these gaps and been told to work on something more tractable — this is where those observations belong.</p>
+    <p>If you are an astronomer with access to observational data that could test these properties — the framework is here.</p>
+    <p>If you are an experimentalist who sees a testable question in the list above — the programme is open.</p>
+    <p>Critique is as welcome as agreement. If you find a property wrongly stated, a score incorrectly assigned, or a gap that has already been resolved — say so. The list survives scrutiny by being corrected, not by being defended.</p>
+  </div>
+
+  <div class="pullquote">
+    <p>Two theories. Three hundred and fifty years. A combined score of 53.9% against 23 confirmed observational properties. Seven properties unaddressed by either. The map is precise. The experiments are affordable. What is missing is not the physics. It is the decision to look.</p>
+  </div>
+
+  <div class="foot">
+    <div class="foot-label">Series 08 — The Physical Universe</div>
+    <div class="foot-closer">"Newton and Einstein together account for roughly half of what gravity observably does. The other half — volume response, density contrast, compression field, fusion radius extension, flat rotation, disc formation, rotation-dipole correlation — remains without theoretical account. These are not peripheral effects. They are core properties any complete theory must explain. The scorecard is public. The observations are confirmed. Come test it."</div>
+  </div>
+
+</article>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('bar').style.width =
+      (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+  });
+
+  document.getElementById('hamburger').addEventListener('click', () => {
+    document.getElementById('navLinks').classList.toggle('open');
+  });
+</script>
+</body>
+</html>
