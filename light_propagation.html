@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Propagation on Rotating & Orbiting Planet</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #000;
+            color: #0f0;
+            font-family: monospace;
+        }
+        h1 {
+            text-align: center;
+            color: #0f0;
+            font-size: 2em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #0a0;
+            margin-bottom: 20px;
+        }
+        canvas {
+            display: block;
+            margin: 20px auto;
+            border: 2px solid #0f0;
+            background: #000;
+        }
+        .controls {
+            max-width: 900px;
+            margin: 0 auto 20px;
+            padding: 20px;
+            border: 1px solid #0f0;
+            background: #001100;
+        }
+        .control-row {
+            margin: 15px 0;
+        }
+        label {
+            display: inline-block;
+            width: 200px;
+            color: #0f0;
+        }
+        button {
+            background: #0f0;
+            color: #000;
+            border: none;
+            padding: 12px 25px;
+            margin: 5px;
+            cursor: pointer;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1em;
+        }
+        button:hover {
+            background: #0c0;
+        }
+        button.active {
+            background: #f80;
+            color: #000;
+        }
+        .info {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 2px solid #f00;
+            background: #200;
+            color: #faa;
+        }
+        .info h2 {
+            color: #f00;
+            margin-bottom: 15px;
+        }
+        .info p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+        .scale-info {
+            background: #002200;
+            border: 1px solid #0f0;
+            padding: 15px;
+            margin: 15px 0;
+            color: #0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>LIGHT PROPAGATION: THE UNTESTED ASSUMPTION</h1>
+    <div class="subtitle">Why we've never actually tested if light speed is constant for all observers</div>
+    
+    <div class="controls">
+        <div class="scale-info">
+            <strong>IMPORTANT — VELOCITIES NOT TO SCALE:</strong> For every 1 meter Earth's surface moves due to rotation, light travels 651.7 km. The animation shows wave expansion slowed dramatically for visibility.<br><br>
+            <strong>SCALE:</strong> Planet radius = 6,700 km | Light source = 1 meter | Wave expands to 3,000 km<br>
+            <strong>QUESTION:</strong> Does Planet 2 see Planet 1's wave as symmetric and moving at c? Or distorted with differential speeds?<br><br>
+            <strong>📖 READ:</strong> <a href="article-10.html" style="color: #0ff; text-decoration: underline;">Article 10 — Einstein's Most Famous Experiment Was Never Actually Done</a>
+        </div>
+        
+        <div class="control-row">
+            <button id="autoBtn" onclick="toggleAuto()">AUTO EMIT: OFF</button>
+            <button onclick="addPlanet()">+ ADD PLANET</button>
+            <button onclick="removePlanet()">- REMOVE PLANET</button>
+            <button onclick="clearWaves()">CLEAR WAVES</button>
+        </div>
+        
+        <div class="control-row">
+            <button id="rotBtn" onclick="toggleRotation()" class="active">ROTATION: ON</button>
+            <button id="orbBtn" onclick="toggleOrbit()" class="active">ORBIT: ON</button>
+        </div>
+        
+        <div class="control-row" style="border-top: 2px solid #f00; padding-top: 15px; margin-top: 15px;">
+            <strong style="color: #f00; display: block; margin-bottom: 10px;">⚠ EXPERIMENTS NEVER DONE:</strong>
+            <button id="noRotBtn" onclick="toggleNonRotatingObserver()" style="background: #f00; color: #fff;">ADD NON-ROTATING OBSERVER</button>
+            <button id="noOrbBtn" onclick="toggleNonOrbitingObserver()" style="background: #f00; color: #fff;">ADD NON-ORBITING OBSERVER</button>
+        </div>
+    </div>
+
+    <canvas id="canvas" width="800" height="800"></canvas>
+
+    <div class="info">
+        <h2>⚠ WHAT YOU'RE SEEING</h2>
+        
+        <p><strong>The Setup:</strong></p>
+        <p>• Each planet has a light source rotating with the planet's surface</p>
+        <p>• Light spreads symmetrically to 3,000 km from the source (expanding blue circles)</p>
+        <p>• Planets are ROTATING (different rotation speeds for each planet)</p>
+        <p>• Planets are ORBITING at different speeds (inner planets faster, following v² ∝ 1/r)</p>
+        
+        <p style="margin-top: 20px;"><strong>What We Observe Locally:</strong></p>
+        <p>On ANY planet, light spreads symmetrically. This is what every observer measures from their own reference frame.</p>
+        
+        <p style="margin-top: 20px;"><strong>The Critical Question:</strong></p>
+        <p style="color: #fff;">What does an observer on Planet 2 see when they look at Planet 1's expanding light wave?</p>
+        
+        <p style="margin-top: 15px;"><strong>Basic wave physics says:</strong></p>
+        <p>Planet 2 is MOVING relative to Planet 1 (different orbit, different rotation). Therefore:</p>
+        <p>• The part of Planet 1's wave moving TOWARD Planet 2 should appear faster (c+v)</p>
+        <p>• The part moving AWAY should appear slower (c-v)</p>
+        <p>• The wave should look DISTORTED (elliptical), not circular</p>
+        <p>• This is how ALL waves work - sound, water, everything</p>
+        
+        <p style="margin-top: 15px;"><strong>Einstein says:</strong></p>
+        <p>Planet 2 measures Planet 1's wave as STILL perfectly circular and expanding at exactly c in all directions, despite the relative motion. Time and space warp to make this happen.</p>
+        
+        <p style="margin-top: 20px; color: #fff;"><strong>The Doppler Absurdity:</strong></p>
+        <p>We CAN move relative to a light source on Earth and detect Doppler shift. We do this in labs all the time.</p>
+        
+        <p style="margin-top: 10px;">So is light speed constant or not? Is it:</p>
+        <p>• A measurement problem? (Our instruments can't detect the speed difference?)</p>
+        <p>• A speed problem? (Speed really is different but we deny it?)</p>
+        <p>• A sensitivity problem? (The effect is too small to measure?)</p>
+        
+        <p style="margin-top: 15px;">We observe Doppler shifts (blue/red shift) - this IS evidence of differential velocity with the wavefront! The Doppler effect exists BECAUSE you encounter wave crests at different rates due to relative motion.</p>
+        
+        <p style="margin-top: 10px;">Yet we calculate c = fλ, see it equals 3×10⁸ m/s, and declare "speed is constant" - while ignoring that frequency and wavelength changed BECAUSE of differential velocity!</p>
+        
+        <p style="margin-top: 15px;">We use Doppler = differential velocity to measure galactic rotation. But for light speed itself, we deny what Doppler is telling us.</p>
+        
+        <p style="margin-top: 20px;"><strong>Why We Don't Know:</strong></p>
+        <p>Every test is done FROM a planet (inside a "bubble"). Like testing sound inside Earth's rotating atmosphere - of course it's symmetric, the atmosphere rotates WITH the planet!</p>
+        
+        <p style="margin-top: 15px; color: #f00; font-size: 1.1em;"><strong>⚠ THE EXPERIMENTS NEVER DONE:</strong></p>
+        <p style="color: #fff;">We've NEVER tested light from:</p>
+        <p><strong>1. Non-Rotating Observer:</strong> A point that orbits the Sun but does NOT rotate with Earth's surface (no participation in Earth's ~460 m/s rotational velocity). Would light still appear isotropic from this frame?</p>
+        <p><strong>2. Non-Orbiting Observer:</strong> A point that does NOT orbit with Earth around the Sun (no participation in Earth's 29.78 km/s orbital velocity). Would light propagation look different from here?</p>
+        <p style="margin-top: 10px;">Click the red buttons above to add these observers to the simulation. These represent experiments that are <strong>technologically feasible today</strong> but have never been performed.</p>
+        
+        <p style="margin-top: 15px;"><strong>Scale Reality Check:</strong></p>
+        <p style="color: #fff;">For every 1 meter Earth's surface moves due to rotation, light travels <strong>651.7 kilometers</strong>. The animation shows wave expansion slowed dramatically for visibility - actual light waves would be invisible at this scale!</p>
+        
+        <p style="margin-top: 20px;"><strong>The Alternative Explanation:</strong></p>
+        <p>The medium that carries light (call it aether, field, or spacetime) couples LOCALLY to gravitational systems - just like a planet's atmosphere rotates with the planet.</p>
+        
+        <p style="margin-top: 10px;">This explains:</p>
+        <p>✓ Michelson-Morley null result (medium rotates WITH Earth)</p>
+        <p>✓ Stellar aberration (at large distances, no local coupling)</p>
+        <p>✓ Local light symmetry (inside the coupled bubble)</p>
+        <p>✓ Doppler shifts (moving through the medium)</p>
+        <p>✓ Why sound behaves the same way (atmosphere is obviously coupled)</p>
+        
+        <p style="margin-top: 20px; color: #f00; font-size: 1.1em;"><strong>THE TEST:</strong></p>
+        <p>Put an interferometer on a satellite that does NOT rotate with Earth's surface and does NOT orbit with Earth. Measure light speed isotropy from THAT frame.</p>
+        <p style="margin-top: 10px;">If Einstein is right: still isotropic.</p>
+        <p style="margin-top: 5px;">If local medium coupling: anisotropic (different speeds in different directions).</p>
+        <p style="margin-top: 15px; color: #fff;">One experiment. 100+ years overdue. Technology exists. Nobody has done it.</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        // Scale: 1 pixel = ~100 km (doubled from 50), so planet radius (6700km) = 67 pixels (half of 134)
+        const SCALE = 100; // km per pixel (doubled to make planets half size)
+        const PLANET_RADIUS_KM = 6700;
+        const PLANET_RADIUS_PX = PLANET_RADIUS_KM / SCALE; // 67 pixels (was 134)
+        const LIGHT_SOURCE_RADIUS_PX = 0.02 / SCALE; // 1 meter in pixels (tiny!)
+        const WAVE_MAX_RADIUS_KM = 3000;
+        const WAVE_MAX_RADIUS_PX = WAVE_MAX_RADIUS_KM / SCALE; // 30 pixels (was 60)
+        // 2 seconds = 120 frames at 60fps, so speed = 30px / 120 frames = 0.25 px/frame
+        const WAVE_SPEED_PX = 0.25;
+
+        let rotating = true;
+        let orbiting = true;
+        let autoEmit = false;
+        let autoInterval = null;
+
+        let planets = [{
+            orbitRadius: 120, // Reduced starting orbit
+            angle: 0,
+            rotAngle: 0,
+            color: '#00ff00',
+            waves: [],
+            orbitalSpeed: Math.sqrt(1 / 120) * 6,
+            rotationSpeed: 0.02 // Base rotation speed
+        }];
+
+        function addPlanet() {
+            if (planets.length >= 3) return; // Limit to 3 planets
+            // Use 1.6x multiplier: 120, 192, 307 - all fit on screen
+            const baseOrbit = 120;
+            const newOrbit = baseOrbit * Math.pow(1.6, planets.length);
+            const baseRotation = 0.02;
+            const newRotation = baseRotation * Math.pow(2, planets.length); // Rotation speed still doubles
+            planets.push({
+                orbitRadius: newOrbit,
+                angle: Math.random() * Math.PI * 2,
+                rotAngle: 0,
+                color: `hsl(${120 + planets.length * 80}, 70%, 50%)`,
+                waves: [],
+                orbitalSpeed: Math.sqrt(1 / newOrbit) * 6,
+                rotationSpeed: newRotation
+            });
+        }
+
+        function removePlanet() {
+            if (planets.length > 1) {
+                planets.pop();
+            }
+        }
+
+        function emitLight() {
+            console.log('Emitting light! Planets:', planets.length);
+            planets.forEach((planet, i) => {
+                // Store the current rotation angle when wave is emitted
+                planet.waves.push({
+                    radius: 1,
+                    alpha: 1,
+                    sourceAngle: planet.rotAngle // Remember where source was when emitted
+                });
+                console.log(`Planet ${i} now has ${planet.waves.length} waves`);
+            });
+        }
+
+        function toggleRotation() {
+            rotating = !rotating;
+            const btn = document.getElementById('rotBtn');
+            btn.textContent = 'ROTATION: ' + (rotating ? 'ON' : 'OFF');
+            btn.classList.toggle('active');
+        }
+
+        function toggleOrbit() {
+            orbiting = !orbiting;
+            const btn = document.getElementById('orbBtn');
+            btn.textContent = 'ORBIT: ' + (orbiting ? 'ON' : 'OFF');
+            btn.classList.toggle('active');
+        }
+
+        function toggleAuto() {
+            autoEmit = !autoEmit;
+            const btn = document.getElementById('autoBtn');
+            
+            if (autoEmit) {
+                btn.textContent = 'AUTO EMIT: ON';
+                btn.classList.add('active');
+                autoInterval = setInterval(emitLight, 1200);
+            } else {
+                btn.textContent = 'AUTO EMIT: OFF';
+                btn.classList.remove('active');
+                clearInterval(autoInterval);
+            }
+        }
+
+        function clearWaves() {
+            planets.forEach(p => p.waves = []);
+        }
+
+        // Experimental observers
+        let nonRotatingObserver = null;
+        let nonOrbitingObserver = null;
+
+        function toggleNonRotatingObserver() {
+            const btn = document.getElementById('noRotBtn');
+            if (nonRotatingObserver) {
+                nonRotatingObserver = null;
+                btn.textContent = 'ADD NON-ROTATING OBSERVER';
+                btn.classList.remove('active');
+            } else {
+                // Place at fixed distance from first planet's center, but angle doesn't rotate with planet
+                const planet = planets[0];
+                nonRotatingObserver = {
+                    planetIndex: 0, // Track which planet it's following
+                    distance: PLANET_RADIUS_PX * 1.5, // Fixed distance from planet center
+                    fixedAngle: 0, // Fixed angle relative to planet center (doesn't change)
+                    label: 'Non-Rotating Observer',
+                    color: '#ff0000'
+                };
+                btn.textContent = 'REMOVE NON-ROTATING OBSERVER';
+                btn.classList.add('active');
+            }
+        }
+
+        function toggleNonOrbitingObserver() {
+            const btn = document.getElementById('noOrbBtn');
+            if (nonOrbitingObserver) {
+                nonOrbitingObserver = null;
+                btn.textContent = 'ADD NON-ORBITING OBSERVER';
+                btn.classList.remove('active');
+            } else {
+                // Place at fixed position (doesn't orbit)
+                const planet = planets[0];
+                nonOrbitingObserver = {
+                    x: centerX + Math.cos(planet.angle) * planet.orbitRadius,
+                    y: centerY + Math.sin(planet.angle) * planet.orbitRadius,
+                    label: 'Non-Orbiting Observer',
+                    color: '#ff00ff'
+                };
+                btn.textContent = 'REMOVE NON-ORBITING OBSERVER';
+                btn.classList.add('active');
+            }
+        }
+
+        function draw() {
+            // Clear
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw sun at center (reduced size)
+            ctx.fillStyle = '#ffff00';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 20, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#ffaa00';
+            ctx.beginPath();
+            ctx.arc(centerX - 5, centerY - 5, 7, 0, Math.PI * 2);
+            ctx.fill();
+
+            planets.forEach(planet => {
+                // Update motion
+                if (orbiting) planet.angle += planet.orbitalSpeed * 0.003; // Use planet's own orbital speed
+                if (rotating) planet.rotAngle += planet.rotationSpeed; // Use planet's own rotation speed
+
+                // Planet position
+                const px = centerX + Math.cos(planet.angle) * planet.orbitRadius;
+                const py = centerY + Math.sin(planet.angle) * planet.orbitRadius;
+
+                // Draw orbit path
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, planet.orbitRadius, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Draw planet with shading FIRST
+                const gradient = ctx.createRadialGradient(
+                    px - PLANET_RADIUS_PX * 0.3,
+                    py - PLANET_RADIUS_PX * 0.3,
+                    PLANET_RADIUS_PX * 0.1,
+                    px,
+                    py,
+                    PLANET_RADIUS_PX
+                );
+                gradient.addColorStop(0, planet.color);
+                gradient.addColorStop(1, '#003300');
+                
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(px, py, PLANET_RADIUS_PX, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Highlight
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.beginPath();
+                ctx.arc(px - PLANET_RADIUS_PX * 0.4, py - PLANET_RADIUS_PX * 0.4, PLANET_RADIUS_PX * 0.2, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Light source position on rotating surface - moved further out
+                const sourceX = px + Math.cos(planet.rotAngle) * PLANET_RADIUS_PX * 0.9;
+                const sourceY = py + Math.sin(planet.rotAngle) * PLANET_RADIUS_PX * 0.9;
+
+                // Line from center to source
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(px, py);
+                ctx.lineTo(sourceX, sourceY);
+                ctx.stroke();
+
+                // NOW draw light waves ON TOP of planet
+                planet.waves.forEach((wave, i) => {
+                    wave.radius += WAVE_SPEED_PX;
+                    wave.alpha = 1 - (wave.radius / WAVE_MAX_RADIUS_PX);
+
+                    if (wave.radius <= WAVE_MAX_RADIUS_PX) {
+                        // Calculate midpoint between planet center and source position when wave was emitted
+                        const sourceXAtEmit = px + Math.cos(wave.sourceAngle) * PLANET_RADIUS_PX * 0.9;
+                        const sourceYAtEmit = py + Math.sin(wave.sourceAngle) * PLANET_RADIUS_PX * 0.9;
+                        const waveCenterX = px + (sourceXAtEmit - px) * 0.5; // Midpoint X
+                        const waveCenterY = py + (sourceYAtEmit - py) * 0.5; // Midpoint Y
+                        
+                        // Main wave - brighter and thicker
+                        ctx.strokeStyle = `rgba(0, 200, 255, ${wave.alpha})`;
+                        ctx.lineWidth = 4;
+                        ctx.beginPath();
+                        ctx.arc(waveCenterX, waveCenterY, wave.radius, 0, Math.PI * 2);
+                        ctx.stroke();
+
+                        // Inner accent wave
+                        if (wave.radius > 3) {
+                            ctx.strokeStyle = `rgba(150, 230, 255, ${wave.alpha * 0.6})`;
+                            ctx.lineWidth = 2;
+                            ctx.beginPath();
+                            ctx.arc(waveCenterX, waveCenterY, wave.radius - 3, 0, Math.PI * 2);
+                            ctx.stroke();
+                        }
+                    } else {
+                        planet.waves.splice(i, 1);
+                    }
+                });
+
+                // Light source - BLACK DOT on top of everything (smaller)
+                ctx.fillStyle = '#000000';
+                ctx.beginPath();
+                ctx.arc(sourceX, sourceY, 3, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // White outline so it stands out
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(sourceX, sourceY, 3, 0, Math.PI * 2);
+                ctx.stroke();
+            });
+
+            // Draw experimental observers
+            if (nonRotatingObserver) {
+                const planet = planets[nonRotatingObserver.planetIndex];
+                // Planet's current position
+                const planetX = centerX + Math.cos(planet.angle) * planet.orbitRadius;
+                const planetY = centerY + Math.sin(planet.angle) * planet.orbitRadius;
+                
+                // Observer orbits with planet but at fixed angle (doesn't rotate with surface)
+                const px = planetX + Math.cos(nonRotatingObserver.fixedAngle) * nonRotatingObserver.distance;
+                const py = planetY + Math.sin(nonRotatingObserver.fixedAngle) * nonRotatingObserver.distance;
+                
+                // Draw connection line from planet center to observer
+                ctx.strokeStyle = 'rgba(255, 0, 0, 0.3)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([3, 3]);
+                ctx.beginPath();
+                ctx.moveTo(planetX, planetY);
+                ctx.lineTo(px, py);
+                ctx.stroke();
+                ctx.setLineDash([]);
+                
+                // Draw as a square (different from planets)
+                ctx.fillStyle = nonRotatingObserver.color;
+                ctx.fillRect(px - 8, py - 8, 16, 16);
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.strokeRect(px - 8, py - 8, 16, 16);
+                
+                // Label
+                ctx.fillStyle = '#fff';
+                ctx.font = '11px monospace';
+                ctx.fillText('NON-ROTATING', px + 12, py - 5);
+                ctx.fillText('(Experiment Never Done)', px + 12, py + 8);
+            }
+
+            if (nonOrbitingObserver) {
+                // Draw as a diamond (different from planets and non-rotating)
+                ctx.fillStyle = nonOrbitingObserver.color;
+                ctx.beginPath();
+                ctx.moveTo(nonOrbitingObserver.x, nonOrbitingObserver.y - 10);
+                ctx.lineTo(nonOrbitingObserver.x + 10, nonOrbitingObserver.y);
+                ctx.lineTo(nonOrbitingObserver.x, nonOrbitingObserver.y + 10);
+                ctx.lineTo(nonOrbitingObserver.x - 10, nonOrbitingObserver.y);
+                ctx.closePath();
+                ctx.fill();
+                
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // Label
+                ctx.fillStyle = '#fff';
+                ctx.font = '11px monospace';
+                ctx.fillText('NON-ORBITING', nonOrbitingObserver.x + 12, nonOrbitingObserver.y - 5);
+                ctx.fillText('(Experiment Never Done)', nonOrbitingObserver.x + 12, nonOrbitingObserver.y + 8);
+            }
+
+            // Draw info overlay
+            const infoHeight = nonRotatingObserver || nonOrbitingObserver ? 120 : 80;
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            ctx.fillRect(10, 10, 280, infoHeight);
+            ctx.strokeStyle = '#0f0';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(10, 10, 280, infoHeight);
+            
+            ctx.fillStyle = '#0f0';
+            ctx.font = '14px monospace';
+            ctx.fillText(`Planets: ${planets.length}`, 20, 30);
+            ctx.fillText(`Rotation: ${rotating ? 'ON' : 'OFF'}`, 20, 50);
+            ctx.fillText(`Orbit: ${orbiting ? 'ON' : 'OFF'}`, 20, 70);
+            
+            if (nonRotatingObserver || nonOrbitingObserver) {
+                ctx.fillStyle = '#f00';
+                ctx.fillText('⚠ EXPERIMENTS ACTIVE:', 20, 95);
+                if (nonRotatingObserver) {
+                    ctx.fillStyle = '#ff0000';
+                    ctx.fillText('□ Non-Rotating Observer', 30, 110);
+                }
+                if (nonOrbitingObserver) {
+                    ctx.fillStyle = '#ff00ff';
+                    ctx.fillText('◇ Non-Orbiting Observer', 30, nonRotatingObserver ? 125 : 110);
+                }
+            }
+
+            requestAnimationFrame(draw);
+        }
+
+        // Start
+        draw();
+    </script>
+</body>
+</html>

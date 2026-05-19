@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Open Graph / WhatsApp / Facebook -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Einstein's Most Famous Experiment Was Never Actually Done">
+<meta property="og:description" content="The Michelson-Morley experiment proved light speed is constant. Except we only tested it while moving at 30 km/s. Nobody checked what happens when you stop.">
+<meta property="og:image" content="https://krishnanamit.github.io/PhysicalUniverse/ogarticle10.png">
+<meta property="og:url" content="https://krishnanamit.github.io/PhysicalUniverse/article-10.html">
+<meta property="og:site_name" content="The Physical Universe">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Einstein's Most Famous Experiment Was Never Actually Done">
+<meta name="twitter:description" content="The Michelson-Morley experiment proved light speed is constant. Except we only tested it while moving at 30 km/s. Nobody checked what happens when you stop.">
+<meta name="twitter:image" content="https://krishnanamit.github.io/PhysicalUniverse/ogarticle10.png">
+<!-- Standard meta description -->
+<meta name="description" content="The Michelson-Morley experiment proved light speed is constant. Except we only tested it while moving at 30 km/s. Nobody checked what happens when you stop.">
+<title>Einstein's Most Famous Experiment Was Never Actually Done — The Physical Universe Series 10</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#12100e;--paper:#f4efe6;--accent:#b5271e;--accent2:#d4830a;--muted:#6b6155;--rule:#d6ccb8;--soft:#ede8dd; }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-size:20px;line-height:1.8;font-weight:300;overflow-x:hidden}
+  body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.5}
+  #bar{position:fixed;top:0;left:0;height:2px;background:var(--accent);width:0%;z-index:999;transition:width .08s linear}
+
+  /* NAV */
+  .site-nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(18,16,14,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(244,239,230,.06)}
+  .nav-logo{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--paper);text-decoration:none;opacity:.7;transition:opacity .2s}
+  .nav-logo:hover{opacity:1}
+  .nav-logo em{font-style:normal;color:var(--accent)}
+  .nav-links{display:flex;align-items:center;gap:36px;list-style:none}
+  .nav-links a{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:rgba(244,239,230,.45);text-decoration:none;transition:color .2s}
+  .nav-links a:hover,.nav-links a.active{color:var(--paper)}
+  .nav-links a.active::after{content:'';display:block;width:100%;height:1px;background:var(--accent);margin-top:2px}
+  .nav-cta{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;padding:8px 18px;border:1px solid rgba(181,39,30,.5);color:var(--accent)!important;text-decoration:none;white-space:nowrap;transition:all .2s!important}
+  .nav-cta:hover{background:var(--accent)!important;color:var(--paper)!important}
+  .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+  .nav-hamburger span{display:block;width:22px;height:1.5px;background:var(--paper);opacity:.6}
+
+  /* HERO */
+  .hero{min-height:100vh;background:var(--ink);display:grid;grid-template-rows:1fr auto;position:relative;overflow:hidden}
+  .hero-atmos{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 15% 75%,rgba(181,39,30,.18) 0%,transparent 60%),radial-gradient(ellipse 50% 70% at 85% 25%,rgba(212,131,10,.08) 0%,transparent 60%)}
+  
+  .hero-body{position:relative;z-index:10;align-self:end;max-width:900px;margin:0 auto;padding:0 48px 88px;width:100%}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:32px;display:flex;align-items:center;gap:14px;opacity:0;animation:rise .9s ease forwards .2s}
+  .eyebrow::before{content:'';display:block;width:36px;height:1px;background:var(--accent)}
+  h1.title{font-family:'Playfair Display',serif;font-size:clamp(38px,5.8vw,72px);font-weight:900;line-height:1.08;letter-spacing:-.028em;color:var(--paper);margin-bottom:28px;opacity:0;animation:rise 1s ease forwards .4s}
+  h1.title em{font-style:italic;color:var(--accent2)}
+  .subtitle{font-size:19px;color:rgba(244,239,230,.58);max-width:680px;line-height:1.68;font-weight:300;opacity:0;animation:rise 1s ease forwards .6s}
+  .hero-meta{display:flex;align-items:center;gap:20px;margin-top:48px;padding-top:28px;border-top:1px solid rgba(244,239,230,.1);opacity:0;animation:rise 1s ease forwards .8s}
+  .mpill{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.06em;color:rgba(244,239,230,.35)}
+  .msep{width:3px;height:3px;border-radius:50%;background:rgba(244,239,230,.2)}
+  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .scroll-hint{position:absolute;bottom:32px;right:48px;z-index:10;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.3;animation:bob 2.4s ease-in-out infinite,rise 1s ease forwards 1.2s}
+  .scroll-hint span{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--paper);writing-mode:vertical-rl;text-transform:uppercase}
+  .scroll-hint::after{content:'';width:1px;height:44px;background:linear-gradient(to bottom,var(--paper),transparent)}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+  /* ARTICLE */
+  .article{max-width:700px;margin:0 auto;padding:96px 48px 140px}
+  .lead-para::first-letter{font-family:'Playfair Display',serif;font-size:5.8em;font-weight:900;float:left;line-height:.72;margin:.1em .12em 0 0;color:var(--accent)}
+  p{margin-bottom:1.7em;color:#1f1c17}
+  h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3.8vw,38px);font-weight:700;line-height:1.2;color:var(--ink);margin:84px 0 24px;letter-spacing:-.018em}
+  strong{font-weight:600;color:var(--ink)}
+  em{font-style:italic}
+
+  .pullquote{margin:60px -56px;padding:40px 56px 40px 52px;border-left:3px solid var(--accent);background:rgba(181,39,30,.03);position:relative}
+  .pullquote::before{content:'\201C';font-family:'Playfair Display',serif;font-size:140px;line-height:1;color:var(--accent);opacity:.1;position:absolute;top:-10px;left:14px;pointer-events:none}
+  .pullquote p{font-family:'Playfair Display',serif;font-size:clamp(20px,2.8vw,26px);font-style:italic;font-weight:400;line-height:1.5;color:var(--ink);margin:0}
+
+  .ornament{text-align:center;margin:72px 0;color:var(--rule);font-size:18px;letter-spacing:.7em}
+
+  /* Data boxes */
+  .data-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin:48px 0;background:var(--rule)}
+  .data-cell{background:var(--paper);padding:32px 28px;position:relative}
+  .data-cell::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--accent2)}
+  .data-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:8px}
+  .data-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);line-height:1.6}
+
+  /* Stat blocks */
+  .stat-block{background:var(--ink);padding:48px 44px;margin:56px 0;position:relative}
+  .stat-block::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+  .stat-num{font-family:'Playfair Display',serif;font-size:clamp(52px,7vw,82px);font-weight:900;color:var(--accent2);line-height:1;margin-bottom:16px}
+  .stat-text{font-size:18px;color:rgba(244,239,230,.72);line-height:1.7;margin:0}
+
+  /* Callout boxes */
+  .callout{margin:56px 0;background:var(--ink);padding:36px 40px;position:relative;overflow:hidden}
+  .callout::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent2)}
+  .callout-tag{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px}
+  .callout p{color:rgba(244,239,230,.82);font-size:17px;margin:0;line-height:1.72}
+  .callout p + p{margin-top:14px}
+
+  .foot{margin-top:120px;padding-top:48px;border-top:1px solid var(--rule)}
+  .foot-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .foot-closer{font-size:17px;font-style:italic;color:var(--muted);line-height:1.7;margin-bottom:32px;max-width:580px}
+
+  @media (max-width:660px){
+    .site-nav{padding:0 24px}
+    .nav-links{display:none;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:var(--ink);padding:32px 24px;gap:24px;border-bottom:1px solid rgba(244,239,230,.08)}
+    .nav-links.open{display:flex}
+    .nav-hamburger{display:flex}
+    .hero-body{padding:0 24px 64px}
+    .article{padding:64px 24px 100px}
+    .pullquote{margin:48px 0;padding:32px 24px 32px 22px}
+    .data-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div id="bar"></div>
+
+<nav class="site-nav">
+  <a href="index.html" class="nav-logo"><em>AK</em> &nbsp;/&nbsp; The Physical Universe</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="series.html" class="active">Series</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Collaborate</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<header class="hero">
+  <div class="hero-atmos"></div>
+  <div class="hero-body">
+    <p class="eyebrow">The Physical Universe — Series 10</p>
+    <h1 class="title">Einstein's Most Famous Experiment <em>Was Never Actually Done</em></h1>
+    <p class="subtitle">The Michelson-Morley experiment proved light speed is constant. Except we only tested it while moving at 30 km/s. Nobody checked what happens when you stop.</p>
+    <div class="hero-meta">
+      <span class="mpill">16 min read</span>
+      <span class="msep"></span>
+      <span class="mpill">Amit Krishnan</span>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span></div>
+</header>
+
+<article class="article">
+
+<p class="lead-para">Right now, as you read this sentence, you are moving through space at approximately 29.78 kilometers per second. Not relative to your chair. Not relative to the ground beneath you. Relative to the Sun.</p>
+
+<p>That's 107,200 kilometers per hour. Fast enough to circle Earth's equator in 22 minutes. Fast enough to reach the Moon in less than four hours.</p>
+
+<p>Yet when you turn on a flashlight, the light spreads out symmetrically in all directions. No distortion. No asymmetry. No hint whatsoever that you're moving at 1/10,000th the speed of light.</p>
+
+<p>This is treated as obvious. As settled. As requiring no further investigation.</p>
+
+<p>It is none of those things.</p>
+
+<h2>The Scale of the Problem</h2>
+
+<p>Let's establish exactly what we're dealing with. Earth orbits the Sun at an average speed of 29.78 km/s. The speed varies slightly — from 30.29 km/s at perihelion (closest approach) to 29.29 km/s at aphelion (farthest point) — but we can work with the average.</p>
+
+<div class="data-grid">
+  <div class="data-cell">
+    <div class="data-num">29.78</div>
+    <div class="data-label">Earth's orbital speed<br>kilometers per second</div>
+  </div>
+  <div class="data-cell">
+    <div class="data-num">299,792</div>
+    <div class="data-label">Speed of light<br>kilometers per second</div>
+  </div>
+</div>
+
+<p>The ratio is approximately 1:10,000. Earth is moving at 0.01% of the speed of light.</p>
+
+<p>That sounds small. It isn't.</p>
+
+<p>For any other wave phenomenon — sound, water waves, seismic waves — motion at 0.01% of wave speed produces easily measurable effects. If you're moving through air at 0.01% of sound speed (roughly 0.34 m/s, a slow walk), the Doppler shift is trivially detectable.</p>
+
+<p>Yet for light, we observe perfect symmetry.</p>
+
+<h2>What Every Other Wave Does</h2>
+
+<p>Imagine you're floating in a swimming pool. You create a wave by slapping the water surface with your hand. The wave spreads outward in a circle — symmetric in all directions — because you're stationary relative to the water.</p>
+
+<p>Now imagine doing the same thing while moving through the water. The wave no longer spreads symmetrically. It's compressed ahead of you (shorter wavelength, higher frequency) and stretched behind you (longer wavelength, lower frequency). The wave pattern is distorted — visibly elliptical rather than circular.</p>
+
+<p>This is not a subtle effect. It's not something that requires precision instruments to detect. You can <em>see</em> it with your naked eye.</p>
+
+<p>The same thing happens with sound. If a train approaches you while blowing its whistle, the pitch is higher (compressed waves). As it passes and moves away, the pitch drops (stretched waves). This is the Doppler effect, and it's one of the most fundamental behaviors of waves in a medium.</p>
+
+<div class="pullquote">
+  <p>For every wave we have ever studied — except light — motion through the medium distorts the wave pattern. The distortion is proportional to your speed relative to the medium.</p>
+</div>
+
+<p>Light doesn't behave this way. At least, not when measured from Earth's surface.</p>
+
+<p>When we emit light from a source that's moving at 29.78 km/s (because it's on Earth, which is orbiting the Sun at that speed), we measure the light spreading symmetrically in all directions. No ellipse. No asymmetry. Perfect circles.</p>
+
+<p>The question is: why?</p>
+
+<h2>The Two Possible Explanations</h2>
+
+<p>There are only two logical possibilities:</p>
+
+<p><strong>Possibility 1: Light has no medium.</strong> There is nothing for light to move "through." It propagates in empty space with no underlying substance to define a reference frame. Therefore, the concept of "motion relative to the medium" is meaningless. Light's speed is the same in all reference frames because there is no preferred frame.</p>
+
+<p><strong>Possibility 2: Light has a medium, and that medium moves with Earth.</strong> Just as Earth's atmosphere rotates with the planet (which is why we don't feel 1,600 km/h winds at the equator), the light-carrying medium — call it aether, field, or quantum vacuum — couples locally to Earth's gravitational system and participates in its motion. Therefore, we're not actually moving relative to the local medium, which is why we observe symmetric propagation.</p>
+
+<p>Possibility 1 is the foundation of Einstein's Special Relativity.</p>
+
+<p>Possibility 2 was rejected a century ago, largely on the basis of the Michelson-Morley experiment.</p>
+
+<p>But here's what almost nobody mentions: <strong>we have never actually tested which one is correct.</strong></p>
+
+<h2>The Water Analogy Nobody Uses</h2>
+
+<p>Let me make this as concrete as possible.</p>
+
+<p>Imagine you're in a boat on a river. The river is flowing at 5 km/h. You're also moving downstream at 5 km/h — matching the flow exactly.</p>
+
+<p>You create a wave by dropping a stone in the water. What do you see?</p>
+
+<p>The wave spreads out in a perfect circle around the point where the stone entered. Completely symmetric. No distortion.</p>
+
+<p>Does this prove that water has no medium? Does it prove that waves don't need water to propagate?</p>
+
+<p>Of course not.</p>
+
+<p>It proves only that <em>you are moving with the medium</em>. The water is flowing, and you're flowing with it, so from your perspective, you're stationary relative to the water. Therefore, the waves appear symmetric.</p>
+
+<p>Now imagine you anchor the boat. You stop moving. The river keeps flowing beneath you at 5 km/h.</p>
+
+<p>You drop another stone.</p>
+
+<p>The wave pattern is now <em>distorted</em>. The wavefront moving downstream (with the current) travels faster relative to you. The wavefront moving upstream (against the current) travels slower. The circular wave you saw before is now an ellipse.</p>
+
+<div class="callout">
+  <p class="callout-tag">The Critical Question</p>
+  <p>What happens if we do the equivalent experiment with light?</p>
+  <p>What if we emit light from a platform that is NOT moving with Earth's orbital motion? What if we "anchor the boat" in the river of space?</p>
+</div>
+
+<p>We have never done this experiment.</p>
+
+<h2>What We've Actually Tested</h2>
+
+<p>Every test of light-speed isotropy ever performed has been conducted from a reference frame that participates in Earth's motion.</p>
+
+<p>The Michelson-Morley experiment? Performed on Earth's surface, which rotates at ~460 m/s at the equator and orbits at 29,780 m/s.</p>
+
+<p>Modern Kennedy-Thorndike experiments? Same thing. Rotating with Earth. Orbiting with Earth.</p>
+
+<p>Cavity resonator tests? GPS timing tests? Fiber-optic gyroscope tests? All of them: on Earth's surface or in orbit around Earth.</p>
+
+<p>We have measured light from within the "boat." We have never measured it from outside.</p>
+
+<div class="stat-block">
+  <div class="stat-num">0</div>
+  <div class="stat-text">Number of light-speed isotropy experiments performed from a reference frame that does NOT rotate with Earth's surface AND does NOT orbit with Earth around the Sun</div>
+</div>
+
+<p>This is not a minor oversight. This is the foundational assumption of modern physics, and we've never actually tested it under the conditions that would distinguish between the two possibilities.</p>
+
+<h2>The Doppler Paradox</h2>
+
+<p>Here's where it gets really strange.</p>
+
+<p>We <em>do</em> observe Doppler shifts in light. All the time. In laboratories. In astronomy. Everywhere.</p>
+
+<p>When a light source moves toward you, the frequency increases (blueshift). When it moves away, the frequency decreases (redshift).</p>
+
+<p>We use this to measure galactic rotation. We use it to detect exoplanets. We use it to determine that the universe is expanding.</p>
+
+<p>The Doppler effect exists <em>because</em> you encounter wave crests at different rates due to relative motion between you and the source.</p>
+
+<p>But then we measure the speed: c = fλ (speed = frequency × wavelength).</p>
+
+<p>And we get 299,792 km/s.</p>
+
+<p>Frequency changed. Wavelength changed in the opposite direction. The product stayed constant.</p>
+
+<p>So we declare: "Light speed is constant!"</p>
+
+<div class="pullquote">
+  <p>We observe the hallmark signature of differential velocity with the wavefront — Doppler shift — and simultaneously claim that there is no differential velocity with the wavefront.</p>
+</div>
+
+<p>This is not coherent. The Doppler effect is direct observational evidence that you are moving relative to the wavefront. The blueshift means you're catching up to the crests faster than they're arriving. The redshift means you're receding from them.</p>
+
+<p>Yet we calculate c = fλ and say, "See? Speed hasn't changed."</p>
+
+<p>But frequency and wavelength changed <em>because of motion relative to the wave</em>. That's what Doppler is.</p>
+
+<h2>The One Experiment That Could Settle This</h2>
+
+<p>The test is conceptually simple. Technologically, it's within our current capabilities. It has never been done.</p>
+
+<p>Put an interferometer on a satellite that:</p>
+
+<p>1. Does NOT rotate with Earth's surface (no participation in Earth's ~460 m/s rotational velocity)<br>
+2. Does NOT orbit with Earth around the Sun (no participation in Earth's 29,780 m/s orbital velocity)</p>
+
+<p>This satellite would be in a sun-centered inertial frame, stationary relative to the Sun (or moving in a significantly different trajectory than Earth's).</p>
+
+<p>From that platform, measure the isotropy of light speed. Does light still propagate symmetrically in all directions?</p>
+
+<p><strong>If Possibility 1 is correct (no medium):</strong> Light speed will still be isotropic. The result will be identical to Earth-based measurements.</p>
+
+<p><strong>If Possibility 2 is correct (medium couples locally to gravitational systems):</strong> Light speed will be anisotropic. Different speeds in different directions. The "river" of the medium will be detectable because the satellite is no longer moving with it.</p>
+
+<p>One experiment. Clear prediction. Definitive answer.</p>
+
+<div class="callout">
+  <p class="callout-tag">Why This Has Never Been Done</p>
+  <p>The technology exists. The cost is not prohibitive. Deep space probes routinely achieve velocities very different from Earth's orbital motion.</p>
+  <p>But the experiment is not considered necessary. Einstein is considered proven. The question is considered settled. Proposing this experiment is treated as indicating that you don't understand Special Relativity.</p>
+  <p>Yet the experiment has never been performed. The assumption has never been tested under the relevant conditions.</p>
+</div>
+
+<h2>What Stellar Aberration Actually Tells Us</h2>
+
+<p>Defenders of the no-medium interpretation often point to stellar aberration as proof that Earth is moving through "empty space" rather than dragging a medium.</p>
+
+<p>Stellar aberration is the apparent shift in star positions due to Earth's orbital motion. As Earth moves around the Sun, stars appear to trace small ellipses in the sky. This was discovered by James Bradley in 1727 and is correctly calculated using Earth's orbital velocity.</p>
+
+<p>The argument goes: if Earth dragged a light-carrying medium with it, we wouldn't see stellar aberration. Therefore, no medium drag. Therefore, no medium.</p>
+
+<p>But this is a non sequitur.</p>
+
+<p>The medium can couple <em>locally</em> to Earth's gravitational field without coupling at stellar distances. Just as Earth's atmosphere is dragged along by Earth's rotation but doesn't extend to Mars, a light-carrying medium could be coupled within Earth's gravitational well without affecting light from distant stars.</p>
+
+<p>At large distances — where the coupling is negligible or absent — you'd observe aberration.</p>
+
+<p>At local scales — within the gravitational coupling region — you'd observe symmetric light propagation.</p>
+
+<p>Both observations are consistent with a locally-coupled medium. Stellar aberration does not rule it out.</p>
+
+<h2>LIGO and the Medium Question</h2>
+
+<p>Here's the deepest irony in modern physics.</p>
+
+<p>LIGO (Laser Interferometer Gravitational-Wave Observatory) works by detecting differential light travel times in perpendicular arms. When a gravitational wave passes through, it stretches space in one direction and compresses it in another. This creates a measurable difference in how long light takes to traverse the two arms.</p>
+
+<p>LIGO uses the <em>exact same measurement principle</em> as the Michelson-Morley experiment: perpendicular light paths, interferometric comparison, detection of differential light propagation.</p>
+
+<p>But the interpretation is opposite:</p>
+
+<p><strong>Michelson-Morley (null result):</strong> "This proves light speed is absolutely constant. No medium exists."</p>
+
+<p><strong>LIGO (positive differential result):</strong> "This detects variations in spacetime. Gravitational waves exist."</p>
+
+<p>Wait. If light speed is absolutely constant under all conditions, LIGO shouldn't work. The gravitational wave shouldn't create differential light propagation.</p>
+
+<p>The standard explanation: "The distance itself changes. Space stretches and compresses. Light still travels at c through the changing space."</p>
+
+<p>But "space that can stretch and compress and carry waves" is a <em>medium</em>. We've just renamed it.</p>
+
+<p>Calling it "curved spacetime" instead of "aether" is a semantic distinction without an operational difference. If it has measurable properties, if it can be compressed and stretched, if it supports wave propagation — it's a medium.</p>
+
+<div class="pullquote">
+  <p>We violently rejected the concept of aether in 1905. Then we spent the next century populating space with quantum fields, Higgs fields, curved spacetime, and dark energy. All of which are space-filling entities with measurable properties that influence matter and light.</p>
+</div>
+
+<p>The aether was never eliminated. It was rebranded.</p>
+
+<h2>The 100-Year Gap in Experimental Physics</h2>
+
+<p>Consider what we've actually established experimentally:</p>
+
+<p><strong>What we know:</strong> Light propagates symmetrically when measured from Earth's surface or from satellites in Earth orbit.</p>
+
+<p><strong>What we don't know:</strong> Whether light propagates symmetrically when measured from a reference frame with substantially different velocity relative to Earth's orbital motion.</p>
+
+<p>That's it. That's the extent of our experimental knowledge on this question.</p>
+
+<p>Everything else — all the confident declarations about spacetime, about the non-existence of a medium, about the absolute constancy of light speed — is <em>interpretation</em> built on that narrow experimental base.</p>
+
+<p>An interpretation that has never been tested beyond the "moving boat" scenario.</p>
+
+<h2>Why This Matters</h2>
+
+<p>This isn't just a philosophical question about what we call things. It has practical implications.</p>
+
+<p>If the medium-coupling interpretation is correct:</p>
+
+<p>1. Gravitational field manipulation could be reframed as medium density manipulation<br>
+2. "Curved spacetime" could be understood as gradient-driven condensation flow<br>
+3. Quantum field behavior could be reconnected to classical fluid dynamics at small scales<br>
+4. Energy extraction from the quantum vacuum might become tractable</p>
+
+<p>But more importantly: <strong>it would mean we've been solving the wrong equations for a century.</strong></p>
+
+<p>Not wrong in their predictions — General Relativity makes accurate predictions. But wrong in their physical interpretation. Wrong about what's actually happening.</p>
+
+<p>The difference between "space itself curves" and "a medium with varying density creates apparent curvature" is enormous when you're trying to engineer around it.</p>
+
+<p>One interpretation treats spacetime as fundamental and immutable. The other treats it as an emergent property of an underlying medium — something that could potentially be manipulated.</p>
+
+<h2>The Path Forward</h2>
+
+<p>The experiment should be trivial to justify. Science is supposed to test assumptions, not enshrine them.</p>
+
+<p>We have the technology:<br>
+• Deep space probes can achieve velocities substantially different from Earth's<br>
+• Satellite platforms can be placed in non-rotating reference frames<br>
+• Interferometric precision has improved by orders of magnitude since 1887</p>
+
+<p>We have the expertise. We have the resources.</p>
+
+<p>What we lack is the institutional willingness to question a century-old conclusion.</p>
+
+<p>But here's the thing about science: the universe doesn't care what we believe. It doesn't care how elegant Special Relativity is. It doesn't care that Einstein is considered untouchable.</p>
+
+<p>It only cares what's actually true.</p>
+
+<p>And we won't know what's actually true until we "anchor the boat" and measure the waves from outside the current.</p>
+
+<div class="ornament">◆ ◆ ◆</div>
+
+<div class="callout">
+  <p class="callout-tag">The Bottom Line</p>
+  <p>You are moving at 29.78 km/s right now. Light spreads symmetrically around you. We've never checked whether it would still spread symmetrically if you weren't moving at 29.78 km/s.</p>
+  <p>That's not settled science. That's an untested assumption.</p>
+  <p>And a hundred years is long enough to go without testing it.</p>
+</div>
+
+<div style="margin: 56px 0; padding: 36px 40px; background: var(--ink); border-left: 3px solid var(--accent2);">
+  <p style="font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent2); margin-bottom: 14px;">Interactive Simulation</p>
+  <p style="color: rgba(244,239,230,.82); font-size: 17px; margin: 0 0 14px 0; line-height: 1.72;">Want to visualize what we've been discussing? See the untested experiments in action?</p>
+  <a href="light_propagation.html" style="display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; padding: 14px 28px; background: var(--accent2); color: var(--ink); text-decoration: none; transition: background 0.2s;">Launch Interactive Simulation →</a>
+</div>
+
+<div class="foot">
+  <p class="foot-label">Next in Series</p>
+  <p class="foot-closer">This is Series 10 of <em>The Physical Universe</em>. The next article will examine what happens when we take the medium seriously — and calculate orbital dynamics from field condensation rather than spacetime curvature.</p>
+</div>
+
+</article>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const d = document.documentElement;
+    document.getElementById('bar').style.width =
+      (d.scrollTop / (d.scrollHeight - d.clientHeight) * 100) + '%';
+  });
+
+  const ham = document.getElementById('hamburger');
+  const nav = document.getElementById('navLinks');
+  ham.addEventListener('click', () => nav.classList.toggle('open'));
+</script>
+</body>
+</html>
