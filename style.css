@@ -123,8 +123,8 @@ body::after {
 }
 
 .footer-inner {
-  max-width: 960px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  max-width: 1120px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 48px;
 }
 
